@@ -41,16 +41,19 @@ h1, h2, h3 {
     color: white;
     opacity: 0.75;
   }
+  &:focus {
+    color: white;
+    opacity: 0.75;
+  }
 }
 
 .navbar-default .navbar-toggle .icon-bar {
   background-color: white;
 }
-.navbar-default .navbar-toggle {
-  border: 2px solid white;
-  &:hover, &:focus {
-    background-color: #00c6ff;
-  }
+
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+  color: white;
+  opacity: 0.75;
 }
 
 .flash-container {

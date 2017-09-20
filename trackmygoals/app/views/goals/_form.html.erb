@@ -1,0 +1,17 @@
+<%= form_for @goal do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control', placeholder: "Enter goal name..."  %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description %>
+    <%= f.text_area :description, rows: 4, class: 'form-control', placeholder: "Write a quick motivational message to keep you inspired..." %>
+  </div>
+  <div class="form-group">
+    <%= f.label :xp_value %>
+    <%= f.number_field :xp_value, min: 1, max: 5000, class:"form-control", placeholder: "Enter XP value..." %>
+  </div>
+  <div class="form-group">
+    <%= f.submit class:"btn btn-success btn-md" %>
+  </div>
+<% end %>

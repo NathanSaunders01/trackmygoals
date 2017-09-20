@@ -3,7 +3,18 @@
   <h3>Drive your progress to success.</h3>
 </div>
 <% if user_signed_in? %>
-  
+  <div class="container home-signup-links">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="well">
+          <h2 class="text-center">Create Your Goal</h2>
+          <h4 class="text-center">Click here to create your first trackable goal!</h4>
+          </br>
+          <%= link_to "Create Goal", new_goal_path, class: 'btn btn-primary btn-lg btn-block' %>
+        </div>
+      </div>
+    </div>
+  </div>
 <% else %>
   <div class="container home-signup-links">
     <div class="row">

@@ -22,5 +22,11 @@ class User < ApplicationRecord
     "Anonymous"
   end
   
-  
+  def is_premium
+    if self.plan_id == 2
+      return true
+    else
+      return false
+    end
+  end
 end

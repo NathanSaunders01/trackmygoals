@@ -4,16 +4,18 @@
       <h4>Scoreboard</h4>
       <hr>
       <div class="well">
-        <p>XP per activity: <%= @goal.xp_value %></p>
-        <p>Daily XP: 0</p>
-        <p>Weekly XP: 0</p>
+        <p>XP per activity: <%= @goal.xp_value %> XP</p>
+        <p>Daily XP: <%= @goal.daily_goal_xp %> XP</p>
+        <p>Weekly XP: <%= @goal.weekly_goal_xp %> XP</p>
         <p>Monthly XP: 0</p>
-        <p>Total XP: 0</p>
+        <p>Total XP: <%= @goal.total_goal_xp %> XP</p>
       </div>
     </div>
     <div class="col-md-6">
-      <h1 class="text-center"><%= @goal.name %></h1>
-      <h4><%= @goal.description %> - <%= @goal.user.email %></h4>
+      <h1 class="text-center"><%= @goal.name.titleize %></h1>
+      </br>
+      <h4 class="text-center"><%= @goal.description %> - <%= @goal.user.full_name %></h4>
+      <hr>
     </div>
     <div class="col-md-3">
       <a data-toggle="collapse" data-parent="#accordian" href="#collapseOne">

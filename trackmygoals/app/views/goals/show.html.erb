@@ -1,1 +1,55 @@
-<h1 class="text-center"><%= @goal.name %></h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <h4>Scoreboard</h4>
+      <hr>
+      <div class="well">
+        <p>XP per activity: <%= @goal.xp_value %></p>
+        <p>Daily XP: 0</p>
+        <p>Weekly XP: 0</p>
+        <p>Monthly XP: 0</p>
+        <p>Total XP: 0</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h1 class="text-center"><%= @goal.name %></h1>
+      <h4><%= @goal.description %> - <%= @goal.user.email %></h4>
+    </div>
+    <div class="col-md-3">
+      <a data-toggle="collapse" data-parent="#accordian" href="#collapseOne">
+        <h4 class="log-activity">Log Activity<span class="fa fa-caret-down" style="margin-left: 5px"></span></h4>
+      </a>
+      <div id="collapseOne" class="panel-collapse collapse">
+        <div class="panel-body">
+          <%= render 'activities/new' %>
+        </div>
+      </div>
+      <hr class="hr-activity-bar">
+      <div class="recent-activity">
+        <h4 class="recent-activity-header">Recent Activity</h4>
+        <% if @goal_activities.count > 0 %>
+          <% @goal_activities.each do |activity| %>
+            <div class="well well-activity <%= cycle(" ", "bg-white")%>">
+              <p class="text-center">You completed <%= pluralize(activity.quantity, "set") %> of <%= (activity.goal.name).downcase %> - <strong><%= activity.quantity*activity.goal.xp_value %>xp</strong></p>
+              <div class="text-center">
+                <small><%= time_ago_in_words(activity.created_at) %> ago </small>
+              </div>
+              <div class="activity-actions">
+                <%= link_to goal_activity_path(goal_id: activity.goal_id, id: activity.id), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-xs btn-default" do %>
+                  <i class="fa fa-trash-o"></i>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <br>
+          <div class="text-center">
+            <p>You have no activities recorded yet! Log your first one by click on the button blelow</p>
+            <br>
+            <%= link_to "Log Activity", new_goal_activity_path(@goal), class:"btn btn-default btn-md" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

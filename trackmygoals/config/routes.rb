@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   
   devise_for :users, controllers: { registrations: 'users/registrations' }
 
-  resources :goals
+  resources :goals do
+    resources :activities
+  end
   
   resources :contacts, only: :create
   get 'contact-us', to: 'contacts#new', as: 'new_contact'

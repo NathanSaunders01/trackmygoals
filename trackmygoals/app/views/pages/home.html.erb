@@ -1,21 +1,32 @@
-<div class="home-callout text-center container-fluid">
-  <h1>Welcome to Track My Goals</h1>
-  <h3>Drive your progress to success.</h3>
-</div>
 <% if user_signed_in? %>
+  <div class="home-callout text-center container-fluid">
+    <h1>Welcome to Track My Goals, <%= current_user.full_name %></h1>
+    <h3>Drive your progress to success.</h3>
+  </div>
   <div class="container home-signup-links">
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <div class="well">
-          <h2 class="text-center">Create Your Goal</h2>
-          <h4 class="text-center">Click here to create your first trackable goal!</h4>
-          </br>
-          <%= link_to "Create Goal", new_goal_path, class: 'btn btn-primary btn-lg btn-block' %>
+          <% if current_user.goals.count > 0 %>
+            <h2 class="text-center">View Your Goals</h2>
+            <h4 class="text-center">Click here to see your goals!</h4>
+            </br>
+            <%= link_to "View Your Goals", goals_path, class: 'btn btn-success btn-lg btn-block' %>
+          <% else %>
+            <h2 class="text-center">Create Your Goal</h2>
+            <h4 class="text-center">Click here to create your first trackable goal!</h4>
+            </br>
+            <%= link_to "Create Goal", new_goal_path, class: 'btn btn-primary btn-lg btn-block' %>
+          <% end %>
         </div>
       </div>
     </div>
   </div>
 <% else %>
+  <div class="home-callout text-center container-fluid">
+    <h1>Welcome to Track My Goals</h1>
+    <h3>Drive your progress to success.</h3>
+  </div>
   <div class="container home-signup-links">
     <div class="row">
       <div class="col-md-6">

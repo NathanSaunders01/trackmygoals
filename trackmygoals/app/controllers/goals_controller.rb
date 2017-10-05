@@ -33,6 +33,8 @@ class GoalsController < ApplicationController
   end
   
   def show
+    @activities = @goal.goal_activities
+    @goal_activities = @goal.activities.reverse
   end
   
   def index

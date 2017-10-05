@@ -6,6 +6,7 @@ class User < ApplicationRecord
          
   belongs_to :plan
   has_many :goals
+  has_many :activities
   
   attr_accessor :stripe_card_token
   def save_with_subscription
@@ -15,4 +16,11 @@ class User < ApplicationRecord
       save!
     end
   end
+  
+  def full_name
+    return "#{first_name} #{last_name}".strip if (first_name || last_name)
+    "Anonymous"
+  end
+  
+  
 end

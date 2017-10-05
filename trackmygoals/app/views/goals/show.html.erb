@@ -16,6 +16,9 @@
       </br>
       <h4 class="text-center"><%= @goal.description %> - <%= @goal.user.full_name %></h4>
       <hr>
+      <h4>Weekly Progress</h4>
+      </br>
+      <div class="well"><%= column_chart @activities.group_by_day(:created_at, last: 7, format: "%a").sum("quantity"), library: { vAxis: { viewWindow: {min: 0, max: goal_chart_range } } } %></div>
     </div>
     <div class="col-md-3">
       <a data-toggle="collapse" data-parent="#accordian" href="#collapseOne">

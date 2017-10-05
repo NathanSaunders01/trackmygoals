@@ -34,7 +34,7 @@ class GoalsController < ApplicationController
   end
   
   def show
-    @activities = @goal.goal_activities
+    @activities = @goal.activities
     @goal_activities = @goal.activities.reverse
   end
   

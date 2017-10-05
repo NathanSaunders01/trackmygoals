@@ -37,6 +37,10 @@ gem 'devise', '4.2.0'
 gem 'stripe', '1.48.0'
 # Use Figaro for ENV variables
 gem 'figaro', '1.1.1'
+# Use ChartKick for data visualization
+gem 'chartkick'
+# Use GroupDate to group together data
+gem 'groupdate'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

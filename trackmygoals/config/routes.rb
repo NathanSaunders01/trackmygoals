@@ -11,4 +11,6 @@ Rails.application.routes.draw do
   get 'contact-us', to: 'contacts#new', as: 'new_contact'
   
   get 'about', to: 'pages#about'
+  
+  get 'dashboard', to: 'users#dashboard'
 end

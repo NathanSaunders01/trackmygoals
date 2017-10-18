@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171004171627) do
+ActiveRecord::Schema.define(version: 20171017184412) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "quantity"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20171004171627) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "total_xp"
     t.index ["goal_id"], name: "index_activities_on_goal_id"
     t.index ["user_id"], name: "index_activities_on_user_id"
   end
@@ -30,19 +31,14 @@ ActiveRecord::Schema.define(version: 20171004171627) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "goal_activities", force: :cascade do |t|
-    t.integer "goal_id"
-    t.integer "user_id"
-    t.integer "activity_id"
-  end
-
   create_table "goals", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
     t.integer  "xp_value"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.integer  "user_id"
+    t.integer  "recurrence_id"
   end
 
   create_table "plans", force: :cascade do |t|

@@ -7,3 +7,16 @@ should validate the user fields. Rails app will note whether plan 1 or plan 2.
 * Once validated, Rails should send user info (email, plan id) and card token
 to Stripe server and Stripe will create a subscription and send back customer
 token. Rails should save customer token and user information to our database.
+
+Goal Bonus
+* User must select minimum frequency of goal to earn bonus 
+  eg. daily, weekly, monthly or one off
+* Tracker must track how many occurences of goal there have been.
+  When the counter hits 5, user earns double xp value of goal and counter
+  returns to 0.
+* Goal index should show the current streak for each goal
+
+Rewards
+* User must set rewards by including name, xp goal to unlock
+* Rewards must have progress bar showing how close the user is to completing
+* 

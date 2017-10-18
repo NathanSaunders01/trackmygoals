@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :activities
   
   attr_accessor :stripe_card_token
+  
   def save_with_subscription
     if valid?
       customer = Stripe::Customer.create(description: email, plan: plan_id, card: stripe_card_token)
@@ -29,4 +30,14 @@ class User < ApplicationRecord
       return false
     end
   end
+  
+  def total_user_xp
+    total_activities_sum = self.goals.sum(&:total_goal_xp)
+    return (total_activities_sum)
+  end
+  
+  # def user_xp_today
+  #   daily_activities_sum = self.goals.sum(Goal.daily_goal_xp)
+  #   return (daily_activities_sum)
+  # end
 end

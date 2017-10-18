@@ -49,10 +49,12 @@ class GoalsController < ApplicationController
     redirect_to goals_path
   end
   
+  
+  
   private
   
   def goal_params
-    params.require(:goal).permit(:name, :description, :xp_value)
+    params.require(:goal).permit(:name, :description, :xp_value, :recurrence_id)
   end
   
   def set_goal

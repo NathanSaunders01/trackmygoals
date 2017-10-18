@@ -8,19 +8,27 @@
         <table class="table table-striped">
           <thead>
             <th><strong>Goal</strong></th>
-            <th><strong>XP</strong></th>
-            <th><strong>Total XP</strong></th>
-            <th><strong>XP Today</strong></th>
-            <th><strong>Actions</strong></th>
+            <th class="text-center"><strong>XP</strong></th>
+            <th class="text-center"><strong>Total XP</strong></th>
+            <th class="text-center"><strong>XP Today</strong></th>
+            <th class="text-center"><strong>Streak</strong></th>
+            <th class="text-right"><strong>Actions</strong></th>
           </thead>
           <tbody>
             <% @user_goals.each do |goal| %>
               <tr>
                 <td><%= link_to goal.name, goal_path(goal) %></td>
-                <td><%= goal.xp_value %></td>
-                <td><%= goal.total_goal_xp %></td>
-                <td><%= goal.daily_goal_xp %></td>
-                <td>
+                <td class="text-center"><%= goal.xp_value %></td>
+                <td class="text-center"><%= goal.total_goal_xp %></td>
+                <td class="text-center"><%= goal.daily_goal_xp %></td>
+                <td class="text-center">
+                  <% if goal.calculate_length_to_streak >= 5 %>
+                    <%= goal.calculate_length_to_streak.to_i %> <%= if goal.goal_recurrence then goal.goal_recurrence else '' end %>!
+                  <% else %>
+                    <%= progress_bar goal.calculate_length_to_streak/5 %>
+                  <% end %>
+                </td>
+                <td class="text-right">
                   <%= link_to edit_goal_path(goal), class:"btn btn-xs btn-default" do %>
                     <i class="fa fa-edit"></i>
                   <% end %>

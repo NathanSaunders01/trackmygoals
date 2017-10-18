@@ -8,8 +8,9 @@ class ActivitiesController < ApplicationController
     @activity = Activity.new(activity_params)
     @activity.goal = Goal.find(params[:goal_id])
     @activity.user = current_user
+    @activity.total_xp = @activity.goal.calculate_total_activity_xp(@activity.quantity)
     if @activity.save
-      flash[:success] = "You just gained #{@activity.quantity*@activity.goal.xp_value}xp!"
+      flash[:success] = "You just gained #{@activity.total_xp}xp!"
       redirect_to goal_path(@activity.goal)
     else
       redirect_to new_goal_activity_path(@activity.goal)
@@ -28,7 +29,7 @@ class ActivitiesController < ApplicationController
   private
 
   def activity_params
-    params.require(:activity).permit(:quantity)
+    params.require(:activity).permit(:quantity, :total_xp)
   end
   
 end

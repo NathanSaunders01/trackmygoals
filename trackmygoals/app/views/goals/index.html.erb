@@ -5,7 +5,7 @@
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <% if current_user.goals.count > 0 %>
-        <table class="table table-striped">
+        <table class="table">
           <thead>
             <th><strong>Goal</strong></th>
             <th class="text-center"><strong>XP</strong></th>
@@ -14,34 +14,46 @@
             <th class="text-center"><strong>Streak</strong></th>
             <th class="text-right"><strong>Actions</strong></th>
           </thead>
-          <tbody>
-            <% @user_goals.each do |goal| %>
-              <tr>
-                <td><%= link_to goal.name, goal_path(goal) %></td>
-                <td class="text-center"><%= goal.xp_value %></td>
-                <td class="text-center"><%= goal.total_goal_xp %></td>
-                <td class="text-center"><%= goal.daily_goal_xp %></td>
-                <td class="text-center">
-                  <% if goal.calculate_length_to_streak >= 5 %>
-                    <%= goal.calculate_length_to_streak.to_i %> <%= if goal.goal_recurrence then goal.goal_recurrence else '' end %>!
-                  <% else %>
-                    <%= progress_bar goal.calculate_length_to_streak/5 %>
-                  <% end %>
-                </td>
-                <td class="text-right">
-                  <%= link_to edit_goal_path(goal), class:"btn btn-xs btn-default" do %>
-                    <i class="fa fa-edit"></i>
-                  <% end %>
-                  <%= link_to goal_path(goal), method: :delete, data: 
-                    {confirm: "Are you sure you want to delete this goal?\n
-                    You will lose all data relating to this goal."}, 
-                    class: "btn btn-xs btn-danger" do %>
-                     <i class="fa fa-trash"></i>
-                   <% end %>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
+        </table>
+          <div class="tbl-content">
+            <table>
+              <tbody>
+                <% @user_goals.each do |goal| %>
+                  <tr class="<%= if goal.warn_streak_loss then "bg-danger" end %>">
+                    <td class="left-col"><%= link_to goal.name, goal_path(goal) %></td>
+                    <td class="text-center"><%= goal.xp_value %></td>
+                    <td class="text-center"><%= goal.total_goal_xp %></td>
+                    <td class="text-center"><%= goal.daily_goal_xp %></td>
+                    <td class="text-center">
+                      <% if goal.calculate_length_of_streak >= 5 && !goal.warn_streak_loss %>
+                        <span class="fa-stack fa-2x">
+                          <i class="fa fa-star-o fa-stack-2x"></i>
+                          <small class="star-text"><%= goal.calculate_length_of_streak.to_i %></small>
+                        </span>
+                      <% elsif goal.warn_streak_loss %>
+                        <span class="fa-stack fa-2x">
+                          <i class="fa fa-exclamation fa-stack-2x"></i>
+                        </span>
+                      <% else %>
+                        <%= progress_bar goal.calculate_length_of_streak/5 %>
+                      <% end %>
+                    </td>
+                    <td class="text-right right-col">
+                      <%= link_to edit_goal_path(goal), class:"btn btn-xs btn-default" do %>
+                        <i class="fa fa-edit"></i>
+                      <% end %>
+                      <%= link_to goal_path(goal), method: :delete, data: 
+                        {confirm: "Are you sure you want to delete this goal?\n
+                        You will lose all data relating to this goal."}, 
+                        class: "btn btn-xs btn-danger" do %>
+                         <i class="fa fa-trash"></i>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
         </table>
         <%= link_to "Create new goal", new_goal_path, class:"btn btn-primary btn-md" %>
       <% else %>

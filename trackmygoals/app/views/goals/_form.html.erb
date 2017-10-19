@@ -13,7 +13,7 @@
   </div>
   <div class="form-group">
     <%= f.label "Minimum occurence" %>
-    <%= f.select :recurrence_id, options_for_select([['Daily', 1], ['Weekly', 2], ['Monthly', 3], ['One-off', 4]]) %>
+    <%= f.select :recurrence_id, options_for_select([['Daily', 1], ['Weekly', 2], ['Monthly', 3], ['One-off', 4]], f.object.recurrence_id) %>
   </div>
   <div class="form-group">
     <%= f.submit class:"btn btn-success btn-md" %>

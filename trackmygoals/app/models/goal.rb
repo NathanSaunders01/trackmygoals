@@ -25,21 +25,21 @@ class Goal < ActiveRecord::Base
   def calculate_streak
     if self.recurrence_id == 1
       activities = self.activities.where("created_at >= ?", 5.days.ago.in_time_zone).group("strftime('%Y-%m-%d 00:00:00 UTC', created_at)").count.count
-      if (activities == 4 && !self.activities.where("created_at >= ?", Date.today.in_time_zone).exists?) || activities == 5
+      if (activities == 4 && self.check_current_period) || activities == 5
         return 1.2
       else
         return 1
       end
     elsif self.recurrence_id == 2
       activities = self.activities.where("created_at >= ?", 5.weeks.ago.in_time_zone).group_by_week(:created_at).count.count
-      if (activities == 4 && !self.activities.where("created_at >= ?", 0.weeks.ago.beginning_of_week(:sunday).in_time_zone(Time.zone)).exists?) || activities == 5
+      if (activities == 4 && self.check_current_period) || activities == 5
         return 1.2
       else
         return 1
       end
     elsif self.recurrence_id == 3
       activities = self.activities.where("created_at >= ?", 5.months.ago.in_time_zone).group_by_month(:created_at).count.count
-      if (activities == 4 && !self.activities.where("created_at >= ?", 0.months.ago.beginning_of_month.in_time_zone(Time.zone)).exists?) || activities == 5
+      if (activities == 4 && self.check_current_period) || activities == 5
         return 1.2
       else
         return 1
@@ -48,7 +48,6 @@ class Goal < ActiveRecord::Base
   end
   
   def calculate_length_of_streak
-    
     if self.check_current_period 
       blank = 1 
     else 

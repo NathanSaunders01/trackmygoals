@@ -46,7 +46,7 @@ class GoalsController < ApplicationController
   def destroy
     @goal.destroy
     flash[:danger] = "Goal was successfully deleted!"
-    redirect_to goals_path
+    redirect_to dashboard_path
   end
   
   def dashboard

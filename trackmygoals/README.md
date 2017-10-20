@@ -24,7 +24,7 @@ Users log their personal goals and are awarded bonus XP when on a streak of 5 da
 * Users are awarded more XP for completing tasks while on a streak. See app/models/goal.rb
 * Dynamic form on page for entering quantities for goals. See app/views/goals/show.html.erb
 
-### Problems solved
+### Problems solved:
 * Iterating through activities to see how many days in a row the user has logged activities for each goal.
 * Don't Repeat Yourself - As the model file for goal started to grow, I refactored the code to create methods which checked conditions once and returned the appropriate value.
 * Optimization - Initially stored xp values in the table but this slowed the site down as it needed to check the DB mutliple times. Instead, I created methods that calculate the xp values based on certain conditions.

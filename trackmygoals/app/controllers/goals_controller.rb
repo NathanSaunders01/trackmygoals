@@ -49,7 +49,10 @@ class GoalsController < ApplicationController
     redirect_to goals_path
   end
   
-  
+  def dashboard
+    @user_goals = current_user.goals
+    @activities = current_user.activities
+  end
   
   private
   

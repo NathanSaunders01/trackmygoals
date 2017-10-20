@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
-  root to: 'pages#home'
+  
   
   devise_for :users, controllers: { registrations: 'users/registrations' }
+  
+  authenticated :user do
+    root 'goals#dashboard', as: :authenticated_root
+  end
+  
+  root to: 'pages#home'
 
   resources :goals do
     resources :activities
@@ -12,5 +18,5 @@ Rails.application.routes.draw do
   
   get 'about', to: 'pages#about'
   
-  get 'dashboard', to: 'users#dashboard'
+  get 'dashboard', to: 'goals#dashboard'
 end

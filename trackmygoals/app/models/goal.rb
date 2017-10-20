@@ -18,6 +18,10 @@ class Goal < ActiveRecord::Base
     self.activities.where("created_at >= ?", 1.week.ago.in_time_zone).sum(:total_xp)    
   end  
   
+  def monthly_goal_xp
+    self.activities.where("created_at >= ?", 1.month.ago.in_time_zone).sum(:total_xp)    
+  end
+  
   def calculate_streak
     if self.recurrence_id == 1
       activities = self.activities.where("created_at >= ?", 5.days.ago.in_time_zone).group("strftime('%Y-%m-%d 00:00:00 UTC', created_at)").count.count

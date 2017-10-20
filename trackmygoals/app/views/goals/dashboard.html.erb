@@ -1,0 +1,17 @@
+<div class="container">
+  <h1 class="text-center">Dashboard</h1>
+  <hr class="dashboard-header">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1 pie-charts">
+      <div class="col-md-6 text-left">
+        <h2 class="pie-chart-header">Weekly</h2>
+        <%= pie_chart  @user_goals.map{ |goal| [goal.name, goal.weekly_goal_xp] }, library: { chartArea: { top: -50, width: "80%" } } %>
+      </div>
+      <div class="col-md-6 text-left">
+        <h2 class="pie-chart-header">Total</h2>
+        <%= pie_chart  @user_goals.map{ |goal| [goal.name, goal.total_goal_xp] }, library: { chartArea: { top: -50, width: "80%" } } %>
+      </div>
+    </div>
+    <%= render 'goal_table' %>
+  </div>
+</div>

@@ -19,21 +19,58 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
-h1, h2, h3 {
-    font-family: 'Open Sans', sans-serif;
+h1, h2, h3, ul, li, p, tr, th, td {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 200;
+}
+
+h4 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
 }
 
 .navbar, .home-callout {
-  //Gradient provided by @_ighosh at uiGradients.com
-  background: #00c6ff; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #00c6ff , #0072ff); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #00c6ff , #0072ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: black;
+  .active {
+    color: white;
+    opacity: 0.75;
+    background: #323232 !important;
+  }
 }
 
 .navbar {
-  border: none;
+  height: 80px;
+  padding-bottom: 80px;
+  font-size: 16px;
+  color: white !important;
+  border-bottom: 3px solid transparent;
+  border-image: linear-gradient(to right, #108dc7 , #ef8e38);
+  border-image-slice: 1;
+  .logo {
+    height: 60px;
+    width: 180px;
+    margin-top: -10px;
+  }
+  .navbar-log {
+    font-size: 16px;
+  }
 }
 
+.navbar-right {
+  margin-top: 15px;
+  font-weight: 100 !important;
+}
+
+#profile {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    .active {
+      opacity: 0.5;
+    }
+  }
+  
 .navbar-default .navbar-brand,
 .navbar-default .navbar-nav > li > a {
   color: white;
@@ -45,6 +82,12 @@ h1, h2, h3 {
     color: white;
     opacity: 0.75;
   }
+  .active {
+    color: white;
+    opacity: 0.75;
+    background: #00c6ff !important;
+  }
+  
 }
 
 .navbar-default .navbar-toggle .icon-bar {
@@ -53,7 +96,10 @@ h1, h2, h3 {
 
 .flash-container {
   text-align: center;
-  width: 100%;
+  margin-top: -10px;
+  position: absolute;
+  left: 35%;
+  width: 30%;
 }
 .alert-notice, .alert-alert {
 display: none;
@@ -78,3 +124,27 @@ display: none;
 .left-padding {
   padding-left: 15px !important;
 }
+
+#main {
+  transition: margin-left .5s;
+}
+
+body {
+  margin-top: 100px !important;
+  margin: 0;
+  background: #f6f6f6; /* Old browsers */
+}
+
+html {
+  height: 100%;
+  margin: 0;
+}
+
+#profile-links {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+

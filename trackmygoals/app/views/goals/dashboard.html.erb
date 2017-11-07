@@ -1,17 +1,62 @@
 <div class="container">
-  <h1 class="text-center">Dashboard</h1>
-  <hr class="dashboard-header">
+  <h1>DASHBOARD</h1>
+  <br>
   <div class="row">
-    <div class="col-md-10 col-md-offset-1 pie-charts">
-      <div class="col-md-6 text-left">
-        <h2 class="pie-chart-header">Weekly</h2>
-        <%= pie_chart  @user_goals.map{ |goal| [goal.name, goal.weekly_goal_xp] }, library: { chartArea: { top: -50, width: "80%" } } %>
+    <div class="col-md-12 pie-charts">
+      <div class="col-md-6 text-left left-pie-chart-box">
+        <h2 class="pie-chart-header">WEEKLY</h2>
+        <%= pie_chart  @user_goals.map{ |goal| [goal.name, goal.weekly_goal_xp] }, library: { chartArea: { width: "80%" } } %>
       </div>
-      <div class="col-md-6 text-left">
-        <h2 class="pie-chart-header">Total</h2>
-        <%= pie_chart  @user_goals.map{ |goal| [goal.name, goal.total_goal_xp] }, library: { chartArea: { top: -50, width: "80%" } } %>
+      <div class="col-md-6 text-left right-pie-chart-box">
+        <h2 class="pie-chart-header">TOTAL</h2>
+        <%= pie_chart  @user_goals.map{ |goal| [goal.name, goal.total_goal_xp] }, library: { chartArea: { width: "80%" } } %>
       </div>
     </div>
-    <%= render 'goal_table' %>
+  </div>
+  <br>
+  <div class="row dashboard-tables">
+    <div class="panel-group" id="accordion">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+            GOALS
+            <span class="caret"></span>
+            </a>
+          </h4>
+        </div>
+        <div id="collapse1" class="panel-collapse collapse in">
+          <div class="panel-body"><%= render 'goal_table' %></div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+            Collapsible Group 2</a>
+          </h4>
+        </div>
+        <div id="collapse2" class="panel-collapse collapse">
+          <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+          commodo consequat.</div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+            Collapsible Group 3</a>
+          </h4>
+        </div>
+        <div id="collapse3" class="panel-collapse collapse">
+          <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+          commodo consequat.</div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

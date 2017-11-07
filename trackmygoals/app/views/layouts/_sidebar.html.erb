@@ -1,0 +1,44 @@
+<div id="full-sidebar">
+  <div class="nav-side-menu" id="mySidenav">
+      <div class="menu-list">
+        <ul id="menu-content" class="menu-content collapse out">
+           <%= link_to dashboard_path do %>
+             <li>
+               <i class="fa fa-dashboard fa-lg"></i>
+               Dashboard
+             </li>
+           <% end %>
+          <li data-toggle="collapse" data-target="#goals" class="collapsed">
+            <i class="fa fa-trophy fa-lg"></i>Goals<span class="arrow"></span>
+          </li>
+          <ul class="sub-menu collapse" id="goals">
+              <% current_user.goals.each do |goal| %>
+                <li><%= link_to goal.name, goal_path(goal) %></li>
+              <% end %>
+          </ul>
+          <li data-toggle="collapse" data-target="#service" class="collapsed">
+            <a href="#"><i class="fa fa-gift fa-lg"></i> Rewards <span class="arrow"></span></a>
+          </li>  
+          <ul class="sub-menu collapse" id="service">
+            <li>New Service 1</li>
+            <li>New Service 2</li>
+            <li>New Service 3</li>
+          </ul>
+          <li>
+            <a href="#">
+            <i class="fa fa-user fa-lg"></i>Profile
+            </a>
+          </li>
+          <li>
+            <a href="#">
+            <i class="fa fa-users fa-lg"></i>Users
+            </a>
+          </li>
+        </ul>
+     </div>
+  </div>
+  <div class="navbar-button">
+     <button id ="closeNav" class="fa fa-close fa-3x side-button" onclick="closeNav()"></button>
+    <button id="openNav" class="fa fa-bars fa-3x side-button" onclick="openNav()"></button>
+  </div>
+</div>

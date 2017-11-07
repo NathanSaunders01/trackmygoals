@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   get 'about', to: 'pages#about'
   
   get 'dashboard', to: 'goals#dashboard'
+  get 'dashboardtest', to: 'goals#dashboardtest'
 end

@@ -55,14 +55,29 @@ td{
 }
 
 .pie-chart-header {
-  margin-top: -10px;
 }
 
 .pie-charts {
-  margin-bottom: -40px;
   rect {
-    height: 20%;
+    height: 0.1%;
+    width: 0.1%;
   }
+  svg {
+    margin-top: -30px;
+    margin-left: 30px;
+  }
+}
+
+.left-pie-chart-box {
+  background: white;
+  border: 2px solid #999;
+}
+
+.right-pie-chart-box {
+  background: white;
+  border-top: 2px solid #999;
+  border-bottom: 2px solid #999;
+  border-right: 2px solid #999;
 }
 
 .activity-well {
@@ -83,4 +98,7 @@ td{
   margin-right: 20%;
 }
 
-
+.dashboard-tables {
+  padding-left: 15px;
+  padding-right: 15px;
+}

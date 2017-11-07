@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-3 scoreboard-sidebar">
       <h4>Scoreboard</h4>
-      <hr>
+      <br>
       <div class="well scoreboard-well">
         <p>XP per activity: <%= @goal.xp_value %> XP</p>
         <p>Daily XP: <%= @goal.daily_goal_xp %> XP</p>
@@ -12,9 +12,9 @@
     </div>
     <div class="col-md-6">
       <h1 class="text-center"><%= @goal.name.titleize %></h1>
-      <hr>
+      <br>
       <h4 class="text-center"><%= @goal.description %> - <%= @goal.user.full_name.titleize %></h4>
-      <hr>
+      <br>
       <h4>Weekly Progress</h4>
       </br>
       <div class="well"><%= column_chart @activities.group_by_day(:created_at, last: 7, format: "%a").sum(:quantity), library: { vAxis: { viewWindow: {min: 0, max: goal_chart_range } } } %></div>

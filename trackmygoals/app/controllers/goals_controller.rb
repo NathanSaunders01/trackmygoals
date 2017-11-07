@@ -54,6 +54,11 @@ class GoalsController < ApplicationController
     @activities = current_user.activities
   end
   
+  def dashboardtest
+    @user_goals = current_user.goals
+    @activities = current_user.activities
+  end
+  
   private
   
   def goal_params

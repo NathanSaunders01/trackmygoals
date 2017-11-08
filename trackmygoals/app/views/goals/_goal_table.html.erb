@@ -14,7 +14,7 @@
         <tbody>
           <% @user_goals.each do |goal| %>
             <tr class="<%= if goal.warn_streak_loss then "bg-danger" end %>">
-              <td class="left-col"><%= link_to goal.name, goal_path(goal) %></td>
+              <td class="left-col"><strong><%= link_to goal.name, goal_path(goal) %></strong></td>
               <td class="text-center"><%= goal.xp_value %></td>
               <td class="text-center"><%= goal.total_goal_xp %></td>
               <td class="text-center"><%= goal.daily_goal_xp %></td>

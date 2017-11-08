@@ -13,7 +13,7 @@ class GoalsController < ApplicationController
     @goal.user = current_user
     if @goal.save
       flash[:success] = "Your goal has been created!"
-      redirect_to goals_path
+      redirect_to dashboard_path
     else
       flash[:danger] = @goal.errors.full_messages.join(", ")
       render 'new'
@@ -50,6 +50,7 @@ class GoalsController < ApplicationController
   end
   
   def dashboard
+    @goal = Goal.new
     @user_goals = current_user.goals
     @activities = current_user.activities
   end

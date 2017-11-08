@@ -1,5 +1,6 @@
 $(document).ready(function(){
   $('.alert').delay(1000).fadeOut(4000);
+  document.getElementById("defaultOpen").click();
 });
 
 window.onload = function(){ 

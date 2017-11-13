@@ -8,10 +8,10 @@
                Dashboard
              </li>
            <% end %>
-          <li data-toggle="collapse" data-target="#goals" class="collapsed">
+          <li class="dropdown" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
             <i class="fa fa-trophy fa-lg"></i>Goals<span class="arrow"></span>
           </li>
-          <ul class="sub-menu collapse" id="goals">
+          <ul class="collapse dropdown-menu" id="collapseExample">
               <% current_user.goals.each do |goal| %>
                 <li><%= link_to goal.name, goal_path(goal) %></li>
               <% end %>

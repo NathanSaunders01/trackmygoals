@@ -7,6 +7,7 @@ class User < ApplicationRecord
   belongs_to :plan
   has_many :goals
   has_many :activities
+  has_many :rewards
   
   attr_accessor :stripe_card_token
   

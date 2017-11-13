@@ -13,10 +13,6 @@
   
   <%= render 'layouts/navigation' %>
   
-  <% if user_signed_in? %>
-    <%= render 'layouts/sidebar' %>
-  <% end %>
-  
   <body>
     <div class="container flash-container" >
       <% flash.each do |type, msg| %>
@@ -27,4 +23,5 @@
       <%= yield %>
     </div>
   </body>
+  <%= render 'layouts/footer' %>
 </html>

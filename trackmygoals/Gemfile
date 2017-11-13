@@ -43,6 +43,8 @@ gem 'chartkick'
 gem 'groupdate'
 # Use progressbar for progress bar
 gem 'bootstrap_progressbar'
+# Use Client Side Validation gem for inline warnings on forms
+gem 'client_side_validations'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

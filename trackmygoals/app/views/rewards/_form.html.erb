@@ -1,0 +1,22 @@
+<%= form_for @reward do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control', placeholder: "Enter reward name..."  %>
+  </div>
+  <div class="form-group">
+    <%= f.label :xp_goal %>
+    <%= f.number_field :xp_goal, class:"form-control", placeholder: "Enter XP target..." %>
+  </div>
+  <div class="form-group">
+    <%= f.label "Select goals to contribute to reward" %>
+    <div class="scrollbox">
+      <label><input type="checkbox" onclick="toggle(this);" class="first-input"/><strong>Select all</strong></label><br />
+      <%= f.collection_check_boxes :goal_ids, @goals, :id, :name do |cb| %>
+        <% cb.label(class: "checkbox") {cb.check_box + cb.text} %>
+      <% end %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.submit class:"btn btn-success btn-md" %>
+  </div>
+<% end %>

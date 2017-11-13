@@ -1,6 +1,8 @@
 class Goal < ActiveRecord::Base
   belongs_to :user
   has_many :activities
+  has_many :reward_goals
+  has_many :rewards, through: :reward_goals
   
   validates :name, presence: true
   validates :description, presence: true

@@ -1,0 +1,111 @@
+<div class="container">
+  <h1>DASHBOARD</h1>
+  <br>
+  <div class="row">
+    <div class="col-md-12 pie-charts">
+      <div class="col-md-6 text-left left-pie-chart-box">
+        <h2 class="pie-chart-header">WEEKLY</h2>
+        <%= pie_chart  @user_goals.map{ |goal| [goal.name, goal.weekly_goal_xp] }, library: { chartArea: { width: "80%" } } %>
+      </div>
+      <div class="col-md-6 text-left right-pie-chart-box">
+        <h2 class="pie-chart-header">TOTAL</h2>
+        <%= pie_chart  @user_goals.map{ |goal| [goal.name, goal.total_goal_xp] }, library: { chartArea: { width: "80%" } } %>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class=" col-md-12">
+      <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'goaltable')" id="defaultOpen"><h4>GOALS</h4></button>
+        <button class="tablinks" onclick="openTab(event, 'rewardtable')"><h4>REWARDS</h4></button>
+      </div>
+      
+      <div id="goaltable" class="tabcontent">
+        <%= render 'goals/goal_table' %>
+        <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myGoalModal">
+          New Goal
+        </button>
+      </div>
+      
+      <div id="rewardtable" class="tabcontent">
+        <%= render 'rewards/reward_table' %>
+        <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myRewardModal">
+          New Reward
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<%= form_for @goal do |f| %>
+  <div class="modal fade" id="myGoalModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">New Goal</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <%= f.label :name %>
+            <%= f.text_field :name, class: 'form-control', placeholder: "Enter goal name..."  %>
+          </div>
+          <div class="form-group">
+            <%= f.label :description %>
+            <%= f.text_area :description, rows: 4, class: 'form-control', placeholder: "Write a quick motivational message to keep you inspired..." %>
+          </div>
+          <div class="form-group">
+            <%= f.label :xp_value %>
+            <%= f.number_field :xp_value, min: 1, max: 5000, class:"form-control", placeholder: "Enter XP value..." %>
+          </div>
+          <div class="form-group">
+            <%= f.label "Minimum occurence" %>
+            <%= f.select :recurrence_id, options_for_select([['Daily', 1], ['Weekly', 2], ['Monthly', 3], ['One-off', 4]], f.object.recurrence_id) %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="form-group">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <%= f.submit class:"btn btn-success btn-md" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<%= form_for @reward do |f| %>
+  <div class="modal fade" id="myRewardModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">New Reward</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <%= f.label :name %>
+            <%= f.text_field :name, class: 'form-control', placeholder: "Enter reward name..."  %>
+          </div>
+          <div class="form-group">
+            <%= f.label :xp_goal %>
+            <%= f.number_field :xp_goal, class:"form-control", placeholder: "Enter XP target..." %>
+          </div>
+          <div class="form-group">
+            <%= f.label "Select goals to contribute to reward" %>
+            <div class="scrollbox">
+              <label><input type="checkbox" onclick="toggle(this);" class="first-input"/><strong>Select all</strong></label><br />
+              <%= f.collection_check_boxes :goal_ids, @user_goals, :id, :name do |cb| %>
+                <% cb.label(class: "checkbox") {cb.check_box + cb.text} %>
+              <% end %>
+            </div>
+          </div>
+        <div class="modal-footer">
+          <div class="form-group">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <%= f.submit class:"btn btn-success btn-md" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

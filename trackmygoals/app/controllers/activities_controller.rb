@@ -11,7 +11,7 @@ class ActivitiesController < ApplicationController
     @activity.total_xp = @activity.goal.calculate_total_activity_xp(@activity.quantity)
     if @activity.save
       flash[:success] = "You just gained #{@activity.total_xp}xp!"
-      redirect_to goal_path(@activity.goal)
+      redirect_to root_path
     else
       redirect_to new_goal_activity_path(@activity.goal)
       flash[:danger] = "There was a problem logging your activity"
@@ -23,7 +23,7 @@ class ActivitiesController < ApplicationController
     @goal = Goal.find(params[:goal_id])
     @activity.destroy
       flash[:danger] = "Activity was successfully destroyed"
-      redirect_to goal_path(@activity.goal)
+      redirect_to root_path
   end
   
   private

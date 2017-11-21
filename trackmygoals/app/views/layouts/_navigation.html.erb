@@ -1,22 +1,23 @@
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top navbar-logged" role="navigation">
   <div class='container'>
     <div class="navbar-header">
       <%= link_to root_path, class:"navbar-brand" do %>
-        <%= image_tag "Merit.jpg", class:"logo" %>
+        <%= image_tag "merit-without-background.png", class:"logo" %>
       <% end %>
     </div>
     <div class="collapse navbar-collapse" id="main-nav-collapse">
       <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to 'ABOUT', about_path %></li>
+        <li><%= link_to 'CONTACT US', new_contact_path %></li>
         <% if user_signed_in? %>
-          <li><%= link_to "DASHBOARD", dashboard_path %></li>
-          <div class="nav navbar-nav navbar-right">
+          <div class="nav navbar-nav navbar-right profile-dropdown">
             <li id="profile">Hello, <%= current_user.first_name %> <i class="fa fa-user"></i></li>
             <ul id="profile-links">
               <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
             </ul>
           </div>
         <% else %>
-          <%= link_to "Log In", new_user_session_path, class: "btn btn-default navbar-btn navbar-log" %>
+          <%= link_to "Log In", new_user_session_path %>
         <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->

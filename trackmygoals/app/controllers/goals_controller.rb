@@ -1,6 +1,6 @@
 class GoalsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_goal, only: [:edit, :update, :show, :destroy]
+  before_action :set_goal, only: [:edit, :update, :show, :destroy, :complete, :duplicate]
   before_action :require_same_user, only: [:edit, :update, :destroy]
   before_action :check_user_plan, only: [:create]
   
@@ -13,10 +13,10 @@ class GoalsController < ApplicationController
     @goal.user = current_user
     if @goal.save
       flash[:success] = "Your goal has been created!"
-      redirect_to dashboard_path
+      redirect_to root_path
     else
       flash[:danger] = @goal.errors.full_messages.join(", ")
-      render 'new'
+      redirect_to root_path
     end
   end
   
@@ -61,6 +61,26 @@ class GoalsController < ApplicationController
     @activities = current_user.activities
   end
   
+  def complete
+		if @goal.completed == false
+  		@goal.update_attribute(:completed, true)
+  		Activity.create(user: current_user, goal: @goal, quantity: 1, created_at: Time.now, total_xp: @goal.xp_value)
+  		flash[:success] = "Goal was successfully completed!"
+  		redirect_to root_path
+		else
+		  @goal.activities.destroy_all
+		  @goal.update_attribute(:completed, false)
+  		flash[:danger] = "Goal is now incomplete!"
+  		redirect_to root_path
+		end
+  end
+  
+  def duplicate
+    Goal.create(user: current_user, name: @goal.name, description: @goal.description, xp_value: @goal.xp_value, recurrence_id: @goal.recurrence_id, created_at: Time.now, completed: false)
+    flash[:success] = "Goal has been copied!"
+		redirect_to root_path
+  end
+
   private
   
   def goal_params
@@ -81,7 +101,7 @@ class GoalsController < ApplicationController
   def check_user_plan
     if !current_user.is_premium && current_user.goals.count == 3
       flash[:danger] = "You have reached the goal limit for free users. Upgrade for unlimited goals!"
-      return redirect_to goals_path
+      return redirect_to root_path
     end
   end
 end

@@ -19,47 +19,38 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
-h1, h2, h3, ul, li, p, tr, th, td {
-    font-family: 'Nunito', sans-serif;
-    font-weight: 200;
+h1, h2, h3, h4, ul, li, p, tr, th, td, small{
+  font-family: 'Nunito', sans-serif;
+  font-weight: 200;
 }
 
-h4, label, placeholder {
+h1, h2, h3, h4, th {
+  letter-spacing: 2px;
+}
+
+label, placeholder {
     font-family: 'Nunito', sans-serif !important;
     font-weight: 400 !important;
 }
 
-.navbar, .home-callout {
-  background: black;
+strong {
+  font-family: 'Nunito', sans-serif !important;
+  font-weight: 800 !important;
+}
+
+.navbar-logged {
+  background: #162756;
+  height: 80px;
+  font-size: 16px;
+  color: white !important;
+  border-bottom: 3px solid transparent;
+  border-image: linear-gradient(to right, #7986AC , #7986AC);
+  border-image-slice: 1;
   .active {
     color: white;
     opacity: 0.75;
     background: #323232 !important;
   }
-}
-
-.navbar-footer {
-  margin-top: 20px !important;
-  border-top: 3px solid transparent;
-  border-image: linear-gradient(to right, #108dc7 , #ef8e38);
-  border-image-slice: 1;
-  margin-bottom: 0px !important;
-  font-size: 16px;
-  color: white !important;
-  background: black;
-  .navbar-nav {
-    margin-left: 40% !important;
-  }
-}
-
-.navbar {
-  height: 80px;
-  padding-bottom: 80px;
-  font-size: 16px;
-  color: white !important;
-  border-bottom: 3px solid transparent;
-  border-image: linear-gradient(to right, #108dc7 , #ef8e38);
-  border-image-slice: 1;
   .logo {
     height: 50px;
     width: 80px;
@@ -68,14 +59,116 @@ h4, label, placeholder {
       transition: .5s;
     }
   }
-  .navbar-log {
-    font-size: 16px;
+  .navbar-nav li a:hover, .navbar-nav li.active a {
+    background: none !important;
+    border-bottom: 1px solid #7986AC;
   }
+}
+
+.navbar-right {
+  letter-spacing: 2px;
+  .profile-dropdown {
+    letter-spacing: 0px;
+    &:hover {
+      opacity: 0.75;
+    }
+  }
+}
+
+.main {
+  padding-top: 80px;
+  padding-bottom: 40px;
+}
+
+.slideanim {visibility:hidden;}
+.slide {
+    /* The name of the animation */
+    animation-name: slide;
+    -webkit-animation-name: slide; 
+    /* The duration of the animation */
+    animation-duration: 1s; 
+    -webkit-animation-duration: 1s;
+    /* Make the element visible */
+    visibility: visible; 
+}
+
+/* Go from 0% to 100% opacity (see-through) and specify the percentage from when to slide in the element along the Y-axis */
+@keyframes slide {
+    0% {
+        opacity: 0;
+        transform: translateY(70%);
+    } 
+    100% {
+        opacity: 1;
+        transform: translateY(0%);
+    } 
+}
+@-webkit-keyframes slide {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(70%);
+    } 
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0%);
+    }
 }
 
 .navbar-right {
   margin-top: 15px;
   font-weight: 100 !important;
+}
+
+.jumbotron {
+  background-image: url("smoke-background.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  height: 500px !important;
+  color: white;
+  padding: 100px 25px;
+  .landing-logo {
+    height:20%;
+    width: auto;
+  }
+}
+
+.container-fluid {
+    padding: 60px 50px;
+}
+
+.home-logo {
+  color: #e5c100;
+  font-size: 200px;
+}
+
+.logo-small {
+    color: #e5c100;
+    font-size: 50px;
+}
+
+.carousel-control.right, .carousel-control.left {
+    background-image: none;
+    color: #e5c100;
+}
+
+.carousel-indicators li {
+    border-color: #e5c100;
+}
+
+.carousel-indicators li.active {
+    background-color: #e5c100;
+}
+
+.item h4 {
+    font-size: 19px;
+    line-height: 1.375em;
+    font-weight: 400;
+    font-style: italic;
+    margin: 70px 0;
+}
+
+.item span {
+    font-style: normal;
 }
 
 #profile {
@@ -118,19 +211,20 @@ h4, label, placeholder {
   left: 35%;
   width: 30%;
 }
+
+.modal {
+  label.error {
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+  }
+}
+
 .alert-notice, .alert-alert {
   display: none;
-}
-
-.home-callout {
-  color: white;
-  margin-top: -20px;
-  padding-top: 50px;
-  padding-bottom: 100px;
-}
-
-.home-signup-links {
-  margin-top: 30px;
 }
 
 .no-padding {
@@ -142,20 +236,11 @@ h4, label, placeholder {
   padding-left: 15px !important;
 }
 
-#main {
-  margin-top: 100px !important;
-  transition: margin-left .5s;
-}
-
-body {
-  height: 100%;
-  margin: 0;
-  background: #f6f6f6; /* Old browsers */
-}
-
-html {
-  height: 100%;
-  margin: 0;
+html,body {
+   margin:0;
+   padding:0;
+   height:100%;
+   background: #f6f6f6;
 }
 
 #profile-links {
@@ -166,3 +251,9 @@ html {
   transition: max-height 0.2s ease-out;
 }
 
+@media screen and (max-width: 768px) {
+  .col-sm-4 {
+    text-align: center;
+    margin: 25px 0;
+  }
+}

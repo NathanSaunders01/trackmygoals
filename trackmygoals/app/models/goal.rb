@@ -1,6 +1,6 @@
 class Goal < ActiveRecord::Base
   belongs_to :user
-  has_many :activities
+  has_many :activities, dependent: :destroy
   has_many :reward_goals
   has_many :rewards, through: :reward_goals
   
@@ -46,6 +46,8 @@ class Goal < ActiveRecord::Base
       else
         return 1
       end
+    elsif self.recurrence_id == 4
+      return 1
     end
   end
   
@@ -78,7 +80,7 @@ class Goal < ActiveRecord::Base
         end
       end
     end
-    streak.to_f
+    streak
   end
   
   def calculate_total_activity_xp(quantity)
@@ -120,6 +122,10 @@ class Goal < ActiveRecord::Base
     elsif self.recurrence_id == 3 && !self.activities.where("created_at >= ?", 0.months.ago.beginning_of_month.in_time_zone(Time.zone)).exists?
       return true
     end
+  end
+  
+  def completed?
+		self.completed = true && self.recurrence_id == 4
   end
 
 end

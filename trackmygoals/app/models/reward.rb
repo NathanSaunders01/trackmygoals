@@ -5,4 +5,11 @@ class Reward < ActiveRecord::Base
   
   validates :name, presence: true
   validates :xp_goal, presence: true
+  
+  after_create :sum_goal_xp
+  
+  def sum_goal_xp
+    self.goals.sum(&:total_goal_xp)
+  end
+  
 end

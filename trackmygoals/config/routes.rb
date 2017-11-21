@@ -10,7 +10,11 @@ Rails.application.routes.draw do
   root to: 'pages#home'
 
   resources :goals do
-    resources :activities
+    member do
+  		patch :complete
+  		put :duplicate
+  	end
+  	resources :activities
   end
   
   resources :rewards

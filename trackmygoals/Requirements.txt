@@ -20,3 +20,9 @@ Rewards
 * User must set rewards by including name, xp goal to unlock
 * Rewards must have progress bar showing how close the user is to completing
 * When creating reward, app must prompt user of average weekly xp based on current goals set.
+
+CARWOW
+* Create migration file adding total_reward_xp
+* Add to total each time an activity is created with a date after the created_at date of reward
+* Change 'select all' option in checklist to include all ids even if goals are created after assignement to reward.
+

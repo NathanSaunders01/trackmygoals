@@ -36,6 +36,12 @@ class RewardsController < ApplicationController
     @user_rewards = @user.rewards
   end
   
+  def destroy
+    @reward.destroy
+    flash[:danger] = "Reward was successfully deleted!"
+    redirect_to root_path
+  end
+  
   private
   
   def reward_params

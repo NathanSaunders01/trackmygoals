@@ -9,6 +9,10 @@
 # Plan.create(name: 'basic', price: 0)
 # Plan.create(name: 'pro', price: 1.99)
 
-# 4.times do |a|
-#   Activity.create!(user_id: 1, goal_id: 19, quantity: "#{a}".to_i, total_xp: 100*"#{a}".to_i, created_at: a.days.ago)
+3.times do |a|
+  Activity.create!(user_id: 5, goal_id: 31, quantity: "#{a}".to_i, total_xp: 100*"#{a}".to_i, created_at: a.days.ago)
+end
+
+# 1.times do |a|
+#   Activity.create!(user_id: 4, goal_id: 24, quantity: 2, total_xp: 200, created_at: 4.days.ago)
 # end

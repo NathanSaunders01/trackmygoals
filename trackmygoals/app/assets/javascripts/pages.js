@@ -1,6 +1,7 @@
 $(document).ready(function(){
   $('.alert').delay(1000).fadeOut(4000);
   document.getElementById("defaultOpen").click();
+  document.getElementById("defaultSecOpen").click();
 });
 
 window.onload = function(){ 

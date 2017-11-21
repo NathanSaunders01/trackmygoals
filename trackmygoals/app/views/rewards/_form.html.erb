@@ -1,22 +1,37 @@
-<%= form_for @reward do |f| %>
-  <div class="form-group">
-    <%= f.label :name %>
-    <%= f.text_field :name, class: 'form-control', placeholder: "Enter reward name..."  %>
-  </div>
-  <div class="form-group">
-    <%= f.label :xp_goal %>
-    <%= f.number_field :xp_goal, class:"form-control", placeholder: "Enter XP target..." %>
-  </div>
-  <div class="form-group">
-    <%= f.label "Select goals to contribute to reward" %>
-    <div class="scrollbox">
-      <label><input type="checkbox" onclick="toggle(this);" class="first-input"/><strong>Select all</strong></label><br />
-      <%= f.collection_check_boxes :goal_ids, @goals, :id, :name do |cb| %>
-        <% cb.label(class: "checkbox") {cb.check_box + cb.text} %>
-      <% end %>
+<%= form_for(reward, :method => :put) do |f| %>
+  <div class="modal fade" id="myUpdateReward_<%= reward.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Edit Reward</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <%= f.label :name %>
+            <%= f.text_field :name, class: 'form-control', placeholder: "Enter reward name..."  %>
+          </div>
+          <div class="form-group">
+            <%= f.label :xp_goal %>
+            <%= f.number_field :xp_goal, class:"form-control", placeholder: "Enter XP target..." %>
+          </div>
+          <div class="form-group">
+            <%= f.label "Select goals to contribute to reward" %>
+            <div class="scrollbox">
+              <label><input type="checkbox" onclick="toggle(this);" class="first-input"/><strong>Select all</strong></label><br />
+              <%= f.collection_check_boxes :goal_ids, @user_goals, :id, :name do |cb| %>
+                <% cb.label(class: "checkbox") {cb.check_box + cb.text} %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="form-group">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <%= f.submit class:"btn btn-success btn-md" %>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <%= f.submit class:"btn btn-success btn-md" %>
   </div>
 <% end %>

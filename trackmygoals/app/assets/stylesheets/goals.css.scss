@@ -12,19 +12,22 @@
 
 .fa-star-o {
   color: #ffd27f;
+  z-index: 100;
+}
+
+.star-text {
+  z-index: 1000 !important;
 }
 
 .fa-exclamation {
   color: #ff6666;
 }
 
+
 table{
   width:100%;
   table-layout: fixed;
   margin-bottom: 20px !important;
-  tbody > tr:hover {
-    opacity: 0.7;
-  }
   .left-col {
     padding-left: 5px;
   }
@@ -55,7 +58,8 @@ td{
   font-size: 16px;
 }
 
-.pie-chart-header {
+.fa-exclamation-circle {
+  color: #dc4c4c;
 }
 
 .pie-charts {
@@ -81,16 +85,6 @@ td{
   border-right: 2px solid #999;
 }
 
-.activity-well {
-  width: 70%;
-  height: 60%;
-  margin-left: 10%;
-  .activity-actions {
-    margin-top: -20px;
-    float: right;
-  }
-}
-
 .bg-white {
   background: white !important;
 }
@@ -104,11 +98,16 @@ td{
   padding-right: 15px;
 }
 
+.btn-activity {
+  float: right;
+}
+
 div.tab {
     overflow: hidden;
     border: 1px solid #ccc;
     border-bottom: none;
     background-color: #f1f1f1;
+    margin-top: 50px;
 }
 
 /* Style the buttons inside the tab */
@@ -124,16 +123,36 @@ div.tab button {
 
 /* Change background color of buttons on hover */
 div.tab button:hover {
-    background-color: #ddd;
+    background-color: #061439;
+    color: white;
+    border-bottom: 3px solid #7986AC;
+}
+
+.btn-merit {
+  border: 1px solid #162756 !important;
+  border-radius: 3px !important;
+  padding: 5px 10px;
+  background-color: white !important;
+  color: #162756 !important;
+  &:hover {
+    background-color: #162756 !important;
+    color: white !important;
+  }
 }
 
 .tablinks {
   width: 50%;
 }
 
+.tablinkssec {
+  width: 50%;
+}
+
 /* Create an active/current tablink class */
 div.tab button.active {
-    background-color: white;
+    background-color: #162756;
+    color: white;
+    border-bottom: 3px solid #7986AC;
 }
 
 /* Style the tab content */
@@ -155,4 +174,55 @@ div.tab button.active {
 @keyframes fadeEffect {
     from {opacity: 0;}
     to {opacity: 1;}
+}
+
+.tabcontentsec {
+    display: none;
+    background: white !important;
+    padding: 6px 12px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 1px solid #ccc;
+    border-top: none;
+    -webkit-animation: fadeEffect 1s;
+    animation: fadeEffect 1s; /* Fading effect takes 1 second */
+    .active {
+      border-bottom: none !important;
+    }
+}
+
+.stats-box {
+  width: 100%;
+  height: 100%;
+}
+
+div.tab-charts {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+div.tab-charts button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    .active {
+      background: white;
+    }
+}
+
+/* Change background color of buttons on hover */
+div.tab-charts button:hover {
+    background-color: #ddd;
+}
+
+.tablinks-charts {
+  width: 33%;
 }

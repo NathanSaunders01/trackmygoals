@@ -23,6 +23,6 @@ Rewards
 
 CARWOW
 * Create migration file adding total_reward_xp
-* Add to total each time an activity is created with a date after the created_at date of reward
+* Add to total each time an activity is created with adate after the created_at date of reward
 * Change 'select all' option in checklist to include all ids even if goals are created after assignement to reward.
 

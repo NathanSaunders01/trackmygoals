@@ -26,7 +26,7 @@ class Goal < ActiveRecord::Base
   
   def calculate_streak
     if self.recurrence_id == 1
-      activities = self.activities.where("created_at >= ?", 5.days.ago.in_time_zone).group("strftime('%Y-%m-%d 00:00:00 UTC', created_at)").count.count
+      activities = self.activities.where("created_at >= ?", 5.days.ago.in_time_zone).group_by_day(:created_at).count.count
       if (activities == 4 && self.check_current_period) || activities == 5
         return 1.2
       else

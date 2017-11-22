@@ -59,7 +59,7 @@ class Goal < ActiveRecord::Base
     end
     streak = 0
     if self.recurrence_id == 1 
-      days = self.activities.group("strftime('%Y-%m-%d 00:00:00 UTC', created_at)").count
+      days = self.activities.group_by_day(:created_at).count
       days.reverse_each do |day, count|
         if day == (streak+blank).days.ago.beginning_of_day.in_time_zone(Time.zone).to_formatted_s
           streak+=1

@@ -61,7 +61,7 @@ class Goal < ActiveRecord::Base
     if self.recurrence_id == 1 
       days = self.activities.group_by_day(:created_at).count
       days.reverse_each do |day, count|
-        if day == (streak+blank).days.ago.beginning_of_day.in_time_zone(Time.zone).to_formatted_s
+        if day == (streak+blank).days.ago.beginning_of_day.in_time_zone(Time.zone).to_date
           streak+=1
         end
       end

@@ -14,5 +14,9 @@
 # end
 
 5.times do |a|
-  Activity.create!(user_id: 5, goal_id: 31, quantity: 1, total_xp: 200, created_at: (a+1).weeks.ago)
+  Activity.create!(user_id: 1, goal_id: 2, quantity: 1, total_xp: 500, created_at: (a+1).weeks.ago)
+end
+
+3.times do |a|
+  Activity.create!(user_id: 1, goal_id: 1, quantity: a.to_i, total_xp: 250, created_at: (a-1).days.ago)
 end

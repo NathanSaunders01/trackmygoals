@@ -26,7 +26,7 @@ class GoalsController < ApplicationController
   def update
     if @goal.update(goal_params)
       flash[:success] = "Goal was successfully updated!"
-      redirect_to goal_path(@goal)
+      redirect_to root_path
     else
       flash[:danger] = @goal.errors.full_messages.join(", ")
       render 'edit'

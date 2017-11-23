@@ -28,6 +28,10 @@ h1, h2, h3, h4, th {
   letter-spacing: 2px;
 }
 
+fancy {
+  font-family: 'Lobster', cursive;
+}
+
 label, placeholder {
     font-family: 'Nunito', sans-serif !important;
     font-weight: 400 !important;
@@ -38,14 +42,22 @@ strong {
   font-weight: 800 !important;
 }
 
-.navbar-logged {
+.navbar-header{
+  display: inline;
+  small {
+    vertical-align: bottom;
+    font-style: italic;
+    opacity: 0.5;
+    font-weight: 400;
+  }
+}
+
+.navbar {
   background: #162756;
   height: 80px;
   font-size: 16px;
   color: white !important;
-  border-bottom: 3px solid transparent;
-  border-image: linear-gradient(to right, #7986AC , #7986AC);
-  border-image-slice: 1;
+  border: none;
   .active {
     color: white;
     opacity: 0.75;
@@ -65,8 +77,16 @@ strong {
   }
 }
 
+.navbar-logged {
+  border-bottom: 3px solid transparent !important;
+  border-image: linear-gradient(to right, #7986AC , #7986AC)!important;
+  border-image-slice: 1 !important;
+}
+
 .navbar-right {
   letter-spacing: 2px;
+  margin-top: 15px;
+  font-weight: 100 !important;
 }
 
 .main {
@@ -108,18 +128,14 @@ strong {
     }
 }
 
-.navbar-right {
-  margin-top: 15px;
-  font-weight: 100 !important;
-}
-
 .jumbotron {
-  background-image: url("smoke-background.jpg");
-  background-repeat: no-repeat;
-  background-size: 100% auto;
+  background: #162756;
   height: 500px !important;
   color: white;
-  padding: 100px 25px;
+  padding: 20px 25px 60px 25px;
+  border-bottom: 3px solid transparent !important;
+  border-image: linear-gradient(to right, #7986AC , #7986AC)!important;
+  border-image-slice: 1 !important;
   .landing-logo {
     height:20%;
     width: auto;
@@ -127,7 +143,7 @@ strong {
 }
 
 .container-fluid {
-    padding: 60px 50px;
+  padding: 20px 50px;
 }
 
 .home-logo {
@@ -155,14 +171,16 @@ strong {
 
 .item h4 {
     font-size: 19px;
+    font-family: 'Nunito';
     line-height: 1.375em;
-    font-weight: 400;
+    font-weight: 200;
     font-style: italic;
     margin: 70px 0;
 }
 
 .item span {
-    font-style: normal;
+  font-family: 'Nunito';
+  font-weight: 400;
 }
 
 .navbar-default .navbar-brand,

@@ -2,7 +2,7 @@ class GoalsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_goal, only: [:edit, :update, :show, :destroy, :complete, :duplicate]
   before_action :require_same_user, only: [:edit, :update, :destroy]
-  before_action :check_user_plan, only: [:create]
+  # before_action :check_user_plan, only: [:create]
   
   def new
     @goal = Goal.new
@@ -98,10 +98,10 @@ class GoalsController < ApplicationController
     end
   end
   
-  def check_user_plan
-    if !current_user.is_premium && current_user.goals.count == 3
-      flash[:danger] = "You have reached the goal limit for free users. Upgrade for unlimited goals!"
-      return redirect_to root_path
-    end
-  end
+  # def check_user_plan
+  #   if !current_user.is_premium && current_user.goals.count == 3
+  #     flash[:danger] = "You have reached the goal limit for free users. Upgrade for unlimited goals!"
+  #     return redirect_to root_path
+  #   end
+  # end
 end

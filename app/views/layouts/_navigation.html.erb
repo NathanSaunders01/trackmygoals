@@ -1,8 +1,11 @@
-<nav class="navbar navbar-default navbar-fixed-top navbar-logged" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top <%= if user_signed_in? then "navbar-logged" end %>" role="navigation">
   <div class='container'>
     <div class="navbar-header">
       <%= link_to root_path, class:"navbar-brand" do %>
-        <%= image_tag "merit-without-background.png", class:"logo" %>
+        <span>
+          <%= image_tag "merit-without-background.png", class:"logo" %>
+          <small>Beta</small>
+        </span>
       <% end %>
     </div>
     <div class="collapse navbar-collapse" id="main-nav-collapse">
@@ -23,7 +26,7 @@
             </ul>
           </li>
         <% else %>
-          <li><%= link_to "Log In", new_user_session_path %></li>
+          <li><%= link_to "LOG IN", new_user_session_path %></li>
         <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right  nav-links">

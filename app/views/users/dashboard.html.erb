@@ -34,7 +34,7 @@
             New Goal
           </button>
         <% else %>
-          <div class="text-center">
+          <div class="text-center blank-table">
             <h4 class="text-center">You have no goals yet!</h4>
             </br>
             <button type="button" class="btn-merit" data-toggle="modal" data-target="#myGoalModal">
@@ -51,7 +51,7 @@
             New Reward
           </button>
         <% else %>
-          <div class="text-center">
+          <div class="text-center blank-table">
             <h4 class="text-center">You have no rewards yet!</h4>
             </br>
             <button type="button" class="btn-merit" data-toggle="modal" data-target="#myRewardModal">
@@ -75,11 +75,11 @@
         </button>
       </div>
       
-      <div id="activitytable" class="tabcontentsec activity-scrollbox">
+      <div id="activitytable" class="tabcontentsec <%= if @activities.count >= 8 then "activity-scrollbox-many" else "activity-scrollbox-few" end %>">
         <%= render 'activities/activity_table' %>
       </div>
       
-      <div id="pasttaskstable" class="tabcontentsec">
+      <div id="pasttaskstable" class="tabcontentsec  <%= if @activities.count >= 8 then "activity-scrollbox-many" else "activity-scrollbox-few" end %>">
         <%= render 'goals/completed_goals' %>
       </div>
     </div>

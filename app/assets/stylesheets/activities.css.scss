@@ -1,5 +1,11 @@
-.activity-scrollbox {
+.activity-scrollbox-many {
   height: 400px;
+  overflow: auto;
+  background: white;
+}
+
+.activity-scrollbox-few {
+  height: auto;
   overflow: auto;
   background: white;
 }

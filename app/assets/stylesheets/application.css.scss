@@ -59,7 +59,7 @@ strong {
       transition: .5s;
     }
   }
-  .navbar-nav li a:hover, .navbar-nav li.active a {
+  .nav-links li a:hover, .nav-links li.active a {
     background: none !important;
     border-bottom: 1px solid #7986AC;
   }
@@ -67,12 +67,6 @@ strong {
 
 .navbar-right {
   letter-spacing: 2px;
-  .profile-dropdown {
-    letter-spacing: 0px;
-    &:hover {
-      opacity: 0.75;
-    }
-  }
 }
 
 .main {
@@ -171,16 +165,6 @@ strong {
     font-style: normal;
 }
 
-#profile {
-    cursor: pointer;
-    border: none;
-    outline: none;
-    transition: 0.4s;
-    .active {
-      opacity: 0.5;
-    }
-  }
-  
 .navbar-default .navbar-brand,
 .navbar-default .navbar-nav > li > a {
   color: white;
@@ -243,12 +227,39 @@ html,body {
    background: #f6f6f6;
 }
 
-#profile-links {
-  padding: 0 18px;
+.nav-profile {
+  cursor: pointer;
+  outline: none;
+  letter-spacing: 0px;
+  transition: 0.4s;
+}
+
+.profile-dropdown {
+  margin-top: 15px !important;
   background-color: white;
+  // border: solid #7986AC;
+  //border-width: 0px 1px 0px 1px;
+}
+
+#profile-links {
+  display: block;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
+  li {
+    margin-left: -40px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border: solid #7986AC;
+    border-width: 0px 1px 1px 1px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 14px;
+  }
+  li:last-child {
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+  }
 }
 
 @media screen and (max-width: 768px) {

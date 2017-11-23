@@ -24,14 +24,10 @@
             <td class="text-center"><%= number_with_delimiter(goal.daily_goal_xp, :delimiter => ',') %></td>
             <td class="text-center">
               <% if !(goal.recurrence_id == 4) %>
-                <% if goal.calculate_length_of_streak >= 5 %>
+                <% if goal.calculate_streak == 1.2 %>
                   <span class="fa-stack fa-2x">
                     <i class="fa fa-star-o fa-stack-2x"></i>
                     <small class="star-text"><%= goal.calculate_length_of_streak.to_i %></small>
-                  </span>
-                <% elsif goal.warn_streak_loss %>
-                  <span class="fa-stack fa-2x">
-                    <i class="fa fa-exclamation fa-stack-2x"></i>
                   </span>
                 <% else %>
                   <div class="progress">

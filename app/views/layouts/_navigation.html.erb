@@ -6,19 +6,29 @@
       <% end %>
     </div>
     <div class="collapse navbar-collapse" id="main-nav-collapse">
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right nav-profile">
+        <% if user_signed_in? %>
+          <li id="profile">
+            <%= link_to 'javascript:void(0)' do %>
+              Hello, <%= current_user.first_name %>
+              <i class="fa fa-user"></i>
+            <% end %>
+            <ul id="profile-links" class="profile-dropdown">
+              <li class="text-center"><%= link_to "Settings", '#' %></li>
+              <%= link_to destroy_user_session_path, method: :delete do %>
+               <li class="text-center">
+                  Sign Out
+               </li>
+             <% end %>
+            </ul>
+          </li>
+        <% else %>
+          <li><%= link_to "Log In", new_user_session_path %></li>
+        <% end %>
+      </ul>
+      <ul class="nav navbar-nav navbar-right  nav-links">
         <li><%= link_to 'ABOUT', about_path %></li>
         <li><%= link_to 'CONTACT US', new_contact_path %></li>
-        <% if user_signed_in? %>
-          <div class="nav navbar-nav navbar-right profile-dropdown">
-            <li id="profile">Hello, <%= current_user.first_name %> <i class="fa fa-user"></i></li>
-            <ul id="profile-links">
-              <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
-            </ul>
-          </div>
-        <% else %>
-          <%= link_to "Log In", new_user_session_path %>
-        <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div>

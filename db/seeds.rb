@@ -6,13 +6,13 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Plan.create(name: 'basic', price: 0)
-Plan.create(name: 'pro', price: 1.99)
+# Plan.create(name: 'basic', price: 0)
+# Plan.create(name: 'pro', price: 1.99)
 
 # 3.times do |a|
 #   Activity.create!(user_id: 5, goal_id: 31, quantity: "#{a}".to_i, total_xp: 100*"#{a}".to_i, created_at: a.days.ago)
 # end
 
-# 1.times do |a|
-#   Activity.create!(user_id: 4, goal_id: 24, quantity: 2, total_xp: 200, created_at: 4.days.ago)
-# end
+5.times do |a|
+  Activity.create!(user_id: 5, goal_id: 31, quantity: 1, total_xp: 200, created_at: (a+1).weeks.ago)
+end

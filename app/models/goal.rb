@@ -25,59 +25,32 @@ class Goal < ActiveRecord::Base
   end
   
   def calculate_streak
-    if self.recurrence_id == 1
-      activities = self.activities.where("created_at >= ?", 5.days.ago.in_time_zone).group_by_day(:created_at).count.count
-      if (activities == 4 && self.check_current_period) || activities == 5
-        return 1.2
-      else
-        return 1
-      end
-    elsif self.recurrence_id == 2
-      activities = self.activities.where("created_at >= ?", 5.weeks.ago.in_time_zone).group_by_week(:created_at).count.count
-      if (activities == 4 && self.check_current_period) || activities == 5
-        return 1.2
-      else
-        return 1
-      end
-    elsif self.recurrence_id == 3
-      activities = self.activities.where("created_at >= ?", 5.months.ago.in_time_zone).group_by_month(:created_at).count.count
-      if (activities == 4 && self.check_current_period) || activities == 5
-        return 1.2
-      else
-        return 1
-      end
-    elsif self.recurrence_id == 4
+    if self.calculate_length_of_streak >= 5 || (self.calculate_length_of_streak == 4 && self.check_current_period)
+      return 1.2
+    else
       return 1
-    end
+    end  
   end
   
   def calculate_length_of_streak
-    if self.check_current_period 
-      blank = 1 
-    else 
-      blank = 0 
-    end
     streak = 0
     if self.recurrence_id == 1 
       days = self.activities.group_by_day(:created_at).count
       days.reverse_each do |day, count|
-        if day == (streak+blank).days.ago.beginning_of_day.in_time_zone(Time.zone).to_date
-          streak+=1
-        end
+        break if count == 0 && !(day == Date.today)
+        streak+=1
       end
     elsif self.recurrence_id == 2
       weeks = self.activities.group_by_week(:created_at).count
       weeks.reverse_each do |week, count|
-        if week == (streak+blank).weeks.ago.beginning_of_week(:sunday).in_time_zone(Time.zone).to_date
-          streak+=1
-        end
+        break if count == 0 && !(week == 0.weeks.ago.beginning_of_week(:sunday).to_date)
+        streak+=1
       end
     elsif self.recurrence_id == 3
       months = self.activities.group_by_month(:created_at).count
       months.reverse_each do |month, count|
-        if month == (streak+blank).months.ago.beginning_of_month.in_time_zone(Time.zone).to_date
-          streak+=1
-        end
+        break if count == 0 && !(month == 0.months.ago.beginning_of_month.to_date)
+        streak+=1
       end
     end
     streak
@@ -98,20 +71,9 @@ class Goal < ActiveRecord::Base
   end
   
   def warn_streak_loss
-    if self.recurrence_id == 1
-      if (self.calculate_length_of_streak >= 5 && self.check_current_period)
-        return true
-      end
-    elsif self.recurrence_id == 2
-      if (self.calculate_length_of_streak >= 5 && self.check_current_period)
-        return true
-      end
-    elsif self.recurrence_id == 3
-      if (self.calculate_length_of_streak >= 5 && self.check_current_period)
-        return true
-      end
+    if (self.calculate_streak == 1.2 && self.check_current_period)
+      return true
     end
-    
   end
   
   def check_current_period

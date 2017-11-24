@@ -1,3 +1,28 @@
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+  <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+  <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+</ul>
+
+<div class="tab-content">
+  <div id="home" class="tab-pane fade in active">
+    <h3>HOME</h3>
+    <%= column_chart @activities.group_by_day(:created_at, last: 7, format: "%a").sum(:quantity), library: { vAxis: { viewWindow: {min: 0, max: goal_chart_range } } } %>
+  </div>
+  <div id="menu1" class="tab-pane fade">
+    <h3>Menu 1</h3>
+    <%= column_chart @activities.group_by_week(:created_at, last: 7, format: "%D").sum(:quantity), library: { vAxis: { viewWindow: {min: 0, max: goal_chart_range } } } %>
+  </div>
+  <div id="menu2" class="tab-pane fade">
+    <h3>Menu 2</h3>
+    <%= column_chart @activities.group_by_week(:created_at, last: 7, format: "%b").sum(:quantity), library: { vAxis: { viewWindow: {min: 0, max: goal_chart_range } } } %>
+  </div>
+</div>
+
+
+
+
+
 <!--<div class="container">-->
 <!--  <div class="row">-->
 <!--    <div class="col-md-3 scoreboard-sidebar">-->

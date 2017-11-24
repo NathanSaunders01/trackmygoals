@@ -1,5 +1,6 @@
 $(document).on('shown.bs.modal', '.modal', function() {
   $(this).find('[autofocus]').focus();
+  window.dispatchEvent(new Event('resize'));
 });
 $(document).on("shown.bs.modal", function () {
         $("#addGoalForm").validate({

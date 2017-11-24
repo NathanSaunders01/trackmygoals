@@ -79,7 +79,7 @@
         <%= render 'activities/activity_table' %>
       </div>
       
-      <div id="pasttaskstable" class="tabcontentsec  <%= if @activities.count >= 8 then "activity-scrollbox-many" else "activity-scrollbox-few" end %>">
+      <div id="pasttaskstable" class="tabcontentsec  <%= if @completed_goals.count >= 8 then "activity-scrollbox-many" else "activity-scrollbox-few" end %>">
         <%= render 'goals/completed_goals' %>
       </div>
     </div>

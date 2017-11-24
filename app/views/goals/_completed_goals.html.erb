@@ -1,13 +1,13 @@
 <table>
-  <thead>
+  <thead class="completed-table">
     <th> </th>
     <th class="text-center">Value</th>
     <th class="text-center">Date Completed</th>
     <th class="text-right">Actions</th>
   </thead>
 </table>
-<% if @completed_goals.count > 0 %>
-  <div class="tbl-content">
+<div class="tbl-content">
+  <% if @completed_goals.count > 0 %>
     <table>
       <tbody>
         <% @completed_goals.each do |goal| %>
@@ -33,7 +33,7 @@
         <% end %>
       </tbody>
     </table>
-  </div>
-<% else %>
-  <h4 class="text-center">You have no completed tasks yet!</h4>
-<% end %>
+  <% else %>
+    <h4 class="text-center">You have no completed tasks yet!</h4>
+  <% end %>
+</div>

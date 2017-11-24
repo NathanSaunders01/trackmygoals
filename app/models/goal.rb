@@ -76,6 +76,11 @@ class Goal < ActiveRecord::Base
     end
   end
   
+  def days_to_streak
+    streak = self.calculate_length_of_streak
+    5 - streak
+  end
+  
   def check_current_period
     if self.recurrence_id == 1 && !self.activities.where("created_at >= ?", Date.today.in_time_zone).exists?
       return true

@@ -1,7 +1,7 @@
 <table>
   <thead>
     <th> </th>
-    <th class="text-center">XP Value</th>
+    <th class="text-center">Value</th>
     <th class="text-center">Date Completed</th>
     <th class="text-right">Actions</th>
   </thead>
@@ -12,8 +12,8 @@
       <tbody>
         <% @completed_goals.each do |goal| %>
           <tr>
-            <td class="left-col"><%= goal.name %></td>
-            <td class="text-center"><%= goal.xp_value %>xp</td>
+            <td class="left-col"><%= goal.name.titleize %></td>
+            <td class="text-center"><%= goal.xp_value %> XP</td>
             <td class="text-center"><%= time_ago_in_words(goal.updated_at) %> ago </td>
             <td class="text-right right-col">
               <%= link_to complete_goal_path(goal), method: :patch, class:"btn btn-xs btn-primary" do %>

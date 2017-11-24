@@ -19,6 +19,20 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+// Dark Blue Theme
+
+// Darker: #061439 hover tab
+// Dark: #162756 navbar/active tab
+// Light: #4F608F 
+// Lighter: #7986AC border - navbar/profile links
+
+// Dark Red Theme
+
+// Darker: #4D0016
+// Dark: #73132E
+// Light: #BF607B
+// Lighter: #E699AF
+
 h1, h2, h3, h4, ul, li, p, tr, th, td, small{
   font-family: 'Nunito', sans-serif;
   font-weight: 200;
@@ -79,7 +93,10 @@ strong {
 
 .navbar-logged {
   border-bottom: 3px solid transparent !important;
-  border-image: linear-gradient(to right, #7986AC , #7986AC)!important;
+  -webkit-border-image: -webkit-linear-gradient(left, #7986AC, #7986AC)!important;
+  -moz-border-image: -moz-linear-gradient(left, #7986AC, #7986AC)!important;
+  -o-border-image: -o-linear-gradient(left, #7986AC, #7986AC)!important;
+  border-image: linear-gradient(to right, #7986AC, #7986AC)!important;
   border-image-slice: 1 !important;
 }
 
@@ -132,6 +149,7 @@ strong {
   background: #162756;
   height: 500px !important;
   color: white;
+  margin-bottom: 0px;
   padding: 20px 25px 60px 25px;
   border-bottom: 3px solid transparent !important;
   border-image: linear-gradient(to right, #7986AC , #7986AC)!important;
@@ -255,8 +273,6 @@ html,body {
 .profile-dropdown {
   margin-top: 15px !important;
   background-color: white;
-  // border: solid #7986AC;
-  //border-width: 0px 1px 0px 1px;
 }
 
 #profile-links {
@@ -288,5 +304,19 @@ html,body {
   .col-sm-4 {
     text-align: center;
     margin: 25px 0;
+  }
+}
+
+.left-how-box {
+  padding: 1% 5% 1% 5%;
+  .fa {
+    color: #e5c100;
+  }
+}
+
+.right-how-box {
+  padding: 1% 5% 1% 5%;
+  .fa {
+    color: #e5c100;
   }
 }

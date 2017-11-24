@@ -17,7 +17,7 @@
               <i class="fa fa-user"></i>
             <% end %>
             <ul id="profile-links" class="profile-dropdown">
-              <li class="text-center"><%= link_to "Settings", '#' %></li>
+              <li class="text-center"><%= link_to "Settings", edit_user_registration_path(current_user) %></li>
               <%= link_to destroy_user_session_path, method: :delete do %>
                <li class="text-center">
                   Sign Out
@@ -29,7 +29,7 @@
           <li><%= link_to "LOG IN", new_user_session_path %></li>
         <% end %>
       </ul>
-      <ul class="nav navbar-nav navbar-right  nav-links">
+      <ul class="nav navbar-nav navbar-right nav-links">
         <li><%= link_to 'ABOUT', about_path %></li>
         <li><%= link_to 'CONTACT US', new_contact_path %></li>
       </ul>

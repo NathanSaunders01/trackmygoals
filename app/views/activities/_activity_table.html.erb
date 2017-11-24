@@ -3,7 +3,7 @@
     <tbody id="activityList">
       <% @activities.each do |activity| %>
         <div class="activity-row">
-          <p class="text-center recent-activity">You gained <strong><%= activity.total_xp %>xp</strong> completing <%= pluralize(activity.quantity, "set") %> of "<strong><%= (activity.goal.name).titleize %></strong>"</p>
+          <p class="text-center recent-activity">You gained <strong><%= activity.total_xp %> XP</strong> completing <%= pluralize(activity.quantity, "set") %> of "<strong><%= (activity.goal.name).titleize %></strong>"</p>
           <span class="activity-info">
             <small><%= time_ago_in_words(activity.created_at) %> ago </small>
             <%= link_to goal_activity_path(goal_id: activity.goal_id, id: activity.id), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-xs btn-danger btn-activity" do %>

@@ -11,13 +11,15 @@
       <tbody>
         <% @user_rewards.each do |reward| %>
           <tr>
-            <td class="left-col"><strong><%= link_to reward.name, reward_path(reward) %></strong></td>
+            <td class="left-col"><strong><%= reward.name.titleize %></strong></td>
             <td class="text-center"><%=  number_with_delimiter(reward.xp_goal, :delimiter => ',') %></td>
             <td class="text-center">
-              <div class="progress">
-                <div class="progress-bar progress-bar-primary progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: <%= (reward.sum_goal_xp.to_f / reward.xp_goal.to_f) * 100 %>%;">
+              <span data-toggle="tooltip" title="You are <%= reward.xp_goal - reward.sum_goal_xp %> XP away from unlocking this!" data-placement="top">
+                <div class="progress">
+                  <div class="progress-bar progress-bar-primary progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: <%= (reward.sum_goal_xp.to_f / reward.xp_goal.to_f) * 100 %>%;">
+                  </div>
                 </div>
-              </div>
+              </span>
             </td>
             <td class="text-right right-col">
               <span class="fa-stack fa-2x">

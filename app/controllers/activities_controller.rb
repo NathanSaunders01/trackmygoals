@@ -10,7 +10,7 @@ class ActivitiesController < ApplicationController
     @activity.user = current_user
     @activity.total_xp = @activity.goal.calculate_total_activity_xp(@activity.quantity)
     if @activity.save
-      flash[:success] = "You just gained #{@activity.total_xp}xp!"
+      flash[:success] = "You just gained #{@activity.total_xp} XP!"
       redirect_to root_path
     else
       redirect_to new_goal_activity_path(@activity.goal)

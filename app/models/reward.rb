@@ -9,7 +9,7 @@ class Reward < ActiveRecord::Base
   after_create :sum_goal_xp
   
   def sum_goal_xp
-    self.goals.sum(&:total_goal_xp)
+    self.goals.map {|goal| [goal.activities.where("created_at >= ?", self.created_at).sum(:total_xp)]}.sum.sum
   end
   
 end

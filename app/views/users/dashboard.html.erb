@@ -141,7 +141,7 @@
           <div class="form-group">
             <%= f.label "Select tasks to contribute to reward" %>
             <div class="scrollbox">
-              <label><input type="checkbox" onclick="toggle(this);" class="first-input"/><strong>Select all</strong></label><br />
+              <label><input type="checkbox" onclick="toggle(this);" class="first-input"/><strong>Select all</strong></label><br/>
               <%= f.collection_check_boxes :goal_ids, @user_goals, :id, :name do |cb| %>
                 <% cb.label(class: "checkbox") {cb.check_box + cb.text} %>
               <% end %>

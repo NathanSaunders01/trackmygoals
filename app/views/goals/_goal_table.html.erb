@@ -13,7 +13,7 @@
       <tbody>
         <% @user_goals.each do |goal| %>
           <tr class="<%= if goal.warn_streak_loss then "bg-danger" end %>">
-            <td class="left-col"><strong><%= goal.name.titleize %> </strong><span data-toggle="tooltip" title="Your streak will end soon!" data-placement="top" class="<%= if goal.warn_streak_loss then "fa fa-exclamation-circle" end %>"></span></td>
+            <td class="left-col"><strong><%= link_to goal.name.titleize, goal_path(goal) %> </strong><span data-toggle="tooltip" title="Your streak will end soon!" data-placement="top" class="<%= if goal.warn_streak_loss then "fa fa-exclamation-circle" end %>"></span></td>
             <td class="text-center">
               <%= number_with_delimiter(goal.xp_value, :delimiter => ',') %>
               <% if goal.calculate_streak == 1.2 %>
@@ -28,7 +28,7 @@
                 <% if goal.calculate_streak == 1.2 %>
                   <span class="fa-stack fa-2x">
                     <i class="fa fa-star-o fa-stack-2x"></i>
-                    <small class="star-text"><%= goal.calculate_length_of_streak.to_i %></small>
+                    <small class="star-text"><%= goal.calculate_length_of_streak %></small>
                   </span>
                 <% else %>
                   <span data-toggle="tooltip" title="You are <%= pluralize( goal.days_to_streak, "day") %> away from earning bonus XP!" data-placement="top">

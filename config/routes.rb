@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   
   root to: 'pages#home'
 
-  resources :goals do
+  resources :goals, :path => 'tasks' do
     member do
   		patch :complete
   		put :duplicate

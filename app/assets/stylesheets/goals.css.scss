@@ -134,7 +134,6 @@ div.tab button:hover {
 
 .btn-merit {
   border: 1px solid #162756 !important;
-  border-radius: 3px !important;
   padding: 5px 10px;
   background-color: white !important;
   color: #162756 !important;
@@ -142,6 +141,10 @@ div.tab button:hover {
     background-color: #162756 !important;
     color: white !important;
   }
+}
+
+.btn {
+  border-radius: 0px !important;
 }
 
 .tablinks {

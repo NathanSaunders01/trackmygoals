@@ -3,4 +3,19 @@
     letter-spacing: 0px;
     font-weight: 400;
   }
+  .modal-content {
+    border-radius: 0px !important;
+    border: 2px solid #162756;
+  }
+}
+
+.modal {
+  label.error {
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+  }
 }

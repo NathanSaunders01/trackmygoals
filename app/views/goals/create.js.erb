@@ -1,0 +1,16 @@
+$('.modal').modal('hide');
+$('body').removeClass('modal-open');
+$('.modal-backdrop').remove();
+<% if @goal.recurrence_id == 1 %>
+  <% if current_user.goals.where("recurrence_id = ? AND completed = ?", 1, false).count == 6 %>
+    location.reload();
+  <% else %>
+    $('#todo_task_list').append('<%= j render(@goal) %>');
+  <% end %>
+<% elsif @goal.recurrence_id == 2 %>
+  <% if current_user.goals.where("recurrence_id = ?", 2).count == 5 %>
+    location.reload();
+  <% else %>
+    $('#ongo_goal_list').append('<%= j render(@goal) %>');
+  <% end %>
+<% end %>

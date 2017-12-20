@@ -5,41 +5,34 @@ class Goal < ActiveRecord::Base
   has_many :rewards, through: :reward_goals
   
   validates :name, presence: true
-  validates :description, presence: true
   validates :xp_value, presence: true
   
   def total_goal_xp
     self.activities.sum(:total_xp)
   end
   
-  def daily_goal_xp
-    self.activities.where("created_at >= ?", Time.zone.now.beginning_of_day).sum(:total_xp)
+  def daily_goal_xp(date)
+    self.activities.where(['created_at >= ? AND created_at < ?', date, date + 1]).sum(:total_xp)
   end
   
-  def weekly_goal_xp
-    self.activities.where("created_at >= ?", 1.week.ago.in_time_zone).sum(:total_xp)    
+  def weekly_goal_xp(date)
+    start = Date.commercial(Date.today.year, date)
+    last = start + 1.week
+    self.activities.where(['created_at >= ? AND created_at < ?', start, last]).sum(:total_xp)    
   end  
   
-  def monthly_goal_xp
-    self.activities.where("created_at >= ?", 1.month.ago.in_time_zone).sum(:total_xp)    
+  def monthly_goal_xp(date)
+    start = Date.new(Date.today.year, date, 1)
+    last = start + 1.month 
+    self.activities.where(['created_at >= ? AND created_at < ?', start, last]).sum(:total_xp)
   end
   
   def calculate_streak
-    if self.calculate_length_of_streak >= 5 || (self.calculate_length_of_streak == 4 && self.empty_current_period)
+    if self.calculate_length_of_streak >= 5 || (self.calculate_length_of_streak == 4 && self.empty_current_period == 1)
       return 1.2
     else
       return 1
     end  
-  end
-  
-  def calc_streak
-    streak = 0
-    days = self.activities.group_by_day(:created_at).count.reject { |day, count| count == 0 }
-    days.reverse_each do |day, count|
-      break if day != (streak+self.empty_current_period).days.ago.in_time_zone(Time.zone).to_date
-      streak+=1
-    end
-    streak
   end
   
   def calculate_length_of_streak
@@ -67,7 +60,7 @@ class Goal < ActiveRecord::Base
   end
   
   def calculate_total_activity_xp(quantity)
-    self.xp_value*quantity*self.calculate_streak
+    self.xp_value*quantity*self.check_for_bonus*self.check_todo_countdown_xp_change
   end
 
   def goal_recurrence
@@ -91,6 +84,30 @@ class Goal < ActiveRecord::Base
     5 - streak
   end
   
+  def empty_days
+    if self.activities.where("created_at >= ?", 6.days.ago.beginning_of_day).exists?
+      true
+    else
+      false
+    end
+  end
+  
+  def empty_weeks
+    if self.activities.where("created_at >= ?", 7.weeks.ago.beginning_of_day).exists?
+      true
+    else
+      false
+    end
+  end
+  
+  def empty_months
+    if self.activities.where("created_at >= ?", 6.months.ago.beginning_of_day).exists?
+      true
+    else
+      false
+    end
+  end
+  
   def empty_current_period
     if self.recurrence_id == 1 && !self.activities.where("created_at >= ?", Date.today.in_time_zone).exists?
       1
@@ -105,6 +122,47 @@ class Goal < ActiveRecord::Base
   
   def completed?
 		self.completed = true && self.recurrence_id == 4
+  end
+
+  def check_for_bonus
+    if self.recurrence_id == 1
+      return 1
+    elsif self.recurrence_id == 2 
+      start_date = 1.week.ago.beginning_of_week(:monday).beginning_of_day
+      end_date = 0.weeks.ago.beginning_of_week(:monday).beginning_of_day
+      last_week_activity_count = self.activities.where("created_at >= ? AND created_at <= ?", start_date, end_date).count
+      if ((last_week_activity_count == self.frequency) || (self.created_at >= 0.weeks.ago.beginning_of_week(:monday).beginning_of_day)) && self.recurrence_id == 2
+        return 1.2
+      else
+        1
+      end
+    end
+  end
+  
+  def check_todo_countdown
+    (Date.today - self.created_at.to_date).to_i 
+  end
+
+  def check_todo_countdown_xp_change
+    if self.recurrence_id == 1
+      countdown_start = 3
+      countdown_end = 13
+      if self.check_todo_countdown < countdown_start
+        1
+      elsif self.check_todo_countdown >= countdown_start && self.check_todo_countdown <= countdown_end
+        1-((self.check_todo_countdown - countdown_start).to_f/10.0)
+      else
+        0
+      end
+    elsif self.recurrence_id == 2
+      1
+    end
+  end
+  
+  def check_progress_for_bonus
+    start_date = 0.weeks.ago.beginning_of_week(:monday).beginning_of_day
+    end_date = DateTime.now
+    this_week_activity_count = self.activities.where("created_at >= ? AND created_at <= ?", start_date, end_date).count
   end
 
 end

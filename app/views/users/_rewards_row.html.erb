@@ -1,0 +1,633 @@
+<div class="col-md-3 col-sm-6">
+  <div class="<%= if (current_user.check_week_reward && @weekly_reward.calculate_xp_for_reward >= 100) then "reward-well-complete" else "reward-well" end %> text-center rw">
+    <h4 class="reward-title">WEEKLY REWARD</h4>
+    <hr class="reward-hr"></hr>
+    <div id="weekly_reward">
+      <% if current_user.check_week_reward %>
+        <h4 class="max-lines"><strong><%= @weekly_reward.name.downcase.titleize %></strong></h4>
+        <% if @weekly_reward.calculate_xp_for_reward >= 100 %>
+          <%= image_tag "merit-without-background.png", class:"reward-crown" %>
+        <% else %>
+          <div class="row">
+            <div class="text-right col-md-3 col-xs-3 progress-title">
+              <p>
+                Weekly: 
+              </p>
+            </div>
+            <div class="text-center col-md-offset-1 col-xs-offset-1 col-md-8 col-xs-8">
+              <% if (@weekly_reward.weekly_average - @weekly_reward.xp_this_week) <= 0 %>
+                <span data-toggle="tooltip" title="You've hit your weekly target!" data-placement="top">
+              <% else %>
+                <span data-toggle="tooltip" title="You need another <%= number_with_delimiter(@weekly_reward.weekly_average - @weekly_reward.xp_this_week, :delimiter => ',') %> XP to hit your weekly target!" data-placement="top">
+              <% end %>
+                <div class="progress">
+                  <div class="progress-bar progress-bar-gold progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: <%= @weekly_reward.calculate_xp_for_reward_by_week %>%;">
+                    <span><%= (@weekly_reward.calculate_xp_for_reward_by_week).to_i %>%</span>
+                  </div>
+                </div>
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="text-right col-md-3 col-xs-3 progress-title">
+              <p>
+                Total: 
+              </p>
+            </div>
+            <div class="text-center col-md-offset-1 col-xs-offset-1 col-md-8 col-xs-8">
+              <span data-toggle="tooltip" title="You are <%= number_with_delimiter( @weekly_reward.xp_goal - @weekly_reward.xp_count, :delimiter => ',') %> XP away from unlocking this!" data-placement="top">
+                <div class="progress">
+                  <div class="progress-bar progress-bar-gold progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: <%= @weekly_reward.calculate_xp_for_reward %>%;">
+                    <span><%= (@weekly_reward.calculate_xp_for_reward).to_i %>%</span>
+                  </div>
+                </div>
+              </span>
+            </div>
+          </div>
+          <div class="timer">
+            <p id="week_timer"></p>
+          </div>
+        <% end %>
+      <% else %>
+        <%= link_to "New Reward", new_reward_path(:period => 1), class:"btn btn-md btn-primary new-reward-button", id:"new_weekly_reward_link", "data-rewardid" => "1", "data-toggle" => "modal", "data-target" => "#myNewReward", remote: true %>
+      <% end %>
+    </div>
+  </div>
+  <li class="list-unstyled dropdown text-right" id="reward_more_links_week">
+    <i class="glyphicon glyphicon-option-vertical" data-toggle="<%= if current_user.check_week_reward then "dropdown" end %>"></i>
+    <% if current_user.check_week_reward %>
+      <ul class="dropdown-menu dropdown-menu-right reward-dropdown-menu">
+        <li>
+          <%= link_to "Edit", edit_reward_path(@weekly_reward), id:"edit_reward_link", "data-toggle" => "modal", "data-target" => "#myUpdateReward_Weekly", remote: true %>
+        </li>
+        <li>
+          <%= link_to "Delete", reward_path(@weekly_reward), method: :delete, data: 
+          {confirm: "Are you sure you want to delete this reward?"} %>
+        </li>
+      </ul>
+      <%= form_for(@weekly_reward, :method => :put, remote: true) do |f| %>
+        <div class="modal fade" id="myUpdateReward_Weekly" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <div class="col-md-12 col-xs-12 dash-modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title text-center" id="myModalLabel">Update Weekly Reward</h4>
+                </div>
+              </div>
+              <div class="modal-body text-left">
+                <div class="form-group">
+                  <%= f.label :name %>
+                  <%= f.text_field :name, class: 'form-control', placeholder: "Enter reward name...", autofocus: true  %>
+                </div>
+                <div class="form-group">
+                  <%= f.label :xp_goal, "XP Goal" %>
+                  <%= f.number_field :xp_goal, class:"form-control", placeholder: "e.g. 2,000.." %>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <div class="form-group">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <%= f.submit class:"btn btn-success btn-md" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </li>
+</div>
+<div class="col-md-3 col-sm-6">
+  <div class="<%= if (current_user.check_month_reward && @monthly_reward.calculate_xp_for_reward >= 100) then "reward-well-complete" else "reward-well" end %> text-center rw">
+    <h4 class="reward-title month-reward-title">MONTHLY REWARD</h4>
+    <hr class="reward-hr"></hr>
+    <div id="monthly_reward">
+      <% if current_user.check_month_reward %>
+        <h4 class="max-lines"><strong><%= @monthly_reward.name.downcase.titleize %></strong></h4>
+        <% if @monthly_reward.calculate_xp_for_reward >= 100 %>
+          <%= image_tag "merit-without-background.png", class:"reward-crown" %>
+        <% else %>
+          <div class="row">
+            <div class="text-right col-md-3 col-xs-3 progress-title">
+              <p>
+                Weekly: 
+              </p>
+            </div>
+            <div class="text-center col-md-offset-1 col-xs-offset-1 col-md-8 col-xs-8">
+              <% if (@monthly_reward.weekly_average - @monthly_reward.xp_this_week) <= 0 %>
+                <span data-toggle="tooltip" title="You've hit your weekly target!" data-placement="top">
+              <% else %>
+                <span data-toggle="tooltip" title="You need another <%= number_with_delimiter(@monthly_reward.weekly_average - @monthly_reward.xp_this_week, :delimiter => ',') %> XP to hit your weekly target!" data-placement="top">
+              <% end %>
+                <div class="progress">
+                  <div class="progress-bar progress-bar-gold progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: <%= @monthly_reward.calculate_xp_for_reward_by_week %>%;">
+                    <span><%= (@monthly_reward.calculate_xp_for_reward_by_week).to_i %>%</span>
+                  </div>
+                </div>
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="text-right col-md-3 col-xs-3 progress-title">
+              <p>
+                Total: 
+              </p>
+            </div>
+            <div class="text-center col-md-offset-1 col-xs-offset-1 col-md-8 col-xs-8">
+              <span data-toggle="tooltip" title="You are <%= number_with_delimiter( @monthly_reward.xp_goal - @monthly_reward.xp_count, :delimiter => ',') %> XP away from unlocking this!" data-placement="top">
+                <div class="progress">
+                  <div class="progress-bar progress-bar-gold progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: <%= @monthly_reward.calculate_xp_for_reward %>%;">
+                    <span><%= (@monthly_reward.calculate_xp_for_reward).to_i %>%</span>
+                  </div>
+                </div>
+              </span>
+            </div>
+          </div>
+          <div class="timer">
+            <p id="month_timer"></p>
+          </div>
+        <% end %>
+      <% else %>
+        <%= link_to "New Reward", new_reward_path(:period => 2), class:"btn btn-md btn-primary new-reward-button", id:"new_monthly_reward_link", "data-rewardid" => "2", "data-toggle" => "modal", "data-target" => "#myNewReward", remote: true %>
+      <% end %>
+    </div>
+  </div>
+  <li class="list-unstyled dropdown text-right" id="reward_more_links_month">
+    <i class="glyphicon glyphicon-option-vertical" data-toggle="<%= if current_user.check_month_reward then "dropdown" end %>"></i>
+    <% if current_user.check_month_reward %>
+      <ul class="dropdown-menu dropdown-menu-right reward-dropdown-menu">
+        <li>
+          <%= link_to "Edit", edit_reward_path(@monthly_reward), id:"edit_reward_link", "data-toggle" => "modal", "data-target" => "#myUpdateReward_Monthly", remote: true %>
+        </li>
+        <li>
+          <%= link_to "Delete", reward_path(@monthly_reward), method: :delete, data: 
+          {confirm: "Are you sure you want to delete this reward?"} %>
+        </li>
+      </ul>
+      <%= form_for(@monthly_reward, :method => :put, remote: true) do |f| %>
+        <div class="modal fade" id="myUpdateReward_Monthly" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <div class="col-md-12 col-xs-12 dash-modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title text-center" id="myModalLabel">Update Monthly Reward</h4>
+                </div>
+              </div>
+              <div class="modal-body text-left">
+                <div class="form-group">
+                  <%= f.label :name %>
+                  <%= f.text_field :name, class: 'form-control', placeholder: "Enter reward name...", autofocus: true  %>
+                </div>
+                <div class="form-group">
+                  <%= f.label :xp_goal, "XP Goal" %>
+                  <%= f.number_field :xp_goal, class:"form-control", placeholder: "e.g. 2,000.." %>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <div class="form-group">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <%= f.submit class:"btn btn-success btn-md" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </li>
+</div>
+<div class="col-md-3 col-sm-6">
+  <div class="<%= if (current_user.check_three_month_reward && @three_month_reward.calculate_xp_for_reward >= 100) then "reward-well-complete" else "reward-well" end %> text-center rw">
+    <h4 class="reward-title">3 MONTH REWARD</h4>
+    <hr class="reward-hr"></hr>
+    <div id="three_month_reward">
+      <% if current_user.check_three_month_reward %>
+        <h4 class="max-lines"><strong><%= @three_month_reward.name.downcase.titleize %></strong></h4>
+        <% if @three_month_reward.calculate_xp_for_reward >= 100 %>
+          <%= image_tag "merit-without-background.png", class:"reward-crown" %>
+        <% else %>
+          <div class="row">
+            <div class="text-right col-md-3 col-xs-3 progress-title">
+              <p>
+                Weekly: 
+              </p>
+            </div>
+            <div class="text-center col-md-offset-1 col-xs-offset-1 col-md-8 col-xs-8">
+              <% if (@three_month_reward.weekly_average - @three_month_reward.xp_this_week) <= 0 %>
+                <span data-toggle="tooltip" title="You've hit your weekly target!" data-placement="top">
+              <% else %>
+                <span data-toggle="tooltip" title="You need another <%= number_with_delimiter(@three_month_reward.weekly_average - @three_month_reward.xp_this_week, :delimiter => ',') %> XP to hit your weekly target!" data-placement="top">
+              <% end %>
+                <div class="progress">
+                  <div class="progress-bar progress-bar-gold progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: <%= @three_month_reward.calculate_xp_for_reward_by_week %>%;">
+                    <span><%= (@three_month_reward.calculate_xp_for_reward_by_week).to_i %>%</span>
+                  </div>
+                </div>
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="text-right col-md-3 col-xs-3 progress-title">
+              <p>
+                Total: 
+              </p>
+            </div>
+            <div class="text-center col-md-offset-1 col-xs-offset-1 col-md-8 col-xs-8">
+              <span data-toggle="tooltip" title="You are <%= number_with_delimiter( @three_month_reward.xp_goal - @three_month_reward.xp_count, :delimiter => ',') %> XP away from unlocking this!" data-placement="top">
+                <div class="progress">
+                  <div class="progress-bar progress-bar-gold progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: <%= @three_month_reward.calculate_xp_for_reward %>%;">
+                    <span><%= (@three_month_reward.calculate_xp_for_reward).to_i %>%</span>
+                  </div>
+                </div>
+              </span>
+            </div>
+          </div>
+          <div class="timer">
+            <p id="three_month_timer"></p>
+          </div>
+        <% end %>
+      <% else %>
+        <%= link_to "New Reward", new_reward_path(:period => 3), class:"btn btn-md btn-primary new-reward-button", id:"new_three_month_reward_link", "data-rewardid" => "3", "data-toggle" => "modal", "data-target" => "#myNewReward", remote: true %>
+      <% end %>
+    </div>
+  </div>
+  <li class="list-unstyled dropdown text-right" id="reward_more_links_three_month">
+    <i class="glyphicon glyphicon-option-vertical" data-toggle="<%= if current_user.check_three_month_reward then "dropdown" end %>"></i>
+    <% if current_user.check_three_month_reward %>
+      <ul class="dropdown-menu dropdown-menu-right reward-dropdown-menu">
+        <li>
+          <%= link_to "Edit", edit_reward_path(@three_month_reward), id:"edit_reward_link", "data-toggle" => "modal", "data-target" => "#myUpdateReward_ThreeMonth", remote: true %>
+        </li>
+        <li>
+          <%= link_to "Delete", reward_path(@three_month_reward), method: :delete, data: 
+          {confirm: "Are you sure you want to delete this reward?"} %>
+        </li>
+      </ul>
+      <%= form_for(@three_month_reward, :method => :put, remote: true) do |f| %>
+        <div class="modal fade" id="myUpdateReward_ThreeMonth" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <div class="col-md-12 col-xs-12 dash-modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title text-center" id="myModalLabel">Update Three Month Reward</h4>
+                </div>
+              </div>
+              <div class="modal-body text-left">
+                <div class="form-group">
+                  <%= f.label :name %>
+                  <%= f.text_field :name, class: 'form-control', placeholder: "Enter reward name...", autofocus: true  %>
+                </div>
+                <div class="form-group">
+                  <%= f.label :xp_goal, "XP Goal" %>
+                  <%= f.number_field :xp_goal, class:"form-control", placeholder: "e.g. 2,000.." %>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <div class="form-group">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <%= f.submit class:"btn btn-success btn-md" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </li>
+</div>
+<div class="col-md-3 col-sm-6">
+  <div class="<%= if (current_user.check_annual_reward && @annual_reward.calculate_xp_for_reward >= 100) then "reward-well-complete" else "reward-well" end %> text-center rw">
+    <h4 class="reward-title">ANNUAL REWARD</h4>
+    <hr class="reward-hr"></hr>
+    <div id="annual_reward">
+      <% if current_user.check_annual_reward %>
+        <h4 class="max-lines"><strong><%= @annual_reward.name.downcase.titleize %></strong></h4>
+        <% if @annual_reward.calculate_xp_for_reward >= 100 %>
+          <%= image_tag "merit-without-background.png", class:"reward-crown" %>
+        <% else %>
+          <div class="row">
+            <div class="text-right col-md-3 col-xs-3 progress-title">
+              <p>
+                Weekly: 
+              </p>
+            </div>
+            <div class="text-center col-md-offset-1 col-xs-offset-1 col-md-8 col-xs-8">
+              <% if (@annual_reward.weekly_average - @annual_reward.xp_this_week) <= 0 %>
+                <span data-toggle="tooltip" title="You've hit your weekly target!" data-placement="top">
+              <% else %>
+                <span data-toggle="tooltip" title="You need another <%= number_with_delimiter(@annual_reward.weekly_average - @annual_reward.xp_this_week, :delimiter => ',') %> XP to hit your weekly target!" data-placement="top">
+              <% end %>
+                <div class="progress">
+                  <div class="progress-bar progress-bar-gold progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: <%= @annual_reward.calculate_xp_for_reward_by_week %>%;">
+                    <span><%= (@annual_reward.calculate_xp_for_reward_by_week).to_i %>%</span>
+                  </div>
+                </div>
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="text-right col-md-3 col-xs-3 progress-title">
+              <p>
+                Total: 
+              </p>
+            </div>
+            <div class="text-center col-md-offset-1 col-xs-offset-1 col-md-8 col-xs-8">
+              <span data-toggle="tooltip" title="You are <%= number_with_delimiter( @annual_reward.xp_goal - @annual_reward.xp_count, :delimiter => ',') %> XP away from unlocking this!" data-placement="top">
+                <div class="progress">
+                  <div class="progress-bar progress-bar-gold progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: <%= @annual_reward.calculate_xp_for_reward %>%;">
+                    <span><%= (@annual_reward.calculate_xp_for_reward).to_i %>%</span>
+                  </div>
+                </div>
+              </span>
+            </div>
+          </div>
+          <div class="timer">
+            <p id="annual_timer"></p>
+          </div>
+        <% end %>
+      <% else %>
+        <%= link_to "New Reward", new_reward_path(:period => 4), class:"btn btn-md btn-primary new-reward-button", id:"new_annual_reward_link", "data-rewardid" => "4", "data-toggle" => "modal", "data-target" => "#myNewReward", remote: true %>
+      <% end %>
+    </div>
+  </div>
+  <li class="list-unstyled dropdown text-right" id="reward_more_links_annual">
+    <i class="glyphicon glyphicon-option-vertical" data-toggle="<%= if current_user.check_annual_reward then "dropdown" end %>"></i>
+    <% if current_user.check_annual_reward %>
+      <ul class="dropdown-menu dropdown-menu-right reward-dropdown-menu">
+        <li>
+          <%= link_to "Edit", edit_reward_path(@annual_reward), id:"edit_reward_link", "data-toggle" => "modal", "data-target" => "#myUpdateReward_Annual", remote: true %>
+        </li>
+        <li>
+          <%= link_to "Delete", reward_path(@annual_reward), method: :delete, data: 
+          {confirm: "Are you sure you want to delete this reward?"} %>
+        </li>
+      </ul>
+      <%= form_for(@annual_reward, :method => :put, remote: true) do |f| %>
+        <div class="modal fade" id="myUpdateReward_Annual" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <div class="col-md-12 col-xs-12 dash-modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title text-center" id="myModalLabel">Update Annual Reward</h4>
+                </div>
+              </div>
+              <div class="modal-body text-left">
+                <div class="form-group">
+                  <%= f.label :name %>
+                  <%= f.text_field :name, class: 'form-control', placeholder: "Enter reward name...", autofocus: true  %>
+                </div>
+                <div class="form-group">
+                  <%= f.label :xp_goal, "XP Goal" %>
+                  <%= f.number_field :xp_goal, class:"form-control", placeholder: "e.g. 2,000.." %>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <div class="form-group">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <%= f.submit class:"btn btn-success btn-md" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </li>
+</div>
+<%= form_for @reward, remote: true do |f| %>
+  <div class="modal fade" id="myNewReward" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="col-md-12 col-xs-12 dash-modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title text-center" id="myModalLabel">
+              New Reward
+            </h4>
+          </div>
+        </div>
+        <div class="modal-body">
+          <%= f.hidden_field :period %>
+          <div class="form-group">
+            <%= f.label :name %>
+            <%= f.text_field :name, class: 'form-control', placeholder: "Enter reward name...", autofocus: true  %>
+          </div>
+          <div class="form-group">
+            <%= f.label :xp_goal, "XP Goal" %>
+            <%= f.number_field :xp_goal, class:"form-control", placeholder: "e.g. 2,000.." %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="form-group">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <%= f.submit class:"btn btn-success btn-md" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<script>
+$(document).ready(function(){
+  resizeBoxes();
+  if ($("#week_timer")[0]) {
+    CalculateWeekCountdownTimer();
+  }
+  if ($("#month_timer")[0]) {
+    CalculateMonthCountdownTimer();
+  }
+  if ($("#three_month_timer")[0]) {
+    CalculateThreeMonthCountdownTimer();
+  }
+  if ($("#annual_timer")[0]) {
+    CalculateAnnualCountdownTimer();
+  }
+});
+
+function resizeBoxes() {
+  var elementHeights = $("div[class^='reward-well']").map(function() {
+    return $(this).height();
+  }).get();
+
+  // Math.max takes a variable number of arguments
+  // `apply` is equivalent to passing each height as an argument
+  var maxHeight = Math.max.apply(null, elementHeights);
+
+  // Set each height to the max height
+  $("div[class^='reward-well']").height(maxHeight);
+  $("div[class^='reward-well']").css("margin-top", "20px");
+  
+}
+
+function CalculateWeekCountdownTimer() {
+  var curr = new Date; // get current date
+  var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
+  var last = first + 7;
+  var countDownDate = new Date(curr.setDate(last)).setHours(23,59,59,999)
+
+// Update the count down every 1 second
+  var x = setInterval(function() {
+  
+    // Get todays date and time
+    var now = new Date().getTime();
+  
+    // Find the distance between now an the count down date
+    var distance = countDownDate - now;
+  
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  
+    // Display the result in the element with id="demo"
+    document.getElementById("week_timer").innerHTML = days + "d " + hours + "h "
+    + minutes + "m " + seconds + "s ";
+  
+    // If the count down is finished, write some text 
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("week_timer").innerHTML = "EXPIRED";
+    }
+  }, 1000);
+}
+
+function CalculateMonthCountdownTimer() {
+  var today = new Date();
+  var countDownDate = new Date(today.getFullYear(), today.getMonth()+1, 0).setHours(23,59,59,999);
+
+// Update the count down every 1 second
+  var x = setInterval(function() {
+  
+    // Get todays date and time
+    var now = new Date().getTime();
+  
+    // Find the distance between now an the count down date
+    var distance = countDownDate - now;
+  
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  
+    // Display the result in the element with id="demo"
+    document.getElementById("month_timer").innerHTML = days + "d " + hours + "h "
+    + minutes + "m " + seconds + "s ";
+  
+    // If the count down is finished, write some text 
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("month_timer").innerHTML = "EXPIRED";
+    }
+  }, 1000);
+}
+
+function CalculateThreeMonthCountdownTimer() {
+  var today = new Date();
+  var countDownDate = new Date(today.getFullYear(), today.getMonth()+3, 0).setHours(23,59,59,999);
+
+// Update the count down every 1 second
+  var x = setInterval(function() {
+  
+    // Get todays date and time
+    var now = new Date().getTime();
+  
+    // Find the distance between now an the count down date
+    var distance = countDownDate - now;
+  
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  
+    // Display the result in the element with id="demo"
+    document.getElementById("three_month_timer").innerHTML = days + "d " + hours + "h "
+    + minutes + "m " + seconds + "s ";
+  
+    // If the count down is finished, write some text 
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("three_month_timer").innerHTML = "EXPIRED";
+    }
+  }, 1000);
+}
+
+function CalculateAnnualCountdownTimer() {
+  
+  var countDownDate = new Date(new Date().getFullYear(), 11, 31).setHours(23,59,59,999);
+
+// Update the count down every 1 second
+  var x = setInterval(function() {
+  
+    // Get todays date and time
+    var now = new Date().getTime();
+  
+    // Find the distance between now an the count down date
+    var distance = countDownDate - now;
+  
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  
+    // Display the result in the element with id="demo"
+    document.getElementById("annual_timer").innerHTML = days + "d " + hours + "h "
+    + minutes + "m " + seconds + "s ";
+  
+    // If the count down is finished, write some text 
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("annual_timer").innerHTML = "EXPIRED";
+    }
+  }, 1000);
+}
+
+  $('#myNewReward').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var recipient = button.data('rewardid') // Extract info from data-* attributes
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this)
+    var period = "";
+    if (recipient == 1)
+      period = "Weekly"
+    else if (recipient == 2)
+      period = "Monthly"
+    else if (recipient == 3)
+      period = "Three Month"
+    else if (recipient == 4)
+      period = "Annual"
+    modal.find('.modal-title').text('New ' + period + ' Reward')
+    modal.find('.modal-body input[type="hidden"]').val(recipient)
+    
+   
+})
+.on('shown.bs.modal', function() {
+    $("#new_reward").validate({
+        rules: {
+          "reward[name]": {
+            required: true
+          },
+          "reward[xp_goal]": {
+            required: true,
+            range: [1, 1000000]
+          },
+        messages: {
+            "reward[name]": {
+              required: "Name is a required field."
+            },
+            "reward[xp_goal]": {
+              required: "XP goal is a required field. Choose a value between 1 and 1,000,000."
+            }
+          }
+       }
+    });
+});
+</script>

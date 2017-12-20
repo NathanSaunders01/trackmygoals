@@ -4,12 +4,16 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
          
-  belongs_to :plan
+  # belongs_to :plan
   has_many :goals
   has_many :activities
   has_many :rewards
   
   attr_accessor :stripe_card_token
+  
+  def to_s
+    email
+  end
   
   def save_with_subscription
     if valid?
@@ -35,6 +39,38 @@ class User < ApplicationRecord
   def total_user_xp
     total_activities_sum = self.goals.sum(&:total_goal_xp)
     return (total_activities_sum)
+  end
+  
+  def check_week_reward
+    if self.rewards.where("period = ?", 1).exists?
+      true
+    else
+      false
+    end
+  end
+  
+  def check_month_reward
+    if self.rewards.where("period = ?", 2).exists?
+      true
+    else
+      false
+    end
+  end
+  
+  def check_three_month_reward
+    if self.rewards.where("period = ?", 3).exists?
+      true
+    else
+      false
+    end
+  end
+  
+  def check_annual_reward
+    if self.rewards.where("period = ?", 4).exists?
+      true
+    else
+      false
+    end
   end
   
   # def user_xp_today

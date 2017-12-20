@@ -1,21 +1,48 @@
-<%= form_for @goal do |f| %>
-  <div class="form-group">
-    <%= f.label :name %>
-    <%= f.text_field :name, class: 'form-control', placeholder: "Enter goal name..."  %>
-  </div>
-  <div class="form-group">
-    <%= f.label :description %>
-    <%= f.text_area :description, rows: 4, class: 'form-control', placeholder: "Write a quick motivational message to keep you inspired..." %>
-  </div>
-  <div class="form-group">
-    <%= f.label :xp_value %>
-    <%= f.number_field :xp_value, min: 1, max: 5000, class:"form-control", placeholder: "Enter XP value..." %>
-  </div>
-  <div class="form-group">
-    <%= f.label "Minimum occurence" %>
-    <%= f.select :recurrence_id, options_for_select([['Daily', 1], ['Weekly', 2], ['Monthly', 3], ['One-off', 4]], f.object.recurrence_id) %>
-  </div>
-  <div class="form-group">
-    <%= f.submit class:"btn btn-success btn-md" %>
-  </div>
+<% if @goal.recurrence_id == 1 %>
+  <%= form_for @goal, html: { id: "new_todo_form" }, remote: true do |f| %>
+    <%= f.hidden_field :recurrence_id %>
+    <div class="row">
+      <div class="form-group col-xs-5">
+        <%= f.text_field :name, class: 'form-control', placeholder: "e.g. Food Shop.."  %>
+      </div>
+      <div class="form-group col-xs-4">
+        <%= f.number_field :xp_value, "XP Value", min: 1, max: 5000, class:"form-control", placeholder: "e.g. 250.." %>
+      </div>
+      <form class="form-inline">
+        <div class="form-group col-xs-3 form-buttons">
+          <%= button_tag type: 'submit', class: "btn btn-success btn-xs btn-form" do %>
+            <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+          <% end %>
+          <button class="btn btn-default btn-xs btn-form" id="cancel_task_<%= @goal.recurrence_id %>">
+            <i class="fa fa-close fa-2x"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  <% end %>
+<% else %>
+  <%= form_for @goal, html: { id: "new_ongo_form"}, remote: true do |f| %>
+    <%= f.hidden_field :recurrence_id %>
+    <div class="row">
+        <div class="form-group col-xs-5">
+          <%= f.text_field :name, class: 'form-control', placeholder: "e.g. 30 minute bike ride.."  %>
+        </div>
+        <div class="form-group col-xs-3">
+          <%= f.number_field :xp_value, "XP Value", min: 1, max: 5000, class:"form-control", placeholder: "e.g. 250.." %>
+        </div>
+        <div class="form-group col-xs-2">
+          <%= f.number_field :frequency, class:"form-control", placeholder: "e.g. 2.." %>
+        </div>
+        <form class="form-inline">
+          <div class="form-group col-xs-2 form-buttons">
+            <%= button_tag type: 'submit', class: "btn btn-success btn-xs btn-form" do %>
+              <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+            <% end %>
+            <button class="btn btn-default btn-xs btn-form" id="cancel_task_<%= @goal.recurrence_id %>">
+              <i class="fa fa-close fa-2x"></i>
+            </button>
+          </div>
+        </form>
+    </div>
+  <% end %>
 <% end %>

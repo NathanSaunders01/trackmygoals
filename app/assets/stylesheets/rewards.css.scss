@@ -1,27 +1,99 @@
-.checkbox {
-  margin-left: 20px !important;
-  margin-top: 0px !important;
+.reward-well {
+  background: white;
+  border-radius: 3px;
+  margin-top: 20px;
+  box-sizing: border-box !important;
+  border: 3px solid #061439;
+  padding: 8px 12px 30px 12px;
+  .glyphicon-option-vertical {
+    margin-top: 10px;
+  }
 }
 
-.scrollbox {
-  height: 100px;
-  overflow: auto;
+.reward-well-complete {
   background: white;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-  strong {
-    margin-left: 10px;
-    vertical-align: top;
+  border-radius: 3px;
+  margin-top: 20px;
+  box-sizing: border-box !important;
+  border: 3px solid #e5c100;
+  border-style: dashed;
+  padding: 8px 12px 30px 12px;
+  .glyphicon-option-vertical {
+    margin-top: 10px;
   }
-  .first-input {
-    margin-bottom: 10px !important;
+}
+
+.progress-title {
+  padding-left: 0px !important;
+}
+
+.new-reward-button {
+  margin-top: 30px;
+}
+
+.new_reward {
+  padding-top: 5px !important;
+}
+
+.edit_reward {
+  padding-top: 10px !important;
+  margin-bottom: -15px !important;
+}
+
+.reward-form-row {
+  // .col-sm-3 {
+  //   margin-top: 0px !important;
+  // }
+}
+
+.reward-form-buttons {
+  margin-top: 0px !important;
+  display: grid !important;
+}
+
+.reward-btn-form {
+  width: 30px !important;
+  height: 30px !important;
+  padding: 0px !important;
+  margin-bottom: 20px !important;
+}
+
+.reward_row {
+  margin-bottom: 50px;
+}
+
+.reward-hr {
+  margin: 0px 0px;
+}
+
+.submit-reward-button {
+  margin-bottom: 20px !important;
+  .fa-check {
+    padding: -2px -5px !important;
   }
+}
+
+.cancel-reward-button {
+  padding: 2px 5px;
+}
+
+.reward-title {
+  font-size: 16px !important;  
+}
+
+.month-reward-title {
+  letter-spacing: 1.5px !important;
+}
+
+.reward-crown {
+  width: 30%;
+  height: auto;
+}
+
+.reward-dropdown-menu {
+  min-width: 50px !important;
+}
+
+.timer {
+  margin-top: 12px;
 }

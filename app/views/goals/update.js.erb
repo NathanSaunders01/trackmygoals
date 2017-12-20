@@ -1,0 +1,8 @@
+$('.modal').modal('hide');
+$('body').removeClass('modal-open');
+$('.modal-backdrop').remove();
+<% if @goal.recurrence_id == 1 %>
+  $("#todo_row_<%= @goal.id %>").replaceWith("<%= j render(@goal) %>");
+<% elsif @goal.recurrence_id == 2 %>
+  $("#goal_row_<%= @goal.id %>").replaceWith("<%= j render(@goal) %>");
+<% end %>

@@ -5,25 +5,40 @@ class GoalsController < ApplicationController
   # before_action :check_user_plan, only: [:create]
   
   def new
-    @goal = Goal.new
+    @goal = Goal.new(recurrence_id: params[:recurrence_id])
   end
   
   def create
     @goal = Goal.new(goal_params)
     @goal.user = current_user
-    if @goal.save
-      flash[:success] = "Your goal has been created!"
-      redirect_to root_path
-    else
-      flash[:danger] = @goal.errors.full_messages.join(", ")
-      redirect_to root_path
+    respond_to do |format|
+      if @goal.save
+        format.html { redirect_to root_path }
+        format.js
+      else
+        format.html { render 'new' }
+      end
     end
   end
   
   def edit
+    respond_to do |format|
+      format.js
+    end
   end
   
   def update
+    respond_to do |format|
+      if @goal.update(goal_params)
+        format.html { redirect_to root_path }
+        format.js
+      else
+        format.html { render 'edit' }
+      end
+    end
+  end
+  
+  def update_old
     if @goal.update(goal_params)
       flash[:success] = "Goal was successfully updated!"
       redirect_to root_path
@@ -39,6 +54,7 @@ class GoalsController < ApplicationController
   end
   
   def index
+    @goal = Goal.new
     @user = current_user
     @user_goals = @user.goals
   end
@@ -64,7 +80,7 @@ class GoalsController < ApplicationController
   def complete
 		if @goal.completed == false
   		@goal.update_attribute(:completed, true)
-  		Activity.create(user: current_user, goal: @goal, quantity: 1, created_at: Time.now, total_xp: @goal.xp_value)
+  		Activity.create(user: current_user, goal: @goal, quantity: 1, created_at: Time.now, total_xp: @goal.calculate_total_activity_xp(1))
   		flash[:success] = "Goal was successfully completed!"
   		redirect_to root_path
 		else
@@ -84,7 +100,7 @@ class GoalsController < ApplicationController
   private
   
   def goal_params
-    params.require(:goal).permit(:name, :description, :xp_value, :recurrence_id)
+    params.require(:goal).permit(:name, :xp_value, :recurrence_id, :frequency)
   end
   
   def set_goal

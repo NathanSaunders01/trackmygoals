@@ -1,0 +1,20 @@
+<%= form_for @goal, html: { id: "edit_ongo_form_#{@goal.id}", class: "edit-ongo-goal-form" }, remote: true do |f| %>
+  <%= f.hidden_field :recurrence_id %>
+  <td>
+    <%= f.text_field :name, class: 'form-control', placeholder: "e.g. 30 minute bike ride.."  %>
+  </td>
+  <td>
+    <%= f.number_field :xp_value, min: 1, max: 5000, class:"form-control", placeholder: "e.g. 250.." %>
+  </td>
+  <td>
+    <%= f.number_field :frequency, class:"form-control", placeholder: "e.g. 2.." %>
+  </td>
+    <td class="form-buttons">
+      <%= button_tag type: 'submit', class: "btn btn-success btn-xs btn-form" do %>
+        <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+      <% end %>
+      <button class="btn btn-default btn-xs btn-form" id="cancel_task_<%= @goal.recurrence_id %>">
+        <i class="fa fa-close fa-2x"></i>
+      </button>
+    </td>
+<% end %>

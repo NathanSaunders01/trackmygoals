@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <h1 class="text-center">Feedback</h1>
+      <ul class="list-unstyled">
+        <% @contacts.each do |contact| %>
+          <li>
+            <div class="well row">
+              <div class="col-md-4 text-left">
+                <%= if contact.email then contact.email end %>
+              </div>
+              <div class="col-md-8 text-left">
+                <%= contact.comments %>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>  
+</div>

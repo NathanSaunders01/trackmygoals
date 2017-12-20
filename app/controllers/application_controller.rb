@@ -4,8 +4,13 @@ class ApplicationController < ActionController::Base
   # Whitelist the following form fields so that we can process them, if coming from
   # a devise signup form.
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_feedback
   
   helper_method :resource_name, :resource, :devise_mapping, :resource_class
+
+  def set_feedback
+    @contact = Contact.new
+  end
 
   def resource_name
     :user

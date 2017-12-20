@@ -1,0 +1,142 @@
+<div class=" col-md-12">
+      <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'goaltable')" id="defaultOpen">
+          <i class="fa fa-list-ul fa-2x"></i>
+          <h4>TASKS</h4>
+        </button>
+        <button class="tablinks" onclick="openTab(event, 'rewardtable')">
+          <i class="fa fa-gift fa-2x"></i>
+          <h4>REWARDS</h4>
+        </button>
+      </div>
+      
+      <div id="goaltable" class="tabcontent">
+        <%= render 'goals/goal_table' %>
+        <% if @user_goals.count > 0 %>
+          <button type="button" class="btn-merit" data-toggle="modal" data-target="#myGoalModal">
+            NEW TASK
+          </button>
+        <% else %>
+          <div class="text-center blank-table">
+            <h4 class="text-center">You have no goals yet!</h4>
+            </br>
+            <button type="button" class="btn-merit" data-toggle="modal" data-target="#myGoalModal">
+              Create new goal
+            </button>
+          </div>
+        <% end %>
+      </div>
+      
+      <div id="rewardtable" class="tabcontent">
+        <%= render 'rewards/reward_table' %>
+        <% if @user_rewards.count > 0 %>
+          <button type="button" class="btn-merit" data-toggle="modal" data-target="#myRewardModal">
+            NEW REWARD
+          </button>
+        <% else %>
+          <div class="text-center blank-table">
+            <h4 class="text-center">You have no rewards yet!</h4>
+            </br>
+            <button type="button" class="btn-merit" data-toggle="modal" data-target="#myRewardModal">
+              Create new reward
+            </button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class=" col-md-12">
+      <div class="tab">
+        <button class="tablinkssec" onclick="openSecTab(event, 'activitytable')" id="defaultSecOpen">
+          <i class="fa fa-trophy fa-2x"></i>
+          <h4>RECENT ACTIVITY</h4>
+        </button>
+        <button class="tablinkssec" onclick="openSecTab(event, 'pasttaskstable')">
+          <i class="fa fa-check-square-o fa-2x"></i>
+          <h4>PAST TASKS</h4>
+        </button>
+      </div>
+      
+      <div id="activitytable" class="tabcontentsec <%= if @activities.count >= 8 then "activity-scrollbox-many" else "activity-scrollbox-few" end %>">
+        <%= render 'activities/activity_table' %>
+      </div>
+      
+      <div id="pasttaskstable" class="tabcontentsec  <%= if @completed_goals.count >= 8 then "activity-scrollbox-many" else "activity-scrollbox-few" end %>">
+        <%= render 'goals/completed_goals' %>
+      </div>
+    </div>
+  </div>
+</div>
+<div ng-controller="FormCtrl">
+  <%= form_for @goal, :html => { :id => "addGoalForm"} do |f| %>
+    <div class="modal fade" id="myGoalModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title text-center" id="myModalLabel">New Goal</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <%= f.label :name %>
+              <%= f.text_field :name, class: 'form-control', placeholder: "Enter goal name...", autofocus: true  %>
+            </div>
+            <div class="form-group">
+              <%= f.label :description %>
+              <%= f.text_area :description, rows: 4, class: 'form-control', placeholder: "Write a quick motivational message to keep you inspired..." %>
+            </div>
+            <div class="form-group">
+              <%= f.label :xp_value %>
+              <%= f.number_field :xp_value, min: 1, max: 5000, class:"form-control", placeholder: "Enter XP value..." %>
+            </div>
+            <div class="form-group">
+              <%= f.label "Minimum occurence" %>
+              <%= f.select :recurrence_id, options_for_select([['Daily', 1], ['Weekly', 2], ['Monthly', 3], ['One-off', 4]], f.object.recurrence_id), :include_blank => true %>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <div class="form-group">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <%= f.submit class:"btn btn-success btn-md" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+<%= form_for @reward, :html => { :id => "addRewardForm"} do |f| %>
+  <div class="modal fade" id="myRewardModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title text-center" id="myModalLabel">New Reward</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <%= f.label :name %>
+            <%= f.text_field :name, class: 'form-control', placeholder: "Enter reward name...", autofocus: true  %>
+          </div>
+          <div class="form-group">
+            <%= f.label :xp_goal %>
+            <%= f.number_field :xp_goal, class:"form-control", placeholder: "Enter XP target..." %>
+          </div>
+          <div class="form-group">
+            <%= f.label "Select tasks to contribute to reward" %>
+            <div class="scrollbox">
+              <label><input type="checkbox" onclick="toggle(this);" class="first-input"/><strong>Select all</strong></label><br/>
+              <%= f.collection_check_boxes :goal_ids, @user_goals, :id, :name do |cb| %>
+                <% cb.label(class: "checkbox") {cb.check_box + cb.text} %>
+              <% end %>
+            </div>
+          </div>
+        <div class="modal-footer">
+          <div class="form-group">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <%= f.submit class:"btn btn-success btn-md" %>
+          </div>
+        </div>
+      </div>
+    </div>

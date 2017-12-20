@@ -1,0 +1,9 @@
+<% if @reward.period == 1 %>
+    $('#reward_more_links_week').toggleClass("open", "");
+<% elsif @reward.period == 2 %>
+    $('#reward_more_links_month').toggleClass("open", "");
+<% elsif @reward.period == 3 %>
+    $('#reward_more_links_three_month').toggleClass("open", "");
+<% elsif @reward.period == 4 %>
+    $('#reward_more_links_annual').toggleClass("open", "");
+<% end %>

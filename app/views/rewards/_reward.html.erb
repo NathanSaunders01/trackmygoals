@@ -1,0 +1,61 @@
+<% if @reward.period == 1 %>
+  <div id="weekly_reward">
+<% elsif @reward.period == 2 %>
+  <div id="monthly_reward">
+<% elsif @reward.period == 3 %>
+  <div id="three_month_reward">
+<% elsif @reward.period == 4 %>
+  <div id="annual_reward">
+<% end %>
+  <h4 class="max-lines"><strong><%= @reward.name.downcase.titleize %></strong></h4>
+  <% if @reward.calculate_xp_for_reward >= 100 %>
+    <%= image_tag "merit-without-background.png", class:"reward-crown" %>
+  <% else %>
+    <div class="row">
+      <div class="text-right col-md-3 col-xs-3 progress-title">
+        <p>
+          Weekly: 
+        </p>
+      </div>
+      <div class="text-center col-md-offset-1 col-xs-offset-1 col-md-8 col-xs-8">
+        <% if (@reward.weekly_average - @reward.xp_this_week) < 1 %>
+          <span data-toggle="tooltip" title="You've hit your weekly target!" data-placement="top">
+        <% else %>
+          <span data-toggle="tooltip" title="You need another <%= number_with_delimiter(@reward.weekly_average - @reward.xp_this_week, :delimiter => ',') %> XP to hit your weekly target!" data-placement="top">
+        <% end %>
+          <div class="progress">
+            <div class="progress-bar progress-bar-gold progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: <%= @reward.calculate_xp_for_reward_by_week %>%;">
+              <span><%= (@reward.calculate_xp_for_reward_by_week).to_i %>%</span>
+            </div>
+          </div>
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="text-right col-md-3 col-xs-3 progress-title">
+        <p>
+          Total: 
+        </p>
+      </div>
+      <div class="text-center col-md-offset-1 col-xs-offset-1 col-md-8 col-xs-8">
+         <span data-toggle="tooltip" title="You are <%= number_with_delimiter( @reward.xp_goal - @reward.xp_count, :delimiter => ',') %> XP away from unlocking this!" data-placement="top">
+          <div class="progress">
+            <div class="progress-bar progress-bar-gold progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: <%= @reward.calculate_xp_for_reward %>%;">
+            </div>
+          </div>
+        </span>
+      </div>
+    </div>
+    <div class="timer">
+      <% if @reward.period == 1 %>
+        <p id="week_timer"></p>
+      <% elsif @reward.period == 2 %>
+        <p id="month_timer"></p>
+      <% elsif @reward.period == 3 %>
+        <p id="three_month_timer"></p>
+      <% elsif @reward.period == 4 %>
+        <p id="annual_timer"></p>
+      <% end %>
+    </div>
+  <% end %>
+</div>

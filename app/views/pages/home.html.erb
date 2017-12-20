@@ -1,168 +1,238 @@
-<div class="jumbotron text-center">
-  <%= image_tag "merit-without-background.png", class:"landing-logo" %>
-  <h1><fancy>Meritometer</fancy></h1> 
-  <br>
-  <p>Your <fancy style="font-size: 24px;">ToDo</fancy> list and <fancy style="font-size: 24px;">TaDa</fancy> list. All in one place.</p>
-  <div id="myCarousel" class="carousel slide text-center" data-ride="carousel" data-interval="10000">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
-  
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
-      <div class="item active">
-      <h4>"Never give up on a dream because of the time it will take to accomplish it.<br>The time will pass anyway."<span style="font-style: normal;"> - Earl Nightingale</span></h4>
+<div class="row">
+  <div clas="col-md-12 cl-sm-12 col-xs-12">
+    <div class="jumbotron text-center">
+      <%= image_tag "merit-without-background.png", class:"landing-logo" %>
+      <h1><fancy>Meritometer</fancy></h1> 
+      <br>
+      <p><fancy style="font-size: 24px;">Gamify</fancy> your life. <fancy style="font-size: 24px;">Upgrade</fancy> your character.</p>
+      <button type="button" class="btn-merit" data-toggle="modal" data-target="#user-modal" id="1">
+        SIGN IN
+      </button>
+      <button type="button" class="btn-merit" data-toggle="modal" data-target="#user-modal" id="2">
+        SIGN UP
+      </button>
+      <div id="myCarousel" class="carousel slide text-center" data-ride="carousel" data-interval="10000">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#myCarousel" data-slide-to="1"></li>
+          <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+      
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+          <div class="item active">
+          <h4>"Never give up on a dream because of the time it will take to accomplish it.<br>The time will pass anyway."<span style="font-style: normal;"> - Earl Nightingale</span></h4>
+          </div>
+          <div class="item">
+            <h4>"Discipline is the bridge between goals and accomplishment."<br><span style="font-style: normal;"> - Jim Rohn</span></h4>
+          </div>
+          <div class="item">
+            <h4>"The greatest discovery of my generation is that a human being can alter his <br> life by altering his attitudes."<span style="font-style:normal;"> - William James</span></h4>
+          </div>
+        </div>
       </div>
-      <div class="item">
-        <h4>"Discipline is the bridge between goals and accomplishment."<br><span style="font-style: normal;"> - Jim Rohn</span></h4>
+    </div>
+    <div class="container-fluid bg-white">
+      <h2 class="text-center">HOW IT WORKS</h2>
+      <br>
+      <div class="row">
+        <div class="col-md-6 left-how-box">
+          <div class="col-sm-8">
+            <h4>
+              <strong>To-Do: </strong>
+              Add items to your to-do list and assign yourself XP for completing it. 
+              The more you hate the job, the more points you should award yourself.
+              After saving it, you'll see a red bar counting down 72 hours until it's
+              completely red. Once it's completely red, each day that goes by, it loses 10%
+              of it' original XP value until it's worth nothing.
+            </h4>
+          </div>
+          <div class="col-sm-4 text-center">
+            <i class="fa fa-list-ul fa-5x"></i>
+          </div>
+        </div>
+        <div class="col-md-6 right-how-box">
+          <div class="col-sm-8">
+            <h4>
+              <strong>Rewards: </strong>
+              Set your rewards and how much XP you want to have earnt before unlocking it.
+              You'll see 2 progress bars appear below each reward. The 'Weekly' bar will calculate how much XP
+              you need to earn this week to stay on track and complete it before the time is up. The second 
+              is shows you the total progress.
+            </h4>
+          </div>
+          <div class="col-sm-4 text-center">
+            <i class="fa fa-gift fa-5x"></i>
+          </div>
+        </div>
       </div>
-      <div class="item">
-        <h4>"The greatest discovery of my generation is that a human being can alter his <br> life by altering his attitudes."<span style="font-style:normal;"> - William James</span></h4>
+      <br>
+      <div class="row">
+        <div class="col-md-6 left-how-box">
+          <div class="col-sm-8">
+            <h4>
+              <strong>Ongoing Tasks: </strong>
+              Here you can log activites which you do regularly or want to develop into habits.
+              This can be anything from "Go a day without smoking a cigarette" to "Go for a 15 minute run" or 
+              even something as simple as "Eat a healthy meal". The point is, you should be rewarded for doing
+              things that benefit you. When creating these, you'l be asked to include the expected "frequency".
+              If you're able to hit that number in the week, you'll receive 20% more XP for completing the same
+              task the following week.
+            </h4>
+          </div>
+          <div class="col-sm-4 text-center">
+            <i class="fa fa-trophy fa-5x"></i>
+          </div>
+        </div>
+        <div class="col-md-6 right-how-box">
+          <div class="col-sm-8">
+            <h4>
+              <strong>Coming Soon:</strong>
+              I'm always looking to add new features to this website. As of 20th December 2017, 
+              here are a few things I'm planning to add over the coming weeks/months. 
+              <small>
+                <li style="color: black; letter-spacing: 0px;">Tokens earnt by completing tasks, hitting bonuses and unlocking rewards.</li>
+                <li style="color: black; letter-spacing: 0px;">View stats for your ongoing tasks.</li>
+                <li style="color: black; letter-spacing: 0px;">Leaderboard positions of users based on XP change.</li>
+              </small>
+            </h4>
+          </div>
+          <div class="col-sm-4 text-center">
+            <i class="fa fa-unlock fa-5x"></i>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
-<div class="container-fluid bg-white">
-  <h2 class="text-center">HOW IT WORKS</h2>
-  <br>
-  <div class="row">
-    <div class="col-md-6 left-how-box">
-      <div class="col-sm-8">
-        <h4>
-          <strong>Step 1:</strong>
-          Log your tasks and assign yourself points, or XP as we call it, for 
-          completing them. Award yourself more XP for the tasks you don't enjoy.
-        </h4>
-      </div>
-      <div class="col-sm-4 text-center">
-        <i class="fa fa-list-ul fa-5x"></i>
-      </div>
-    </div>
-    <div class="col-md-6 right-how-box">
-      <div class="col-sm-8">
-        <h4>
-          <strong>Step 2:</strong>
-          Set your rewards and how much XP you want to have earnt before unlocking it.
-          You can choose which tasks contribute XP to each reward.
-        </h4>
-      </div>
-      <div class="col-sm-4 text-center">
-        <i class="fa fa-gift fa-5x"></i>
+<div class="modal fade" id="user-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="tab">
+          <button class="tablinks" onclick="openTab(event, 'signin')" id="signin_form">
+            <h4>SIGN IN</h4>
+          </button>
+          <button class="tablinks" onclick="openTab(event, 'signup')" id="signup_form">
+            <h4>SIGN UP</h4>
+          </button>
+        </div>
+        
+        <div id="signin" class="tabcontent">
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <%= form_for(resource, :as => resource_name, :url => user_session_path(resource_name) ,:html => {:id => "login-box"},:format => :json, :remote => true ) do |f| %>
+    
+                <div id="validation-error-signin"></div>
+    
+                <div class="field form-group">
+                  <%= f.label :email %>
+                  <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+                </div>
+                <div class="field form-group">
+                  <%= f.label :password %>
+                  <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+                </div>
+                <% if devise_mapping.rememberable? -%>
+                  <div class="field form-group">
+                    <%= f.check_box :remember_me %>
+                    <%= f.label :remember_me %>
+                  </div>
+                <% end -%>
+                <div class="form-group">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <%= f.submit "Sign In", class:"btn btn-success btn-md" %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        
+        <div id="signup" class="tabcontent">
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <%= form_for(resource, :as => resource_name, :url => user_registration_path ,:html => {:id => "signup-box"},:format => :json, :remote => true ) do |f| %>
+                
+                <div id="validation-error-signup"></div>
+                
+                <%= hidden_field_tag 'plan', 1 %>
+                
+                <div class="field form-group">
+                  <div class="col-md-6 col-xs-6 no-padding">
+                    <%= f.label :first_name %>
+                    <%= f.text_field :first_name, autofocus: true, class: "form-control" %>
+                  </div>
+                  <div class="col-md-6 col-xs-6 no-padding left-padding">
+                    <%= f.label :last_name %>
+                    <%= f.text_field :last_name, class: "form-control" %>
+                  </div>
+                </div>
+                <div class="field form-group">
+                  <%= f.label :email %>
+                  <%= f.email_field :email, class: 'form-control' %>
+                </div>
+                <div class="field form-group">
+                  <%= f.label :password %>
+                  <% if @minimum_password_length %>
+                  <em>(<%= @minimum_password_length %> characters minimum)</em>
+                  <% end %>
+                  <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+                </div>
+                <div class="field form-group">
+                  <%= f.label :password_confirmation %>
+                  <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+                </div>
+                <div class="form-group">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <%= f.submit "Sign Up", class:"btn btn-success btn-md" %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <br>
-  <div class="row">
-    <div class="col-md-6 left-how-box">
-      <div class="col-sm-8">
-        <h4>
-          <strong>Step 3:</strong>
-          Log activities each time you complete a task and earn bonus XP by completing them
-          5 days, weeks or months in a row (You choose the period when you create the task). 
-        </h4>
-      </div>
-      <div class="col-sm-4 text-center">
-        <i class="fa fa-trophy fa-5x"></i>
-      </div>
-    </div>
-    <div class="col-md-6 right-how-box">
-      <div class="col-sm-8">
-        <h4>
-          <strong>Step 4:</strong>
-          Watch as you start to develop good habits and a sense of merit when you 
-          unlock your rewards. It was all worth it!
-        </h4>
-      </div>
-      <div class="col-sm-4 text-center">
-        <i class="fa fa-unlock fa-5x"></i>
-      </div>
-    </div>
-  </div>
-</div>
-<div id="pricing" class="container-fluid">
-  <div class="text-center">
-    <h2>SIGN UP</h2>
-    <br>
-    <h4>Start earning points for your <strong>productivity</strong> and unlocking treats for your <strong>tenacity</strong>.</h4>
-    <br>
-  </div>
-  <div class="row">
-    <div class="col-sm-offset-1 col-sm-4">
-      <div class="panel panel-default text-center">
-        <div class="panel-heading">
-          <h1>Basic</h1>
-        </div>
-        <div class="panel-body">
-          <p><strong>3</strong> Tasks</p>
-          <p><strong>1</strong> Reward</p>
-          <p><strong>Unlimited</strong> Activities</p>
-          <p><strong>No</strong> Analytics</p>
-          <p><strong>No</strong> Reminders</p>
-        </div>
-        <div class="panel-footer">
-          <h3>FREE</h3>
-          <h4>per month</h4>
-          <%= link_to "Sign up", new_user_registration_path(plan: @basic_plan.id), class:"btn btn-lg" %>
-        </div>
-      </div> 
-    </div> 
-    <div class="col-sm-offset-2 col-sm-4">
-      <div class="panel panel-default text-center">
-        <div class="panel-heading">
-          <h1>Pro</h1>
-        </div>
-        <div class="panel-body">
-          <p><strong>Unlimited</strong> Tasks</p>
-          <p><strong>Unlimited</strong> Reward</p>
-          <p><strong>Unlimited</strong> Activities</p>
-          <p><strong>Analytics</strong></p>
-          <p><strong>Reminders</strong></p>
-        </div>
-        <div class="panel-footer">
-          <h3>FREE <small>(limited)</small></h3>
-          <h4>per month</h4>
-          <%= link_to "Sign up", new_user_registration_path(plan: @basic_plan.id), class:"btn btn-lg" %>
-        </div>
-      </div> 
-    </div> 
-  </div>
-</div>
+</div>  
+
 <script>
-$(window).scroll(function() {
-  $(".slideanim").each(function(){
-    var pos = $(this).offset().top;
+$('#user-modal').on('show.bs.modal', function(e) {
 
-    var winTop = $(window).scrollTop();
-    if (pos < winTop + 600) {
-      $(this).addClass("slide");
-    }
-  });
-});
+        var $modal = $(this),
+            id = e.relatedTarget.id;
+        if (id == 1) {
+          document.getElementById("signin_form").click();
+        } else if (id == 2) {
+          document.getElementById("signup_form").click();
+        }
+        
+        $("#login-box").on('ajax:success', function() {
+          $("#myLogInModal").hide();
+          $('body').removeClass('modal-open');
+          $('.modal-backdrop').remove();
+          location.reload();
+        }); 
+        
+        $("#login-box").on('ajax:error', function(evt, xhr, status, error) {
+          $("#validation-error-signin").html("Invalid username or password.");
+          $("#validation-error-signin").addClass("alert");
+          $("#validation-error-signin").addClass("alert-danger")
+        });
+        
+        $("#signup-box").on('ajax:success', function() {
+          $("#mySignUpModal").hide();
+          $('body').removeClass('modal-open');
+          $('.modal-backdrop').remove();
+          location.reload();
+        });
+        
+        $("#signup-box").on('ajax:error', function(evt, xhr, status, error) {
+          var myObj = JSON.parse(xhr.responseText);
+          $("#validation-error-signup").html(myObj.messages);
+          $("#validation-error-signup").addClass("alert");
+          $("#validation-error-signup").addClass("alert-danger")
+        });
+        
+})
 </script>
-
-  <!--<div class="home-callout text-center container-fluid">-->
-  <!--  <h1>Welcome to RewardMee</h1>-->
-  <!--  <h3>Bargain with the future.</h3>-->
-  <!--</div>-->
-  <!--<div class="container home-signup-links">-->
-  <!--  <div class="row">-->
-  <!--    <div class="col-md-6">-->
-  <!--      <div class="well">-->
-  <!--        <h2 class="text-center">Basic Membership</h2>-->
-  <!--        <h4>Sign up for free and get basic access to our goal tracker.</h4>-->
-  <!--        </br>-->
-  <!--        <%#= link_to "Sign up with Basic", new_user_registration_path(plan: @basic_plan.id), class: 'btn btn-primary btn-lg btn-block' %>-->
-  <!--      </div>-->
-  <!--    </div>-->
-  <!--    <div class="col-md-6">-->
-  <!--      <div class="well">-->
-  <!--        <h2 class="text-center">Pro Membership</h2>-->
-  <!--        <h4>Sign up for the pro account for £1.99/month and get access to all the features!</h4>-->
-  <!--        <%#= link_to "Sign up with Pro", new_user_registration_path(plan: @pro_plan.id), class: 'btn btn-success btn-lg btn-block' %>-->
-  <!--      </div>-->
-  <!--    </div>-->
-  <!--  </div>-->
-  <!--</div>-->

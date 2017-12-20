@@ -7,4 +7,19 @@ module GoalsHelper
     end
   end
   
+  # def day_streak_donut
+  #   pie_chart day_streak_goals_path, height: '400px' ,library: {
+  #     chart: {
+  #         type: 'pie',
+  #         style: {
+  #           fontFamily: 'Nunito'
+  #         },
+  #       },
+  #       plotOptions: {
+  #         pie: {
+  #           innerSize: '90%'
+  #         }
+  #       },
+  #   }
+  # end
 end

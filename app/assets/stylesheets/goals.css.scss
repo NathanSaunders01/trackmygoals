@@ -27,7 +27,6 @@
 table{
   width:100%;
   table-layout: fixed;
-  margin-bottom: 20px !important;
   .left-col {
     padding-left: 5px;
   }
@@ -47,12 +46,11 @@ th {
 }
 
 .tbl-content{
-  margin-top: -20px;
   background: white;
 }
 
-td{
-  height: 60px;
+td {
+  height: 65px;
   vertical-align:middle;
   font-weight: 300;
   font-size: 16px;
@@ -64,37 +62,6 @@ td{
 
 .fa-exclamation-circle {
   color: #dc4c4c;
-}
-
-.pie-charts {
-  rect {
-    height: 0.1%;
-    width: 0.1%;
-  }
-  svg {
-    margin-top: -30px;
-    margin-left: 30px;
-  }
-}
-
-.left-pie-chart-box {
-  background: white;
-  border: 2px solid #999;
-}
-
-.right-pie-chart-box {
-  background: white;
-  border-top: 2px solid #999;
-  border-bottom: 2px solid #999;
-  border-right: 2px solid #999;
-}
-
-.bg-white {
-  background: white !important;
-}
-
-.scoreboard-well {
-  margin-right: 20%;
 }
 
 .dashboard-tables {
@@ -111,7 +78,6 @@ div.tab {
     border: 1px solid #ccc;
     border-bottom: none;
     background-color: #f1f1f1;
-    margin-top: 50px;
 }
 
 /* Style the buttons inside the tab */
@@ -134,17 +100,90 @@ div.tab button:hover {
 
 .btn-merit {
   border: 1px solid #162756 !important;
-  padding: 5px 10px;
+  padding: 10px 20px;
   background-color: white !important;
   color: #162756 !important;
+  font-size: 16px;
   &:hover {
     background-color: #162756 !important;
     color: white !important;
   }
 }
 
-.btn {
+.btn-action {
   border-radius: 0px !important;
+}
+
+[id^=more_] {
+  list-style: none;
+  cursor: pointer !important;
+}
+
+[id^=task_more_] {
+  list-style: none;
+  cursor: pointer !important;
+}
+
+.goal-links {
+  display: block;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  position: absolute;
+  width: 10%;
+  background: white;
+  margin-top: 20px;
+  li {
+    list-style: none;
+    margin-left: -40px;
+    border: solid #7986AC;
+    border-width: 0px 1px 1.5px 1px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: 16px;
+    cursor: pointer !important;
+    z-index: 100;
+    &:hover {
+      text-decoration: underline !important;
+    }
+  }
+  li:last-child {
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+  }
+}
+
+.rotate{
+    -moz-transition: all 0.3s linear;
+    -webkit-transition: all 0.3s linear;
+    transition: all 0.3s linear;
+    z-index: -100;
+}
+
+.rotate.down{
+    -ms-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+    z-index: -100;
+}
+
+.activity-form {
+  padding: 0px 5px;
+}
+
+.form-buttons {
+  padding: 0px 5px !important;
+}
+
+.btn-form {
+  width: 30px !important;
+  height: 30px !important;
+  padding: 0px !important;
+}
+
+.streak-col {
+  padding: 0px 20px;
 }
 
 .tablinks {
@@ -166,7 +205,7 @@ div.tab button.active {
 .tabcontent {
     display: none;
     background: white !important;
-    padding: 6px 12px;
+    padding: 12px 12px;
     border: 1px solid #ccc;
     border-top: none;
     -webkit-animation: fadeEffect 1s;
@@ -232,4 +271,194 @@ div.tab-charts button:hover {
 
 .completed-table {
   border-bottom: 2px solid rgba(192,192,192,0.5);
+}
+
+.dashboard-well {
+  border: 3px solid #061439;
+  border-radius: 3px;
+}
+
+.task-btn-col, .task-action-col {
+  width: 10%;
+}
+
+.task-xp-col {
+  width: 15%;
+}
+
+.task-btn-col {
+  padding-left: 10px;
+}
+
+.task-prog-col {
+  width: 20%;
+  padding: 0px 10px;
+}
+
+.task-name-el {
+  padding-left: 20px;
+}
+
+.task-name-col {
+  width: 45%;
+}
+
+.task-row {
+  h4 {
+    letter-spacing: 0px;
+  }
+  p {
+    margin: 0px !important;
+  }
+}
+
+.task-scrollbox-many {
+  overflow: auto !important;
+  height: 325px;
+  padding-bottom: 50px;
+  padding-right: 10px;
+}
+
+.new-task-area {
+  margin-top: 30px;
+}
+
+.action-col {
+  width: 20%;
+}
+
+.btn-complete {
+  border: 1px solid #2e6da4 !important;
+  background: white !important;
+  color: #337ab7 !important;
+  &:hover {
+    border: 1px solid #2e6da4 !important;
+    background: #337ab7 !important;
+    color: white !important;
+  }
+}
+
+.new-goal-area {
+  margin-top: 15px;
+}
+
+.bg-grey {
+  background: #7986AC;
+}
+
+.task-list {
+  margin-left: -30px !important;
+  min-width: 50px !important;
+}
+
+.goal-list {
+  margin-left: -50px !important;
+  min-width: 50px !important;
+}
+
+.glyphicon-option-vertical {
+  
+}
+
+i.glyphicon-option-vertical {
+  color: #d3d3d3;
+  &[data-toggle="dropdown"] {
+    cursor: pointer !important;
+    color: #939393 !important;
+  }
+}
+
+.ongoing-tasks {
+  height: auto;
+}
+
+.goal-name-col {
+  width: 30%;
+}
+
+.goal-name-el {
+  padding-left: 10px;
+}
+
+th {
+  margin: 0px;
+}
+
+.goal-log-col, .goal-value-col{
+  width: 20%;
+}
+.goal-bonus-col {
+  width: 25%;
+  padding: 0px 10px;  
+}
+.goal-action-col {
+  width: 5%;
+}
+
+thead {
+  border-bottom: 1px solid #7986AC;
+}
+
+.goal-scrollbox-many {
+  overflow: auto !important;
+  height: 325px !important;
+}
+
+.goal-scroll-table {
+  width: 98.5%;
+}
+
+button.chart-link-options {
+  color: #0645AD;
+  cursor: pointer;
+  background: none;
+  border: none;
+  text-decoration: underline;
+}
+
+.chart-content {
+    display: none;
+    background: white !important;
+    padding: 12px 12px;
+    border-top: none;
+    -webkit-animation: fadeEffect 1s;
+    animation: fadeEffect 1s; /* Fading effect takes 1 second */
+}
+
+.chart-options {
+  padding-right: 20px;
+  .active {
+    color: white !important;
+    background: #7986AC !important;
+    padding: 4px 10px !important;
+    border-radius: 15px !important;
+    outline: 0;
+    border: none;
+    -moz-outline-style: none
+  }
+  &:focus {
+    outline: 0;
+    border: none;
+    -moz-outline-style: none
+  }
+}
+
+.edit-ongo-goal-form {
+  width: 100% !important;
+}
+
+td.form-group {
+  padding: 0px 20px;
+}
+
+.progress-bar-gold {
+  background-color: #e6c200 !important;
+}
+
+.fa-star {
+  color: #e6c200 !important;
+}
+
+.progress-bar-goal {
+  background-color: #7986AC;
 }

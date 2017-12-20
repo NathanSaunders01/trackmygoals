@@ -1,37 +1,36 @@
 <nav class="navbar navbar-default navbar-fixed-top <%= if user_signed_in? then "navbar-logged" end %>" role="navigation">
   <div class='container'>
     <div class="navbar-header">
-      <%= link_to root_path, class:"navbar-brand" do %>
-        <span>
-          <%= image_tag "merit-without-background.png", class:"logo" %>
-          <small>Beta</small>
-        </span>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to root_path do %>
+        <%= image_tag "merit-without-background.png", class:"logo" %>
       <% end %>
     </div>
     <div class="collapse navbar-collapse" id="main-nav-collapse">
-      <ul class="nav navbar-nav navbar-right nav-profile">
+      <ul class="nav navbar-nav navbar-right nav-links">
         <% if user_signed_in? %>
-          <li id="profile">
-            <%= link_to 'javascript:void(0)' do %>
-              Hello, <%= current_user.first_name %>
-              <i class="fa fa-user"></i>
-            <% end %>
-            <ul id="profile-links" class="profile-dropdown">
-              <li class="text-center"><%= link_to "Settings", edit_user_registration_path(current_user) %></li>
-              <%= link_to destroy_user_session_path, method: :delete do %>
-               <li class="text-center">
-                  Sign Out
-               </li>
-             <% end %>
+          <li><%= link_to 'FAQ', about_path %></li>
+          <li><%= link_to 'FEEDBACK', new_contact_path, "data-toggle" => "modal", "data-target" => "#myFeedbackModal", remote: true %></li>
+          <li class="list-unstyled dropdown">
+            <a class="dropdown-toggle profile-dropdown" data-toggle="dropdown">
+              <i class="glyphicon glyphicon-user"></i>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li class="text-center">
+                <%= link_to "Settings", edit_user_registration_path(current_user) %>
+              </li>
+              <li class="text-center">
+                <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+              </li>
             </ul>
           </li>
-        <% else %>
-          <li><%= link_to "LOG IN", new_user_session_path %></li>
         <% end %>
-      </ul>
-      <ul class="nav navbar-nav navbar-right nav-links">
-        <li><%= link_to 'ABOUT', about_path %></li>
-        <li><%= link_to 'CONTACT US', new_contact_path %></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div>

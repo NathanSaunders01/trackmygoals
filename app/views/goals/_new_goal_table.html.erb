@@ -1,0 +1,150 @@
+<table>
+  <thead>
+    <th class="goal-name-col"></th> <!--30%-->
+    <th class="text-center goal-value-col">Value</th>  <!--10%-->
+    <th class="text-center goal-bonus-col">Bonus</th>  <!--10%-->
+    <th class="text-center goal-log-col">Log</th>  <!--15%-->
+    <th class="goal-action-col"></th>  <!--5%-->
+  </thead>
+</table>
+<div class="ongoing-tasks <%= if @user_goals.count >= 5 then "goal-scrollbox-many" else "goal-scrollbox-few" end %>">
+  <table id="ongo_goal_list">
+    <% @user_goals.each_with_index do |goal, index| %>
+      <tr class="task-row" id="goal_row_<%= goal.id %>">
+        <td class="goal-name-col">
+          <h4 class="crop-text goal-name-el"> <span data-toggle="tooltip" title="You hit your bonus target last week! You'll receive 20% more XP for every activity logged for this task this week." data-placement="top" class="<%= if goal.check_for_bonus == 1.2 then "fa fa-star" end %>"></span> <%= goal.name.downcase.titleize %></h4>
+        </td> <!--30%-->
+        <td class="text-center goal-value-col">
+          <% if goal.check_for_bonus == 1.2 %>
+            <small><%= number_with_delimiter(goal.xp_value, :delimiter => ',') %> (+<%= (goal.xp_value.to_f*0.2).to_i %>) XP</small>
+          <% else %>
+            <p><%= number_with_delimiter(goal.xp_value, :delimiter => ',') %> XP</p>
+          <% end %>
+        </td>  <!--10%-->
+        <td class="goal-bonus-col">
+          <span data-toggle="tooltip" title="You need <%= pluralize(goal.frequency - goal.check_progress_for_bonus, "activity") %> to unlock the bonus XP!" data-placement="top">
+            <div class="progress">
+              <% if goal.frequency %> 
+                <div class="progress-bar progress-bar-goal progress-bar-striped active"  role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: <%= (goal.check_progress_for_bonus.to_f/goal.frequency.to_f)*100 %>%;">
+                  <span><%= goal.check_progress_for_bonus %>/<%= goal.frequency %></span>
+                </div>
+              <% end %>
+            </div>
+          </span>
+        </td>
+        <td class="goal-log-col">
+          <%= form_for @activity, url: goal_activities_path(goal), remote: true, :html => { :'data-type' => 'html', :id => 'create_activity_form_' + index.to_s } do |f| %>
+            <div class="input-group activity-form">
+              <%= f.number_field :quantity, class:"form-control" %>
+              <span class="input-group-btn">
+                <%= button_tag type: 'submit', class:"btn btn-primary btn-submit", id: index do %>
+                  <i class="fa fa-check"></i>
+                <% end %>
+              </span>
+            </div>
+          <% end %>
+        </td>  <!--5%-->
+        <td class="text-center goal-action-col">
+          <li class="list-unstyled dropdown">
+            <i class="glyphicon glyphicon-option-vertical" data-toggle="dropdown"></i>
+            <ul class="dropdown-menu goal-list">
+              <li>
+                <%= link_to "Edit", edit_goal_path(goal), id:"edit_ongo_task_link", remote: true, "data-toggle" => "modal", "data-target" => "#myUpdateGoal_#{goal.id}" %>
+              </li>
+              <li>
+                <%= link_to "Delete", goal_path(goal), method: :delete, data: 
+                {confirm: "Are you sure you want to delete this task?"} %>
+              </li>
+            </ul>
+          </li>
+        </td>
+        <td>
+        <div class="modal fade" id="myUpdateGoal_<%= goal.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <%= form_for(goal, :method => :put, remote: true, html: { id: "edit_ongo_task_form" }) do |f| %>
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <div class="col-md-12 col-xs-12 dash-modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title text-center" id="myModalLabel">Update <%= goal.name.titleize %></h4>
+                </div>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <%= f.label :name %>
+                  <%= f.text_field :name, class: 'form-control', autofocus: true  %>
+                </div>
+                <div class="form-group">
+                  <%= f.label :xp_value, "XP Value" %>
+                  <%= f.number_field :xp_value, min: 1, max: 5000, class:"form-control" %>
+                </div>
+                <div class="form-group">
+                  <%= f.label :frequency %>
+                  <%= f.number_field :frequency, min: 1, max: 5000, class:"form-control" %>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <div class="form-group">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <%= f.submit "Update Task", class:"btn btn-success btn-md" %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% end %>
+        </div>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+<div class="text-center new-goal-area">
+  <%= link_to new_goal_path(:recurrence_id => 2), id:"new_ongo_task_link", "data-taskid" => "2", "data-toggle" => "modal", "data-target" => "#myNewGoal", remote: true do %>
+    <i class="fa fa-plus-circle fa-2x"></i>
+  <% end %>
+</div>
+<%= form_for @goal, :html => { :id => "addOngoTaskForm"}, remote: true do |f| %>
+  <div class="modal fade" id="myNewGoal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="col-md-12 col-xs-12 dash-modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title text-center" id="myModalLabel">New Ongoing Task</h4>
+          </div>
+        </div>
+        <div class="modal-body">
+          <%= f.hidden_field :recurrence_id %>
+          <div class="form-group">
+            <%= f.label :name %>
+            <%= f.text_field :name, class: 'form-control', placeholder: "Enter goal name...", autofocus: true  %>
+          </div>
+          <div class="form-group">
+            <%= f.label :xp_value, "XP Value" %>
+            <%= f.number_field :xp_value, min: 1, max: 5000, class:"form-control", placeholder: "Enter XP value..." %>
+          </div>
+          <div class="form-group">
+            <%= f.label :frequency %>
+            <%= f.number_field :frequency, min: 1, max: 5000, class:"form-control", placeholder: "Enter frequency..." %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="form-group">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <%= f.submit "Create Task", class:"btn btn-success btn-md" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<script>
+  $('#myNewGoal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var recipient = button.data('taskid') // Extract info from data-* attributes
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this)
+    modal.find('.modal-body input[type="hidden"]').val(recipient)
+});
+</script>

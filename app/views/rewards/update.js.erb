@@ -1,0 +1,15 @@
+$('.modal').modal('hide');
+$('body').removeClass('modal-open');
+$('.modal-backdrop').remove();
+<% if @reward.period == 1 %>
+    $('#weekly_reward').html('<%= j render(@reward) %>');
+<% elsif @reward.period == 2 %>
+    $('#monthly_reward').html('<%= j render(@reward) %>');
+<% elsif @reward.period == 3 %>
+    $('#three_month_reward').html('<%= j render(@reward) %>');
+    resizeBoxes();
+<% elsif @reward.period == 4 %>
+    $('#annual_reward').html('<%= j render(@reward) %>');
+<% end %>
+
+

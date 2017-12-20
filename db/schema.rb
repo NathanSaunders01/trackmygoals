@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171121124922) do
+ActiveRecord::Schema.define(version: 20171208203958) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "quantity"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20171121124922) do
     t.integer  "user_id"
     t.integer  "recurrence_id"
     t.boolean  "completed",     default: false
+    t.integer  "frequency"
   end
 
   create_table "plans", force: :cascade do |t|
@@ -60,6 +61,7 @@ ActiveRecord::Schema.define(version: 20171121124922) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "period"
   end
 
   create_table "users", force: :cascade do |t|

@@ -10,6 +10,7 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require social-share-button
  *= require_tree .
  *= require_self
  */
@@ -18,6 +19,7 @@
 @import 'bootstrap';
 @import "font-awesome-sprockets";
 @import "font-awesome";
+@import "social-share-button";
 
 // Dark Blue Theme
 
@@ -40,6 +42,9 @@ h1, h2, h3, h4, ul, li, p, tr, th, td, small{
 
 h1, h2, h3, h4, th {
   letter-spacing: 2px;
+  small {
+    color: white !important;
+  }
 }
 
 fancy {
@@ -49,6 +54,7 @@ fancy {
 label, placeholder {
     font-family: 'Nunito', sans-serif !important;
     font-weight: 400 !important;
+    font-size: 14px !important;
 }
 
 strong {
@@ -56,9 +62,31 @@ strong {
   font-weight: 800 !important;
 }
 
+input {
+  padding: 6px 6px !important;
+}
+
+.crop-text {
+  overflow: hidden;
+  white-space: nowrap; /* Don't forget this one */
+  text-overflow: ellipsis;
+}
+
+.max-lines {
+  display: block; /* or inline-block */
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 3.6em;
+  height: 3.6em;
+  line-height: 1.8em;
+}
+
 .navbar-header{
+  padding-top: 15px;
   display: inline;
   small {
+    color: white;
     vertical-align: bottom;
     font-style: italic;
     opacity: 0.5;
@@ -66,12 +94,19 @@ strong {
   }
 }
 
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+  background-color: #162756 !important;
+  border-color: #337ab7;
+  color: white !important;
+}
+
 .navbar {
-  background: #162756;
+  background: #162756 !important;
   height: 80px;
   font-size: 16px;
   color: white !important;
   border: none;
+  z-index: 1000;
   .active {
     color: white;
     opacity: 0.75;
@@ -85,19 +120,82 @@ strong {
       transition: .5s;
     }
   }
+  .dropdown {
+    cursor: pointer;
+    .open {
+      background: #162756 !important;
+      color: white !important;
+      border-bottom: none !important;
+      &:focus {
+        background: #162756 !important;
+        color: white !important;
+        border-bottom: none !important;
+      }
+    }
+  }
+  .profile-dropdown {
+    .glyphicon-user {
+      background: lightsteelblue;
+      font-size: 12px;
+      padding: 5px 3px 5px 5px;
+      border: 1.5px solid #d3d3d3;
+      border-radius: 50%;
+      margin-top: -3px;
+    }
+    &:active {
+      background: #162756 !important;
+      color: white !important;
+      border-bottom: none !important;
+    }
+    &:focus {
+      background: #162756 !important;
+      color: white !important;
+      border-bottom: none !important;
+    }
+    &:hover {
+      background: #162756 !important;
+      color: white !important;
+      border-bottom: none !important;
+    }
+  }
+  .dropdown-menu {
+    min-width: 50px;
+    letter-spacing: 0px !important;
+  }
   .nav-links li a:hover, .nav-links li.active a {
     background: none !important;
     border-bottom: 1px solid #7986AC;
   }
 }
 
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle.collapsed:hover {
+  background-color: #7986AC;
+}
+
+.navbar-default .navbar-toggle.collapsed {
+    background-color: #162756;
+}
+
+.navbar-collapse.collapse.in {
+  border: none;
+  margin-top: -18px;
+  background: #162756;
+  .dropdown-menu {
+    background: #7986AC;
+  }
+  .dropdown-menu li a {
+    color: white !important;
+  }
+}
+
+.navbar-collapse.collapsing {
+  border: none;
+  margin-top: -18px;
+  background: #162756;
+}
+
 .navbar-logged {
-  border-bottom: 3px solid transparent !important;
-  -webkit-border-image: -webkit-linear-gradient(left, #7986AC, #7986AC)!important;
-  -moz-border-image: -moz-linear-gradient(left, #7986AC, #7986AC)!important;
-  -o-border-image: -o-linear-gradient(left, #7986AC, #7986AC)!important;
-  border-image: linear-gradient(to right, #7986AC, #7986AC)!important;
-  border-image-slice: 1 !important;
+  border-bottom: 3px solid #7986AC !important;
 }
 
 .navbar-right {
@@ -107,8 +205,94 @@ strong {
 }
 
 .main {
-  padding-top: 100px;
+  padding-top: 80px;
   padding-bottom: 40px;
+}
+
+.col-sm-3 {
+  margin-top: 10px;
+}
+
+.dash-rewards {
+  background: white !important;
+  padding-bottom: 30px;
+  border-radius: 10px;
+  height: auto;
+  margin-right: -15px;
+  margin-left: -15px;
+  margin-bottom: 20px;
+  .col-md-9, .col-xs-9 {
+    padding: 0px !important;
+  }
+  li.list-unstyled {
+    margin-top: -30px;
+    margin-right: 10px;
+  }
+}
+
+.dash-three-quarter {
+  background: white !important;
+  height: 500px;
+  margin-bottom: 10px;
+  margin-right: -10px;
+  margin-left: -15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.ongoing-task-list {
+  padding: 0px 15px 20px 15px;
+}
+
+.dash-quarter {
+  background: white !important;
+  margin-right: -15px;
+  margin-left: -10px;
+  border-radius: 10px;
+  height: 500px;
+}
+
+.dash-left-half {
+  background: white !important;
+  height: 500px;
+  border-radius: 10px;
+  margin-left: -15px;
+  margin-right: -10px;
+  margin-bottom: 20px;
+}
+
+.dash-right-half {
+  background: white !important;
+  height: 500px;
+  border-radius: 10px;
+  margin-right: -15px;
+  margin-left: -10px;
+  margin-bottom: 20px;
+}
+
+.row {
+  margin: 0px !important; 
+  padding: 0px !important;
+}
+
+.todo-list {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+div.dash-header {
+  background: #162756;
+  color: white;
+  margin-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  border-bottom: 5px solid #ebedf2;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+div.dash-header.rewards-header {
+  margin-bottom: 0px !important;
 }
 
 .slideanim {visibility:hidden;}
@@ -147,15 +331,13 @@ strong {
 
 .jumbotron {
   background: #162756;
-  height: 500px !important;
+  height: 600px;
   color: white;
   margin-bottom: 0px;
   padding: 20px 25px 60px 25px;
-  border-bottom: 3px solid transparent !important;
-  border-image: linear-gradient(to right, #7986AC , #7986AC)!important;
-  border-image-slice: 1 !important;
+  border-bottom: 3px solid #7986AC;
   .landing-logo {
-    height:20%;
+    height: 10%;
     width: auto;
   }
 }
@@ -227,7 +409,7 @@ strong {
 .flash-container {
   margin-top: -10px;
   text-align: center;
-  position: absolute;
+  position: fixed;
   left: 35%;
   width: 30%;
 }
@@ -249,41 +431,17 @@ html,body {
    margin:0;
    padding:0;
    height:100%;
-   background: #f6f6f6;
+   background: #ebedf2;
 }
 
 .nav-profile {
   cursor: pointer;
   outline: none;
-  letter-spacing: 0px;
+  
   transition: 0.4s;
 }
 
-.profile-dropdown {
-  margin-top: 15px !important;
-  background-color: white;
-}
 
-#profile-links {
-  display: block;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.2s ease-out;
-  li {
-    margin-left: -40px;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    border: solid #7986AC;
-    border-width: 0px 1px 1px 1px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-size: 14px;
-  }
-  li:last-child {
-    border-bottom-left-radius: 0.5em;
-    border-bottom-right-radius: 0.5em;
-  }
-}
 
 .well {
   background: white;
@@ -308,4 +466,55 @@ html,body {
   .fa {
     color: #e5c100;
   }
+}
+
+.modal-header {
+  padding: 0px !important;
+  border-bottom: none !important;
+}
+.dash-modal-header {
+  background: #162756;
+  color: white;
+  padding-top: 5px !important;
+  padding-bottom: 10px !important;
+  border-bottom: 5px solid #ebedf2;
+  button.close {
+    color: white;
+    opacity: 1;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}
+
+.progress {
+    position: relative;
+}
+
+.progress span {
+    position: absolute;
+    display: block;
+    width: 100%;
+    color: black;
+ }
+ 
+ $size: 24px;
+
+.social-share-button {
+  .ssb-icon {
+    background-size: $size $size;
+    height: $size;
+    width: $size;
+  }
+}
+
+.footer-nav {
+  margin-bottom: -20px;
+  height: 30px !important;
+}
+
+.footer-links {
+  padding-left: 40%;
+  padding-right: 40%;
+  padding-top: 10px;
 }

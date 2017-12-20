@@ -9,21 +9,51 @@
     <%= javascript_include_tag "https://js.stripe.com/v2/", type: 'text/javascript' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag "https://www.google.com/jsapi" %>
-    <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js" %>
-    <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.min.js" %>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
     <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
+    <script>
+      $(document).ready(function(){
+          $('[data-toggle="tooltip"]').tooltip(); 
+      });
+    </script>
   </head>
   
-  
-  <body>
-    <%= render 'layouts/navigation' %>
+  <%= render 'layouts/navigation' %>
+  <body class="<%= if user_signed_in? then "signed_in" end %>">
     <div class="main">
-      <div class="container flash-container" >
-        <% flash.each do |type, msg| %>
-          <%= content_tag :div, msg, class: "alert alert-#{type}" %>
+      <div class="pipe-container">
+        <%= yield %>
+        <% if user_signed_in? %>
+          <%= form_for @contact, remote: true do |f| %>
+            <div class="modal fade" id="myFeedbackModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <div class="col-md-12 col-xs-12 dash-modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title text-center" id="myModalLabel">Feedback</h4>
+                    </div>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <%= f.label :comments, "Comment" %>
+                      <%= f.text_area :comments, rows: 10, class: 'form-control' %>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <div class="form-group">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <%= f.submit "Leave Feedback", class:"btn btn-success btn-md" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
         <% end %>
       </div>
-      <%= yield %>
     </div>
   </body>
+  <%= render 'layouts/footer' %>
 </html>

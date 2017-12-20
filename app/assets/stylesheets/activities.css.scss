@@ -1,21 +1,48 @@
 .activity-scrollbox-many {
   height: 400px;
+  margin-right: 10px;
   overflow: auto;
   background: white;
 }
 
-.activity-scrollbox-few {
-  height: auto;
-  overflow: auto;
-  background: white;
+.btn-submit {
+  border-top-right-radius: 0.25em !important;
+  border-bottom-right-radius: 0.25em !important;
+  padding: 6px 4px !important;
+}
+
+.activity-list {
+  padding: 0px 15px;
 }
 
 .activity-row {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding: 10px 0px;
   border-bottom: solid 1px rgba(192,192,192,0.5) !important; 
 }
 
 .recent-activity {
-  margin-bottom: -10px !important;
+  margin-bottom: -10px;
+  padding-bottom: 10px !important;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.loader {
+    width: 30px;
+    height: 30px;
+    border: 6px solid #f3f3f3; /* Light grey */
+    border-top: 6px solid #337ab7;
+    border-radius: 50%;
+    margin-left: 10px;
+    animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

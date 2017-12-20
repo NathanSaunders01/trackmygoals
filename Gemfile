@@ -41,8 +41,8 @@ gem 'figaro', '1.1.1'
 gem 'chartkick'
 # Use GroupDate to group together data
 gem 'groupdate'
-# Use progressbar for progress bar
-gem 'bootstrap_progressbar'
+# Use Social Gem for sharing on Social Media
+gem 'social-share-button'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

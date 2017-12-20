@@ -22,4 +22,68 @@ module UsersHelper
       "grey".html_safe
     end
   end
+  
+  def xp_by_day
+    column_chart goal_xp_by_day_users_path, stacked: true, height: '350px', width: 'auto', library: {
+        chart: {
+          margin: [50, 20, 50, 70],
+          style: {
+            fontFamily: 'Nunito'
+          }
+        },
+        yAxis: {
+            title: {
+                text: 'XP Gains'
+            }
+        },
+        legend: {
+           enabled: false
+        }
+    }
+  end
+  
+  def xp_by_week
+    column_chart goal_xp_by_week_users_path, stacked: true, height: '350px', width: 'auto',library: {
+        chart: {
+          margin: [50, 20, 50, 70],
+          style: {
+            fontFamily: 'Nunito'
+          }
+        },
+        yAxis: {
+            title: {
+                text: 'XP Gains'
+            }
+        },
+        legend: {
+           enabled: false
+        }
+    }
+  end
+  
+  def xp_by_month
+    column_chart goal_xp_by_month_users_path, stacked: true, height: '350px', width: 'auto',library: {
+        chart: {
+          margin: [50, 20, 50, 70],
+          style: {
+            fontFamily: 'Nunito'
+          }
+        },
+        yAxis: {
+            title: {
+                text: 'XP Gains'
+            }
+        },
+        legend: {
+           enabled: false
+        }
+    }
+  end
+  
+  
+  # def cache_key_day_goal(day)
+  #   count = current_user.activities.count
+  #   max_updated_at = current_user.goals.maximum(:updated_at).try(:utc).try(:to_s, :number)
+  #   "users/daily-#{count}-#{max_updated_at}"
+  # end
 end

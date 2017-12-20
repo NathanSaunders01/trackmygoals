@@ -3,7 +3,7 @@
     <div class="col-md-4 col-md-offset-4">
       <h2 class="text-center">Log in</h2>
       <div class="well">
-        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <%= form_for(resource, :as => resource_name, :url => session_path(resource_name) ,:html => {:id => "login-box"},:format => :json, :remote => true ) do |f| %>
           <div class="field form-group">
             <%= f.label :email %>
             <%= f.email_field :email, autofocus: true, class: 'form-control' %>

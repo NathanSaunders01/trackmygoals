@@ -1,0 +1,10 @@
+<%= form_for Activity.new, url: goal_activities_path(@goal) do |f| %>
+  <div class="field form-group">
+    <%= f.label :quantity %>
+    <%= f.number_field :quantity, class:"form-control" %>
+  </div>
+  
+  <div class="actions form-group">
+    <%= f.submit "Log Activity", class: 'btn btn-primary' %>
+  </div>
+<% end %>

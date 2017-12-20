@@ -1,0 +1,19 @@
+<div class="activity-row" id="activity_row_<%= @activity.id %>">
+  <% if @activity.goal.recurrence_id == 2 %>
+    <p class="text-center recent-activity">You gained <strong><%= @activity.total_xp %> XP</strong> completing <%= pluralize(@activity.quantity, "set") %> of "<strong><%= (@activity.goal.name).downcase.titleize %></strong>"</p>
+  <% elsif activity.goal.recurrence_id == 1 %>
+    <p class="text-center recent-activity">You gained <strong><%= @activity.total_xp %> XP</strong> completing "<strong><%= (@activity.goal.name).downcase.titleize %></strong>"</p>
+  <% end %>
+  <span class="activity-info">
+    <small><%= time_ago_in_words(@activity.created_at) %> ago </small>
+    <% if @activity.goal.recurrence_id == 2 %>
+      <%= link_to goal_activity_path(goal_id: @activity.goal_id, id: @activity.id), method: :delete, remote: true, data: {confirm: "Are you sure?"}, class: "btn btn-xs btn-danger btn-activity" do %>
+        <i class="fa fa-trash-o" title="Delete this activity"></i>
+      <% end %>
+    <% elsif @activity.goal.recurrence_id == 1 %>
+      <%= link_to complete_goal_path(@activity.goal), method: :patch, class:"btn btn-xs btn-primary btn-activity" do %>
+         <i class="fa fa-undo" title="Undo completed task"></i>
+      <% end %>
+    <% end %>
+  </span>
+</div>

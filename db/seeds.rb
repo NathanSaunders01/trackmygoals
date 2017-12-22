@@ -6,8 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# Plan.create(name: 'basic', price: 0)
-# Plan.create(name: 'pro', price: 1.99)
+Plan.create(name: 'basic', price: 0)
+Plan.create(name: 'pro', price: 1.99)
 
 
 30.times do |a|

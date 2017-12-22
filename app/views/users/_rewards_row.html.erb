@@ -4,6 +4,8 @@
     <hr class="reward-hr"></hr>
     <div id="weekly_reward">
       <% if current_user.check_week_reward %>
+        <%= content_tag :div, class: "reward_week_date", data: {date: @weekly_reward.end_date.to_i} do %>
+        <% end %>
         <h4 class="max-lines"><strong><%= @weekly_reward.name.downcase.titleize %></strong></h4>
         <% if @weekly_reward.calculate_xp_for_reward >= 100 %>
           <%= image_tag "merit-without-background.png", class:"reward-crown" %>
@@ -84,6 +86,10 @@
                   <%= f.label :xp_goal, "XP Goal" %>
                   <%= f.number_field :xp_goal, class:"form-control", placeholder: "e.g. 2,000.." %>
                 </div>
+                <div class="form-group">
+                  <%= f.check_box :repeat, {}, true, false %>
+                  <%= f.label :repeat, " Repeat once expired?" %>
+                </div>
               </div>
               <div class="modal-footer">
                 <div class="form-group">
@@ -104,6 +110,8 @@
     <hr class="reward-hr"></hr>
     <div id="monthly_reward">
       <% if current_user.check_month_reward %>
+        <%= content_tag :div, class: "reward_month_date", data: {date: @monthly_reward.end_date.to_i} do %>
+        <% end %>
         <h4 class="max-lines"><strong><%= @monthly_reward.name.downcase.titleize %></strong></h4>
         <% if @monthly_reward.calculate_xp_for_reward >= 100 %>
           <%= image_tag "merit-without-background.png", class:"reward-crown" %>
@@ -184,6 +192,10 @@
                   <%= f.label :xp_goal, "XP Goal" %>
                   <%= f.number_field :xp_goal, class:"form-control", placeholder: "e.g. 2,000.." %>
                 </div>
+                <div class="form-group">
+                  <%= f.check_box :repeat, {}, true, false %>
+                  <%= f.label :repeat, " Repeat once expired?" %>
+                </div>
               </div>
               <div class="modal-footer">
                 <div class="form-group">
@@ -204,6 +216,8 @@
     <hr class="reward-hr"></hr>
     <div id="three_month_reward">
       <% if current_user.check_three_month_reward %>
+        <%= content_tag :div, class: "reward_three_month_date", data: {date: @three_month_reward.end_date.to_i} do %>
+        <% end %>
         <h4 class="max-lines"><strong><%= @three_month_reward.name.downcase.titleize %></strong></h4>
         <% if @three_month_reward.calculate_xp_for_reward >= 100 %>
           <%= image_tag "merit-without-background.png", class:"reward-crown" %>
@@ -284,6 +298,10 @@
                   <%= f.label :xp_goal, "XP Goal" %>
                   <%= f.number_field :xp_goal, class:"form-control", placeholder: "e.g. 2,000.." %>
                 </div>
+                <div class="form-group">
+                  <%= f.check_box :repeat, {}, true, false %>
+                  <%= f.label :repeat, " Repeat once expired?" %>
+                </div>
               </div>
               <div class="modal-footer">
                 <div class="form-group">
@@ -304,6 +322,8 @@
     <hr class="reward-hr"></hr>
     <div id="annual_reward">
       <% if current_user.check_annual_reward %>
+        <%= content_tag :div, class: "reward_year_date", data: {date: @annual_reward.end_date.to_i} do %>
+        <% end %>
         <h4 class="max-lines"><strong><%= @annual_reward.name.downcase.titleize %></strong></h4>
         <% if @annual_reward.calculate_xp_for_reward >= 100 %>
           <%= image_tag "merit-without-background.png", class:"reward-crown" %>
@@ -384,6 +404,10 @@
                   <%= f.label :xp_goal, "XP Goal" %>
                   <%= f.number_field :xp_goal, class:"form-control", placeholder: "e.g. 2,000.." %>
                 </div>
+                <div class="form-group">
+                  <%= f.check_box :repeat, {}, true, false %>
+                  <%= f.label :repeat, " Repeat once expired?" %>
+                </div>
               </div>
               <div class="modal-footer">
                 <div class="form-group">
@@ -419,6 +443,10 @@
           <div class="form-group">
             <%= f.label :xp_goal, "XP Goal" %>
             <%= f.number_field :xp_goal, class:"form-control", placeholder: "e.g. 2,000.." %>
+          </div>
+          <div class="form-group">
+            <%= f.check_box :repeat, {}, true, false %>
+            <%= f.label :repeat, " Repeat once expired?" %>
           </div>
         </div>
         <div class="modal-footer">
@@ -464,10 +492,10 @@ function resizeBoxes() {
 }
 
 function CalculateWeekCountdownTimer() {
-  var curr = new Date; // get current date
-  var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
-  var last = first + 7;
-  var countDownDate = new Date(curr.setDate(last)).setHours(23,59,59,999)
+  var reward_week_date = $('.reward_week_date').data('date');
+  var countDownDate = reward_week_date + "999";
+  
+  
 
 // Update the count down every 1 second
   var x = setInterval(function() {
@@ -497,9 +525,10 @@ function CalculateWeekCountdownTimer() {
 }
 
 function CalculateMonthCountdownTimer() {
-  var today = new Date();
-  var countDownDate = new Date(today.getFullYear(), today.getMonth()+1, 0).setHours(23,59,59,999);
-
+  
+  var reward_month_date = $('.reward_month_date').data('date');
+  var countDownDate = reward_month_date + "999";
+  
 // Update the count down every 1 second
   var x = setInterval(function() {
   
@@ -528,8 +557,8 @@ function CalculateMonthCountdownTimer() {
 }
 
 function CalculateThreeMonthCountdownTimer() {
-  var today = new Date();
-  var countDownDate = new Date(today.getFullYear(), today.getMonth()+3, 0).setHours(23,59,59,999);
+  var reward_three_month_date = $('.reward_three_month_date').data('date');
+  var countDownDate = reward_three_month_date + "999";
 
 // Update the count down every 1 second
   var x = setInterval(function() {
@@ -560,7 +589,8 @@ function CalculateThreeMonthCountdownTimer() {
 
 function CalculateAnnualCountdownTimer() {
   
-  var countDownDate = new Date(new Date().getFullYear(), 11, 31).setHours(23,59,59,999);
+  var reward_year_date = $('.reward_year_date').data('date');
+  var countDownDate = reward_year_date + "999";
 
 // Update the count down every 1 second
   var x = setInterval(function() {

@@ -6,6 +6,8 @@ class Reward < ActiveRecord::Base
   validates :name, presence: true
   validates :xp_goal, presence: true
   
+  after_create :set_end_date
+  
   # def sum_goal_xp
   #   if self.assign_all_goals
   #     @user = self.user
@@ -14,6 +16,18 @@ class Reward < ActiveRecord::Base
   #     self.goals.map {|goal| [goal.activities.where("created_at >= ?", self.created_at).sum(:total_xp)]}.sum.sum
   #   end
   # end
+  
+  def set_end_date
+    if self.period == 1
+      self.update_attribute(:end_date, (self.created_at.end_of_day + 7.days))
+    elsif self.period == 2
+      self.update_attribute(:end_date, (self.created_at.end_of_day + 1.month))
+    elsif self.period == 3
+      self.update_attribute(:end_date, (self.created_at.end_of_day + 3.months))
+    elsif self.period == 4
+      self.update_attribute(:end_date, (self.created_at.end_of_day + 1.year))
+    end
+  end
   
   def xp_count 
     if self.period == 1

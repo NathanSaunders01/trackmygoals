@@ -9,6 +9,7 @@ class RewardsController < ApplicationController
   def create
     @reward = Reward.new(reward_params)
     @reward.user = current_user
+    @reward.repeat(true) if params[:repeat]
     respond_to do |format|
       if @reward.save
         format.html { redirect_to root_path }
@@ -59,7 +60,7 @@ class RewardsController < ApplicationController
   private
   
   def reward_params
-    params.require(:reward).permit(:name, :xp_goal, :period)
+    params.require(:reward).permit(:name, :xp_goal, :period, :repeat, :end_date)
   end
   
   def set_reward

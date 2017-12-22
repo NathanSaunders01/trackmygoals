@@ -9,7 +9,15 @@ class User < ApplicationRecord
   has_many :activities
   has_many :rewards
   
+  # after_touch :check_user_rewards_expiration
+  
   attr_accessor :stripe_card_token
+  
+  #def check_user_rewards_expiration
+   # self.rewards do
+    #  
+  #  end
+  #end
   
   def to_s
     email

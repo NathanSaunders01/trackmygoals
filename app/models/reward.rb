@@ -48,16 +48,7 @@ class Reward < ActiveRecord::Base
   
   def weekly_average
     start_date = Date.today
-    if self.period == 1
-      end_date = Date.today.end_of_week
-    elsif self.period == 2
-      end_date = Date.today.end_of_month
-    elsif self.period == 3
-      end_date = Date.today.end_of_month + 2.months
-    elsif self.period == 4
-      end_date = Date.today.end_of_year
-    end
-    time_left = (end_date - start_date).to_i
+    time_left = (self.end_date.to_date - start_date).to_i
     xp_left = self.xp_goal - self.xp_count
     if time_left < 7
       average = (xp_left/time_left)

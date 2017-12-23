@@ -20,13 +20,11 @@ class User < ApplicationRecord
   #end
   
   def user_xp_change_week
-    xp_last_week = self.activities.where("created_at >= ? AND created_at < ?", 1.week.ago.beginning_of_week, 1.week.ago.end_of_week).sum(:total_xp)
-    hours_this_week = ((DateTime.now.in_time_zone - 0.weeks.ago.beginning_of_week).to_i)/3600
-    xp_at_time_last_week = (xp_last_week / 168) * hours_this_week
-    if (self.user_xp_this_week == 0 || xp_at_time_last_week == 0)
+    xp_last_week = self.activities.where("created_at >= ? AND created_at < ?", 1.week.ago.beginning_of_week, (DateTime.now.in_time_zone - 1.week)).sum(:total_xp)
+    if (self.user_xp_this_week == 0 || xp_last_week == 0)
       return "NaN"
     else
-      return (self.user_xp_this_week / xp_at_time_last_week) * 100
+      return (self.user_xp_this_week / xp_last_week) * 100
     end
   end
   

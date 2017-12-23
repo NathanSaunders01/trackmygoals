@@ -9,6 +9,7 @@
         <h4 class="max-lines"><strong><%= @weekly_reward.name.downcase.titleize %></strong></h4>
         <% if @weekly_reward.calculate_xp_for_reward >= 100 %>
           <%= image_tag "merit-without-background.png", class:"reward-crown" %>
+          <p class="text-center" style="color: #e5c100; margin-bottom: -10px;"><strong>COMPLETE!</strong></p>
         <% else %>
           <div class="row">
             <div class="text-right col-md-3 col-xs-3 progress-title">
@@ -222,6 +223,7 @@
         <h4 class="max-lines"><strong><%= @three_month_reward.name.downcase.titleize %></strong></h4>
         <% if @three_month_reward.calculate_xp_for_reward >= 100 %>
           <%= image_tag "merit-without-background.png", class:"reward-crown" %>
+          <p class="text-center" style="color: #e5c100; margin-bottom: -10px;"><strong>COMPLETE!</strong></p>
         <% else %>
           <div class="row">
             <div class="text-right col-md-3 col-xs-3 progress-title">
@@ -328,6 +330,7 @@
         <h4 class="max-lines"><strong><%= @annual_reward.name.downcase.titleize %></strong></h4>
         <% if @annual_reward.calculate_xp_for_reward >= 100 %>
           <%= image_tag "merit-without-background.png", class:"reward-crown" %>
+          <p class="text-center" style="color: #e5c100; margin-bottom: -10px;"><strong>COMPLETE!</strong></p>
         <% else %>
           <div class="row">
             <div class="text-right col-md-3 col-xs-3 progress-title">

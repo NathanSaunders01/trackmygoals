@@ -1,6 +1,6 @@
 <div class="row">
-  <div clas="col-md-12 cl-sm-12 col-xs-12">
-    <div class="jumbotron text-center">
+  <div clas="col-md-12 cl-sm-12">
+    <div class="jumbotron text-center col-xs-12">
       <%= image_tag "merit-without-background.png", class:"landing-logo" %>
       <h1><fancy>Meritometer</fancy></h1> 
       <br>
@@ -38,7 +38,7 @@
       <br>
       <div class="row">
         <div class="col-md-6 left-how-box">
-          <div class="col-sm-8">
+          <div class="col-sm-8 col-xs-8">
             <h4>
               <strong>To-Do: </strong>
               Add items to your to-do list and assign yourself XP for completing it. 
@@ -48,12 +48,12 @@
               of it' original XP value until it's worth nothing.
             </h4>
           </div>
-          <div class="col-sm-4 text-center">
+          <div class="col-sm-4 col-xs-4 text-center">
             <i class="fa fa-list-ul fa-5x"></i>
           </div>
         </div>
         <div class="col-md-6 right-how-box">
-          <div class="col-sm-8">
+          <div class="col-sm-8 col-xs-8">
             <h4>
               <strong>Rewards: </strong>
               Set your rewards and how much XP you want to have earnt before unlocking it.
@@ -62,7 +62,7 @@
               is shows you the total progress.
             </h4>
           </div>
-          <div class="col-sm-4 text-center">
+          <div class="col-sm-4 col-xs-4 text-center">
             <i class="fa fa-gift fa-5x"></i>
           </div>
         </div>
@@ -70,7 +70,7 @@
       <br>
       <div class="row">
         <div class="col-md-6 left-how-box">
-          <div class="col-sm-8">
+          <div class="col-sm-8 col-xs-8">
             <h4>
               <strong>Ongoing Tasks: </strong>
               Here you can log activites which you do regularly or want to develop into habits.
@@ -81,12 +81,12 @@
               task the following week.
             </h4>
           </div>
-          <div class="col-sm-4 text-center">
+          <div class="col-sm-4 col-xs-4 text-center">
             <i class="fa fa-trophy fa-5x"></i>
           </div>
         </div>
         <div class="col-md-6 right-how-box">
-          <div class="col-sm-8">
+          <div class="col-sm-8 col-xs-8">
             <h4>
               <strong>Coming Soon:</strong>
               I'm always looking to add new features to this website. As of 20th December 2017, 
@@ -98,7 +98,7 @@
               </small>
             </h4>
           </div>
-          <div class="col-sm-4 text-center">
+          <div class="col-sm-4 col-xs-4 text-center">
             <i class="fa fa-unlock fa-5x"></i>
           </div>
         </div>
@@ -121,7 +121,7 @@
         
         <div id="signin" class="tabcontent">
           <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-12 col-sm-12 col-xs-12" style="padding: 0px 20px;">
               <%= form_for(resource, :as => resource_name, :url => user_session_path(resource_name) ,:html => {:id => "login-box"},:format => :json, :remote => true ) do |f| %>
     
                 <div id="validation-error-signin"></div>

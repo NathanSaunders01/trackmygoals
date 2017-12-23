@@ -26,7 +26,7 @@ class User < ApplicationRecord
     if (self.user_xp_this_week == 0 || xp_at_time_last_week == 0)
       return "NaN"
     else
-      return (self.user_xp_this_week / xp_at_date_last_week) * 100
+      return (self.user_xp_this_week / xp_at_time_last_week) * 100
     end
   end
   

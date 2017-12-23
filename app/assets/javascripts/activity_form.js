@@ -1,12 +1,21 @@
 $(document).on("click", ".btn-submit", function(){
   var id = $(this).attr("id");
+  
    $('#create_activity_form_'+id)
     
     .bind("ajax:beforeSend", function(evt, xhr, settings){
       var $submitButton = $(this).find('button[name="button"]');
+      var $form = $(this);
+      var $value = $form.find('input[type="number"]').val();
       
-      $submitButton.replaceWith("<div class='loader'></div>");
-
+      if ($value == null || $value <= 0 )
+      {
+        $submitButton.replaceWith("<button name='button' type='submit' class='btn btn-danger btn-submit'><i style='color: white;' class='fa fa-exclamation-circle'></i></button>");
+        xhr.abort();
+      }
+      else {
+        $submitButton.replaceWith("<div class='loader'></div>");
+      }
     })
     .bind("ajax:success", function(evt, data, status, xhr){
       var $form = $(this);

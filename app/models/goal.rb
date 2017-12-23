@@ -162,7 +162,7 @@ class Goal < ActiveRecord::Base
   def check_progress_for_bonus
     start_date = 0.weeks.ago.beginning_of_week(:monday).beginning_of_day
     end_date = DateTime.now
-    this_week_activity_count = self.activities.where("created_at >= ? AND created_at <= ?", start_date, end_date).count
+    self.activities.where("created_at >= ? AND created_at <= ?", start_date, end_date).sum(:quantity)
   end
 
 end

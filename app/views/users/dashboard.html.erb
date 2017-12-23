@@ -1,6 +1,24 @@
 <script src="https://code.highcharts.com/highcharts.src.js"></script>
 <div class="container dashboard-page">
-  <h1>Hello <%= current_user.first_name.downcase.titleize %>!</h1>
+  <h1>Hello <%= current_user.first_name.downcase.titleize %>! 
+    <span>
+      <small class="percentage-change">
+        <%= current_user.user_xp_change_week %>
+        <% if current_user.user_xp_change_week == "NaN" %>
+        
+        <% else %>
+          %
+        <% end %>
+        <% if current_user.user_xp_change_week == "NaN" %>
+        
+        <% elsif current_user.user_xp_change_week >= 100 %>
+          <i class="fa fa-caret-up" style="color: green;"></i>  
+        <% elsif current_user.user_xp_change_week < 100 %>
+          <i class="fa fa-caret-down" style="color: red;"></i>
+        <% end %>
+      </small>
+    </span>
+  </h1>
   <div class="row">
     <div class="col-md-12 col-xs-12">
       <div class="dash-rewards">

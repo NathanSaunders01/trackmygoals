@@ -115,6 +115,7 @@
         <h4 class="max-lines"><strong><%= @monthly_reward.name.downcase.titleize %></strong></h4>
         <% if @monthly_reward.calculate_xp_for_reward >= 100 %>
           <%= image_tag "merit-without-background.png", class:"reward-crown" %>
+          <p class="text-center" style="color: #e5c100; margin-bottom: -10px;"><strong>COMPLETE!</strong></p>
         <% else %>
           <div class="row">
             <div class="text-right col-md-3 col-xs-3 progress-title">
@@ -515,6 +516,11 @@ function CalculateWeekCountdownTimer() {
     // Display the result in the element with id="demo"
     document.getElementById("week_timer").innerHTML = days + "d " + hours + "h "
     + minutes + "m " + seconds + "s ";
+    
+    if (days <= 1)
+    {
+      $("#week_timer").css("color", "red");
+    }
   
     // If the count down is finished, write some text 
     if (distance < 0) {
@@ -548,6 +554,11 @@ function CalculateMonthCountdownTimer() {
     document.getElementById("month_timer").innerHTML = days + "d " + hours + "h "
     + minutes + "m " + seconds + "s ";
   
+    if (days <= 1)
+    {
+      $("#month_timer").css("color", "red");
+    }
+  
     // If the count down is finished, write some text 
     if (distance < 0) {
       clearInterval(x);
@@ -578,6 +589,11 @@ function CalculateThreeMonthCountdownTimer() {
     // Display the result in the element with id="demo"
     document.getElementById("three_month_timer").innerHTML = days + "d " + hours + "h "
     + minutes + "m " + seconds + "s ";
+  
+    if (days <= 1)
+    {
+      $("#three_month_timer").css("color", "red");
+    }
   
     // If the count down is finished, write some text 
     if (distance < 0) {
@@ -610,6 +626,11 @@ function CalculateAnnualCountdownTimer() {
     // Display the result in the element with id="demo"
     document.getElementById("annual_timer").innerHTML = days + "d " + hours + "h "
     + minutes + "m " + seconds + "s ";
+    
+    if (days <= 1)
+    {
+      $("#annual_timer").css("color", "red");
+    }
   
     // If the count down is finished, write some text 
     if (distance < 0) {

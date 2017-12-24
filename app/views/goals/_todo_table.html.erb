@@ -8,7 +8,12 @@
           <% end %>
         </td>
         <td class="task-name-col">
-          <h4 class="crop-text text-left task-name-el"> <span data-toggle="tooltip" title="Only <%= pluralize(13 - task.check_todo_countdown , "day") %> left to complete this!" data-placement="top" class="<%= if task.check_todo_countdown >= 3 then "fa fa-exclamation-circle" end %>"></span> <%= task.name.downcase.titleize %></h4>
+          <h4 class="crop-text text-left task-name-el" title="<%= task.name.downcase.titleize %>"> 
+            <span data-toggle="tooltip" title="Only <%= pluralize(13 - task.check_todo_countdown , "day") %> left to complete this!" data-placement="top" 
+              class="<%= if task.check_todo_countdown >= 3 then "fa fa-exclamation-circle" end %>">
+            </span> 
+            <%= task.name.downcase.titleize %>
+          </h4>
         </td>
         <td class="task-xp-col text-center">
            <small><%= number_with_delimiter(task.xp_value, :delimiter => ',') %> XP</small>

@@ -1,0 +1,34 @@
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          Feedback
+        </h4>
+      </div>
+    </a>
+    <div id="collapse1" class="panel-collapse collapse">
+      <div class="panel-body">
+        <%= form_for @contact, remote: true do |f| %>
+          <div class="form-group">
+            <%= f.text_area :comments, rows: 10, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.submit "Leave Feedback", class:"btn btn-success btn-md" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $("#new_contact").validate({
+    rules: {
+      "contact[comments]": {
+        required: true,
+        minlength: 3,
+        maxlength: 1000
+      }
+    }
+  })
+</script>

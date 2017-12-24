@@ -25,32 +25,7 @@
       <div class="pipe-container">
         <%= yield %>
         <% if user_signed_in? %>
-          <%= form_for @contact, remote: true do |f| %>
-            <div class="modal fade" id="myFeedbackModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <div class="col-md-12 col-xs-12 dash-modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title text-center" id="myModalLabel">Feedback</h4>
-                    </div>
-                  </div>
-                  <div class="modal-body">
-                    <div class="form-group">
-                      <%= f.label :comments, "Comment" %>
-                      <%= f.text_area :comments, rows: 10, class: 'form-control' %>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <div class="form-group">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      <%= f.submit "Leave Feedback", class:"btn btn-success btn-md" %>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          <% end %>
+          <%= render 'layouts/feedback_footer' %>
         <% end %>
       </div>
     </div>

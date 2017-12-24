@@ -2,6 +2,9 @@
     border: 1px solid #e5c100; 
     border-radius:0;
     transition: box-shadow 0.5s;
+    a {
+        text-decoration: none !important;
+    }
 }
 
 .panel:hover {
@@ -42,4 +45,28 @@
     margin: 15px 0;
     background-color: #e5c100;
     color: #fff;
+}
+
+.panel {
+  label.error {
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+  }
+}
+
+.panel-group#accordion {
+  float: right !important;
+  text-align: left !important;
+  position: fixed;
+  bottom: 0 !important;
+  right: 0 !important;
+  margin-right: 10px !important;
+  z-index: 100;
+  min-width: 30% !important;
+  width: 30% !important;
+  margin-bottom: 0px !important;
 }

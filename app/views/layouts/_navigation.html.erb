@@ -17,7 +17,6 @@
       <ul class="nav navbar-nav navbar-right nav-links">
         <% if user_signed_in? %>
           <li><%= link_to 'FAQ', about_path %></li>
-          <li><%= link_to 'FEEDBACK', new_contact_path, "data-toggle" => "modal", "data-target" => "#myFeedbackModal", remote: true %></li>
           <li class="list-unstyled dropdown">
             <a class="dropdown-toggle profile-dropdown" data-toggle="dropdown">
               <%= image_tag "blank-profile-picture.png", class:"avatar-pic" %>

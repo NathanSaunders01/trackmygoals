@@ -17,6 +17,17 @@ class Reward < ActiveRecord::Base
   #   end
   # end
   
+  def suggest_weekly_xp_target
+    this_user = self.user
+    todo_xp = this_user.goals.where("recurrence_id = ? AND completed = ?", 1, false).sum(:xp_value)
+    ongo_goals = this_user.goals.where("recurrence_id = ?", 2)
+    ongo_sum = 0
+    ongo_goals.each do |goal|
+      ongo_sum += (goal.xp_value * goal.frequency)
+    end
+    return (todo_xp + ongo_sum)
+  end
+  
   def set_end_date
     if self.period == 1
       self.update_attribute(:end_date, (self.created_at.end_of_day + 7.days))

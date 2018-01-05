@@ -182,9 +182,11 @@ input {
   background: #162756;
   .dropdown-menu {
     background: #7986AC;
+    border: none;
   }
   .dropdown-menu li a {
     color: white !important;
+    border: none;
   }
 }
 
@@ -211,6 +213,11 @@ input {
 
 .col-sm-3 {
   margin-top: 10px;
+}
+
+.homepage-counter {
+  color: #e5c100;
+  padding-top: 20px;
 }
 
 .dash-rewards {
@@ -330,11 +337,12 @@ div.dash-header.rewards-header {
 }
 
 .jumbotron {
+  margin-top: -80px;
   background: #162756;
-  height: 600px;
+  height: 700px;
   color: white;
   margin-bottom: 0px;
-  padding: 20px 25px 60px 25px;
+  padding: 100px 25px 60px 25px;
   border-bottom: 3px solid #7986AC;
   .landing-logo {
     height: 10%;

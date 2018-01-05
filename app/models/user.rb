@@ -19,6 +19,16 @@ class User < ApplicationRecord
   #  end
   #end
   
+  def suggest_weekly_xp_target
+    todo_xp = self.goals.where("recurrence_id = ? AND completed = ?", 1, false).sum(:xp_value)
+    ongo_goals = self.goals.where("recurrence_id = ?", 2)
+    ongo_sum = 0
+    ongo_goals.each do |goal|
+      ongo_sum += (goal.xp_value * goal.frequency)
+    end
+    return (todo_xp + ongo_sum)
+  end
+  
   def user_xp_change_week
     xp_last_week = self.activities.where("created_at >= ? AND created_at < ?", 1.week.ago.beginning_of_week, (DateTime.now.in_time_zone - 1.week)).sum(:total_xp)
     if (self.user_xp_this_week == 0 || xp_last_week == 0)

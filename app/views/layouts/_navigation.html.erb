@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-fixed-top <%= if user_signed_in? then "navbar-logged" end %>" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top <%= if user_signed_in? then "navbar-logged" end %>" role="navigation" style="<%= if !user_signed_in? then "background: none !important;" end %> ">
   <div class='container'>
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav-collapse">
@@ -18,7 +18,7 @@
         <% if user_signed_in? %>
           <li><%= link_to 'FAQ', about_path %></li>
           <li class="list-unstyled dropdown">
-            <a class="dropdown-toggle profile-dropdown" data-toggle="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown">
               <%= image_tag "blank-profile-picture.png", class:"avatar-pic" %>
               <span class="caret"></span>
             </a>

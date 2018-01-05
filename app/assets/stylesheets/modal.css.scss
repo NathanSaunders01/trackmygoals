@@ -4,8 +4,17 @@
     font-weight: 400;
   }
   .modal-content {
-    border-radius: 0px !important;
+    border-radius: 10px !important;
     border: 2px solid #162756;
+  }
+  .modal-header {
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
+    border-bottom-left-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+  }
+  .modal-sign-form {
+    padding: 0px !important;
   }
 }
 

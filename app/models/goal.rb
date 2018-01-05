@@ -16,13 +16,21 @@ class Goal < ActiveRecord::Base
   end
   
   def weekly_goal_xp(date)
-    start = Date.commercial(Date.today.year, date)
+    if date <= 0
+      start = Date.commercial(Date.today.year - 1, date + 52)
+    else
+      start = Date.commercial(Date.today.year, date)
+    end
     last = start + 1.week
     self.activities.where(['created_at >= ? AND created_at < ?', start, last]).sum(:total_xp)    
   end  
   
   def monthly_goal_xp(date)
-    start = Date.new(Date.today.year, date, 1)
+    if date <= 0
+      start = Date.new(Date.today.year - 1, date + 12, 1)
+    else
+      start = Date.new(Date.today.year, date, 1)
+    end
     last = start + 1.month 
     self.activities.where(['created_at >= ? AND created_at < ?', start, last]).sum(:total_xp)
   end

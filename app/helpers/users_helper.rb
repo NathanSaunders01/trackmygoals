@@ -26,7 +26,7 @@ module UsersHelper
   def xp_by_day
     column_chart goal_xp_by_day_users_path, stacked: true, height: '350px', width: 'auto', library: {
         chart: {
-          margin: [50, 20, 50, 70],
+          margin: [50, 20, 100, 70],
           style: {
             fontFamily: 'Nunito'
           }
@@ -36,16 +36,13 @@ module UsersHelper
                 text: 'XP Gains'
             }
         },
-        legend: {
-           enabled: false
-        }
     }
   end
   
   def xp_by_week
     column_chart goal_xp_by_week_users_path, stacked: true, height: '350px', width: 'auto',library: {
         chart: {
-          margin: [50, 20, 50, 70],
+          margin: [50, 20, 100, 70],
           style: {
             fontFamily: 'Nunito'
           }
@@ -54,9 +51,6 @@ module UsersHelper
             title: {
                 text: 'XP Gains'
             }
-        },
-        legend: {
-           enabled: false
         }
     }
   end
@@ -64,7 +58,7 @@ module UsersHelper
   def xp_by_month
     column_chart goal_xp_by_month_users_path, stacked: true, height: '350px', width: 'auto',library: {
         chart: {
-          margin: [50, 20, 50, 70],
+          margin: [50, 20, 100, 70],
           style: {
             fontFamily: 'Nunito'
           }
@@ -73,9 +67,6 @@ module UsersHelper
             title: {
                 text: 'XP Gains'
             }
-        },
-        legend: {
-           enabled: false
         }
     }
   end

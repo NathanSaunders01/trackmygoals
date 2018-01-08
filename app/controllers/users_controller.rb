@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     
     # Create an array of goals to iterate through if they have activities
     # recorded in the last 7 days.
-    days_goals = current_user.goals.select { |g| g.empty_days}
+    days_goals = current_user.goals.where("recurrence_id = ?", 2).select { |g| g.empty_days}
     
     # Iterate through goals and for each goal, create a hash of days and points
     goals = days_goals.map do |goal|
@@ -36,6 +36,19 @@ class UsersController < ApplicationController
         data: days
       }
     end
+    
+    # To prevent hundreds of todo list items appearing in chart legend, group them all
+    # under one name called "Todo Tasks" and add the result to the existing array or data
+    todo_tasks = current_user.goals.where("recurrence_id = ? AND completed = ?", 1, true)
+    
+    result = {}
+    (Date.today-6..Date.today).each do |day|
+        result[day.strftime("%a")] = todo_tasks.sum do |todo|
+          todo.daily_goal_xp(day)
+        end
+    end
+    goals.push(name:"Todo Tasks", data: result)
+    
     render json: goals
   end
   
@@ -43,7 +56,7 @@ class UsersController < ApplicationController
     
     # Create an array of goals to iterate through if they have activities
     # recorded in the last 8 weeks.
-    weeks_goals = current_user.goals.select { |g| g.empty_weeks}
+    weeks_goals = current_user.goals.where("recurrence_id = ?", 2).select { |g| g.empty_weeks}
     
     # Iterate through goals and for each goal, create a hash of weeks and points  
     goals = weeks_goals.map do |goal|
@@ -67,11 +80,31 @@ class UsersController < ApplicationController
         data: weeks
       }
     end
+    
+    # To prevent hundreds of todo list items appearing in chart legend, group them all
+    # under one name called "Todo Tasks" and add the result to the existing array or data
+    todo_tasks = current_user.goals.where("recurrence_id = ? AND completed = ?", 1, true)
+    
+    result = {}
+    ((0.weeks.ago.beginning_of_week(:monday).to_date.cweek)-7..0.weeks.ago.beginning_of_week(:monday).to_date.cweek).each do |week|
+      
+      if week <= 0 
+        result[Date.commercial(Date.today.year - 1, week+52).strftime("%d %b")] = todo_tasks.sum do |todo|
+          todo.weekly_goal_xp(week)
+        end
+      else
+        result[Date.commercial(Date.today.year, week).strftime("%d %b")] = todo_tasks.sum do |todo|
+          todo.weekly_goal_xp(week)
+        end
+      end
+    end
+    goals.push(name:"Todo Tasks", data: result)
+    
     render json: goals
   end
   
   def goal_xp_by_month
-    months_goals = current_user.goals.select { |g| g.empty_months}
+    months_goals = current_user.goals.where("recurrence_id = ?", 2).select { |g| g.empty_months} 
       
     goals = months_goals.map do |goal|
       months = {}
@@ -87,6 +120,24 @@ class UsersController < ApplicationController
         data: months
       }
     end
+    
+    todo_tasks = current_user.goals.where("recurrence_id = ? AND completed = ?", 1, true)
+    
+    result = {}
+    ((0.months.ago.beginning_of_month.to_date.mon)-5..0.months.ago.to_date.mon).each do |month|
+      
+      if month <= 0 
+        result[Date.new(Date.today.year - 1, month + 12).strftime("%b")] = todo_tasks.sum do |todo|
+          todo.monthly_goal_xp(month)
+        end
+      else
+        result[Date.new(Date.today.year, month).strftime("%b")] = todo_tasks.sum do |todo|
+          todo.monthly_goal_xp(month)
+        end
+      end
+    end
+    goals.push(name:"Todo Tasks", data: result)
+    
     render json: goals
   end
   
